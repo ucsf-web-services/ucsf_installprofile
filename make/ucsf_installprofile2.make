@@ -216,10 +216,8 @@ projects[ucsf_base][type] = "theme"
 
 ; Libraries
 ; ----------------------------------------------------------------
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-libraries[chosen][download][type] = ""
-libraries[chosen][download][url] = ""
+libraries[chosen][download][type] = "file"
+libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/releases/download/1.0.0/chosen_v1.0.0.zip"
 libraries[chosen][directory_name] = "chosen"
 libraries[chosen][type] = "library"
 
