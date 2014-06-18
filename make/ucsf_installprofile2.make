@@ -105,10 +105,6 @@ projects[switchtheme][subdir] = "contrib"
 projects[switchtheme][version] = "1.0"
 projects[switchtheme][type] = "module"
 
-projects[feature_print_module][subdir] = "contrib"
-projects[feature_print_module][version] = "1.0"
-projects[feature_print_module][type] = "module"
-
 projects[webform][subdir] = "contrib"
 projects[webform][version] = "3.20"
 projects[webform][type] = "module"
@@ -166,6 +162,9 @@ project[node_edit_protection][patch][] = "https://drupal.org/files/issues/wysiwy
 
 ; Contributed themes
 ; ----------------------------------------------------------------
+projects[mothership][subdir] = "mothership"
+projects[mothership][version] = "2.8"
+projects[mothership][type] = "theme"
 
 ; Custom modules
 ; ----------------------------------------------------------------
@@ -189,6 +188,14 @@ projects[ucsf_webedit][download][url] = "git@bitbucket.org:ucsfdrupal/ucsf_webed
 projects[ucsf_webedit][download][branch] = "master"
 projects[ucsf_webedit][type] = "module"
 projects[ucsf_webedit][subdir] = "custom"
+
+projects[feature_print_module][download][type] = "git"
+projects[feature_print_module][download][url] = "git@bitbucket.org:ucsfdrupal/feature_print_module.git"
+;projects[feature_print_module][download][tag] = "7.x-1.0"
+projects[feature_print_module][download][branch] = "master"
+projects[feature_print_module][type] = "module"
+projects[feature_print_module][subdir] = "custom"
+
 
 ; Custom themes
 ; ----------------------------------------------------------------
