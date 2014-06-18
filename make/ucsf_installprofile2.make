@@ -93,6 +93,62 @@ projects[mpac][subdir] = "contrib"
 projects[mpac][version] = "1.1"
 projects[mpac][type] = "module"
 
+projects[field_collection][subdir] = "contrib"
+projects[field_collection][version] = "1.0-beta5"
+projects[field_collection][type] = "module"
+
+projects[flexslider][subdir] = "contrib"
+projects[flexslider][version] = "1.0-rc3"
+projects[flexslider][type] = "module"
+
+projects[switchtheme][subdir] = "contrib"
+projects[switchtheme][version] = "1.0"
+projects[switchtheme][type] = "module"
+
+projects[feature_print_module][subdir] = "contrib"
+projects[feature_print_module][version] = "1.0"
+projects[feature_print_module][type] = "module"
+
+projects[webform][subdir] = "contrib"
+projects[webform][version] = "3.20"
+projects[webform][type] = "module"
+
+projects[imce][subdir] = "contrib"
+projects[imce][version] = "1.7"
+projects[imce][type] = "module"
+
+projects[wysiwyg][subdir] = "contrib"
+projects[wysiwyg][version] = "2.2+8-dev"
+projects[wysiwyg][type] = "module"
+
+projects[imce_wysiwyg][subdir] = "contrib"
+projects[imce_wysiwyg][version] = "1.0"
+projects[imce_wysiwyg][type] = "module"
+
+projects[wysiwyg_filter][subdir] = "contrib"
+projects[wysiwyg_filter][version] = "1.6-rc2"
+projects[wysiwyg_filter][type] = "module"
+
+projects[devel][subdir] = "contrib"
+projects[devel][version] = "1.3"
+projects[devel][type] = "module"
+
+projects[special_menu_items][subdir] = "contrib"
+projects[special_menu_items][version] = "2.0"
+projects[special_menu_items][type] = "module"
+
+projects[views_slideshow][subdir] = "contrib"
+projects[views_slideshow][version] = "3.0"
+projects[views_slideshow][type] = "module"
+
+projects[facetapi][subdir] = "contrib"
+projects[facetapi][version] = "1.0-rc4"
+projects[facetapi][type] = "module"
+
+projects[search_api][subdir] = "contrib"
+projects[search_api][version] = "1.3"
+projects[search_api][type] = "module"
+
 project[pathauto][subdir] = "patched"
 project[pathauto][version] = "1.2"
 project[pathauto][type] = "module"
