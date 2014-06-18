@@ -1,0 +1,163 @@
+<?xml version='1.0' standalone='yes'?>
+<nodes>
+ <node>
+  <title>This is the title of an up and coming event</title>
+  <body><![CDATA[
+    <p>Donec eu leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, sem ante adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing. <a href="#">Nullam urna est, tempor non tristique et</a>, tempus quis enim. Praesent ut dui id risus eleifend fringilla. In eu urna eu nibh varius ultricies. Sed commodo nunc in diam commodo ed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egula ligula, faucibus in egestas quis, congue rutrumeu le semeu ligula eu leo</p>
+
+    <p>Leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, <a href="#">sem ante</a> adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+
+    <p>Nullam urna est, tempor non tristique et, tempus quis enim. Praesent ut dui id risus eleifend fringilla. <a href="#">In eu urna eu nibh varius ultricies.</a> Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.  Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.</p>]]>
+  </body>
+  <date>
+  	<start_date>2011-05-25 10:35</start_date>
+  	<end_date>2011-05-27 10:35</end_date>
+  </date>
+  <location>2</location>
+  <location_map>http://goo.gl/maps/aszly</location_map>
+ </node>
+ <node>
+  <title>Short event title</title>
+  <body><![CDATA[
+    <p>Donec eu leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, sem ante adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing. <a href="#">Nullam urna est, tempor non tristique et</a>, tempus quis enim. Praesent ut dui id risus eleifend fringilla. In eu urna eu nibh varius ultricies. Sed commodo nunc in diam commodo ed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egula ligula, faucibus in egestas quis, congue rutrumeu le semeu ligula eu leo</p>
+
+    <p>Leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, <a href="#">sem ante</a> adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+
+    <p>Nullam urna est, tempor non tristique et, tempus quis enim. Praesent ut dui id risus eleifend fringilla. <a href="#">In eu urna eu nibh varius ultricies.</a> Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.  Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.</p>]]>
+  </body>
+  <date>
+  	<start_date>2011-07-28 8:00</start_date>
+  	<end_date>2011-07-28 10:00</end_date>
+  </date>
+  <location>2</location>
+  <location_map>http://goo.gl/maps/aszly</location_map>
+ </node>
+ <node>
+  <title>This is an example of a very very very long title to express what happens</title>
+  <body><![CDATA[
+    <p>Donec eu leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, sem ante adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing. <a href="#">Nullam urna est, tempor non tristique et</a>, tempus quis enim. Praesent ut dui id risus eleifend fringilla. In eu urna eu nibh varius ultricies. Sed commodo nunc in diam commodo ed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egula ligula, faucibus in egestas quis, congue rutrumeu le semeu ligula eu leo</p>
+
+    <p>Leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, <a href="#">sem ante</a> adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+
+    <p>Nullam urna est, tempor non tristique et, tempus quis enim. Praesent ut dui id risus eleifend fringilla. <a href="#">In eu urna eu nibh varius ultricies.</a> Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.  Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.</p>]]>
+  </body>
+  <date>
+    <start_date>2011-10-28 8:00</start_date>
+    <end_date>2011-10-28 10:00</end_date>
+  </date>
+  <location>1</location>
+  <location_map>http://goo.gl/maps/aszly</location_map>
+ </node>
+ <node>
+  <title>Event 4</title>
+  <body><![CDATA[
+    <p>Donec eu leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, sem ante adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing. <a href="#">Nullam urna est, tempor non tristique et</a>, tempus quis enim. Praesent ut dui id risus eleifend fringilla. In eu urna eu nibh varius ultricies. Sed commodo nunc in diam commodo ed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egula ligula, faucibus in egestas quis, congue rutrumeu le semeu ligula eu leo</p>
+
+    <p>Leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, <a href="#">sem ante</a> adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+
+    <p>Nullam urna est, tempor non tristique et, tempus quis enim. Praesent ut dui id risus eleifend fringilla. <a href="#">In eu urna eu nibh varius ultricies.</a> Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.  Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.</p>]]>
+  </body>
+  <date>
+    <start_date>2012-10-08 8:00</start_date>
+    <end_date>2012-10-08 10:00</end_date>
+  </date>
+  <location>1</location>
+  <location_map>http://goo.gl/maps/aszly</location_map>
+ </node>
+ <node>
+  <title>This is the title of an upcoming event #2</title>
+  <body><![CDATA[
+    <p>Donec eu leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, sem ante adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing. <a href="#">Nullam urna est, tempor non tristique et</a>, tempus quis enim. Praesent ut dui id risus eleifend fringilla. In eu urna eu nibh varius ultricies. Sed commodo nunc in diam commodo ed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egula ligula, faucibus in egestas quis, congue rutrumeu le semeu ligula eu leo</p>
+
+    <p>Leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, <a href="#">sem ante</a> adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+
+    <p>Nullam urna est, tempor non tristique et, tempus quis enim. Praesent ut dui id risus eleifend fringilla. <a href="#">In eu urna eu nibh varius ultricies.</a> Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.  Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.</p>]]>
+  </body>
+  <date>
+    <start_date>2013-04-28 8:00</start_date>
+    <end_date>2013-04-28 10:00</end_date>
+  </date>
+  <location>3</location>
+  <location_map>http://goo.gl/maps/aszly</location_map>
+ </node>
+  <node>
+  <title>This is an example of a very very very long title to express what happens</title>
+  <body><![CDATA[
+    <p>Donec eu leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, sem ante adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing. <a href="#">Nullam urna est, tempor non tristique et</a>, tempus quis enim. Praesent ut dui id risus eleifend fringilla. In eu urna eu nibh varius ultricies. Sed commodo nunc in diam commodo ed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egula ligula, faucibus in egestas quis, congue rutrumeu le semeu ligula eu leo</p>
+
+    <p>Leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, <a href="#">sem ante</a> adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+
+    <p>Nullam urna est, tempor non tristique et, tempus quis enim. Praesent ut dui id risus eleifend fringilla. <a href="#">In eu urna eu nibh varius ultricies.</a> Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.  Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.</p>]]>
+  </body>
+  <date>
+    <start_date>2013-07-30 8:00</start_date>
+    <end_date>2013-07-30 10:00</end_date>
+  </date>
+  <location>1</location>
+  <location_map>http://goo.gl/maps/aszly</location_map>
+ </node>
+ <node>
+  <title>This is an example of a very very very long title to express what happens</title>
+  <body><![CDATA[
+    <p>Donec eu leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, sem ante adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing. <a href="#">Nullam urna est, tempor non tristique et</a>, tempus quis enim. Praesent ut dui id risus eleifend fringilla. In eu urna eu nibh varius ultricies. Sed commodo nunc in diam commodo ed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egula ligula, faucibus in egestas quis, congue rutrumeu le semeu ligula eu leo</p>
+
+    <p>Leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, <a href="#">sem ante</a> adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+
+    <p>Nullam urna est, tempor non tristique et, tempus quis enim. Praesent ut dui id risus eleifend fringilla. <a href="#">In eu urna eu nibh varius ultricies.</a> Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.  Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.</p>]]>
+  </body>
+  <date>
+    <start_date>2013-12-25 8:00</start_date>
+    <end_date>2013-12-25 10:00</end_date>
+  </date>
+  <location>3</location>
+  <location_map>http://goo.gl/maps/aszly</location_map>
+ </node>
+  <node>
+  <title>A short Event Title</title>
+  <body><![CDATA[
+    <p>Donec eu leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, sem ante adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing. <a href="#">Nullam urna est, tempor non tristique et</a>, tempus quis enim. Praesent ut dui id risus eleifend fringilla. In eu urna eu nibh varius ultricies. Sed commodo nunc in diam commodo ed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egula ligula, faucibus in egestas quis, congue rutrumeu le semeu ligula eu leo</p>
+
+    <p>Leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, <a href="#">sem ante</a> adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+
+    <p>Nullam urna est, tempor non tristique et, tempus quis enim. Praesent ut dui id risus eleifend fringilla. <a href="#">In eu urna eu nibh varius ultricies.</a> Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.  Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.</p>]]>
+  </body>
+  <date>
+    <start_date>2013-12-28 8:00</start_date>
+    <end_date>2013-12-28 10:00</end_date>
+  </date>
+  <location>3</location>
+  <location_map>http://goo.gl/maps/aszly</location_map>
+ </node>
+ <node>
+  <title>Alpha Beta Omega</title>
+  <body><![CDATA[
+    <p>Donec eu leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, sem ante adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing. <a href="#">Nullam urna est, tempor non tristique et</a>, tempus quis enim. Praesent ut dui id risus eleifend fringilla. In eu urna eu nibh varius ultricies. Sed commodo nunc in diam commodo ed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egula ligula, faucibus in egestas quis, congue rutrumeu le semeu ligula eu leo</p>
+
+    <p>Leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, <a href="#">sem ante</a> adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+
+    <p>Nullam urna est, tempor non tristique et, tempus quis enim. Praesent ut dui id risus eleifend fringilla. <a href="#">In eu urna eu nibh varius ultricies.</a> Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.  Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.</p>]]>
+  </body>
+  <date>
+    <start_date>2014-02-28 8:00</start_date>
+    <end_date>2014-02-28 10:00</end_date>
+  </date>
+  <location>2</location>
+  <location_map>http://goo.gl/maps/aszly</location_map>
+ </node>
+  <node>
+  <title>Event 10</title>
+  <body><![CDATA[
+    <p>Donec eu leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, sem ante adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing. <a href="#">Nullam urna est, tempor non tristique et</a>, tempus quis enim. Praesent ut dui id risus eleifend fringilla. In eu urna eu nibh varius ultricies. Sed commodo nunc in diam commodo ed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egula ligula, faucibus in egestas quis, congue rutrumeu le semeu ligula eu leo</p>
+
+    <p>Leo sem, in lacinia metus. Sed nisi lorem, consectetur eu hendrerit vel, suscipit at dolor. Proin vehicula, lacus in eleifend convallis, <a href="#">sem ante</a> adipiscing enim, id molestie ipsum magna id risus. Cras sollicitudin justo nibh. Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+
+    <p>Nullam urna est, tempor non tristique et, tempus quis enim. Praesent ut dui id risus eleifend fringilla. <a href="#">In eu urna eu nibh varius ultricies.</a> Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.  Sed commodo nunc in diam commodo mattis. Aenean ligula ligula, faucibus in egestas quis, congue rutrum neque. Maecenas aliquet tincblandit.</p>]]>
+  </body>
+  <date>
+    <start_date>2014-04-23 8:00</start_date>
+    <end_date>2014-04-23 10:00</end_date>
+  </date>
+  <location>3</location>
+  <location_map>http://goo.gl/maps/aszly</location_map>
+ </node>
+</nodes>

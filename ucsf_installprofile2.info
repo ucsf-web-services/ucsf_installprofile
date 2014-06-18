@@ -1,0 +1,124 @@
+name = UCSF Starter Kit Install Profile (v2)
+description = Install with Drupal pre-configured for UCSF use.
+core = 7.x
+distribution_name = UCSF Drupal Starter Kit
+
+; Install necessary core modules.
+dependencies[] = block
+dependencies[] = comment
+dependencies[] = contextual
+;dependencies[] = dashboard
+;dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+;dependencies[] = dblog
+dependencies[] = syslog
+dependencies[] = search
+dependencies[] = field_ui
+dependencies[] = file
+;dependencies[] = toolbar
+dependencies[] = locale
+dependencies[] = rdf
+dependencies[] = ckeditor_link
+dependencies[] = node_edit_protection
+dependencies[] = pasteformat
+
+; Install features
+dependencies[] = ucsf_starterkit_images
+dependencies[] = ucsf_webedit
+dependencies[] = ucsf_images
+
+; Install main contribs.
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = strongarm
+dependencies[] = entity
+dependencies[] = token
+dependencies[] = entity_token
+dependencies[] = views
+dependencies[] = views_bulk_operations
+dependencies[] = views_ui
+dependencies[] = date_api
+dependencies[] = date
+dependencies[] = date_popup
+dependencies[] = date_views
+
+
+; Install contribs.
+dependencies[] = admin_menu
+dependencies[] = admin_menu_toolbar
+dependencies[] = admin_views
+dependencies[] = block_class
+dependencies[] = menu_block
+dependencies[] = chosen
+;dependencies[] = crumbs
+dependencies[] = entityreference
+;dependencies[] = field_extractor
+dependencies[] = image_url_formatter
+;dependencies[] = inline_entity_form
+;dependencies[] = internal_nodes
+dependencies[] = libraries
+dependencies[] = link
+dependencies[] = menu_attributes
+dependencies[] = module_filter
+dependencies[] = mpac
+dependencies[] = pathauto
+dependencies[] = field_collection
+;dependencies[] = taxonomy_formatter
+dependencies[] = flexslider
+dependencies[] = flexslider_fields
+dependencies[] = flexslider_views
+dependencies[] = flexslider_views_slideshow
+dependencies[] = switchtheme
+dependencies[] = feature_print_module
+dependencies[] = webform
+
+
+; Install WYSIWYG modules
+dependencies[] = imce
+dependencies[] = wysiwyg
+dependencies[] = imce_wysiwyg
+dependencies[] = wysiwyg_filter
+
+; Install Devel module
+; dependencies[] = devel
+; dependencies[] = clone
+
+; Install Custom modules
+; dependencies[] = reset
+dependencies[] = ucsftemplate_tweaks
+
+
+; Contrib module needs to be there. But don't need to be enabled
+;dependencies[] = eva
+;dependencies[] = fences
+;dependencies[] = field_collection
+;dependencies[] = rules
+;dependencies[] = rules_admin
+;dependencies[] = fences
+;dependencies[] = title
+;dependencies[] = image_delta_formatter
+;dependencies[] = inline_entity_form
+;dependencies[] = service_links
+;dependencies[] = special_menu_items
+;dependencies[] = views_slideshow
+
+; Install Migrate
+;dependencies[] = migrate
+;dependencies[] = migrate_extra
+
+; Install Search API
+;dependencies[] = facetapi
+;dependencies[] = search_api
+;dependencies[] = search_api_db
+;dependencies[] = search_api_views
+;dependencies[] = search_api_facetapi
+;dependencies[] = search_api_ranges
+
+; System Requirements.
+php_memory_limit = 256M

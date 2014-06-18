@@ -1,0 +1,2029 @@
+<?php
+
+/**
+ * @file
+ * Installation code for Antho Kickstart.
+ */
+
+/**
+ * Implements hook_install_tasks_alter().
+ */
+function ucsf_installprofile2_install_tasks_alter(&$tasks, $install_state) {
+  $tasks['install_finished']['function'] = 'ucsf_installprofile2_install_finished';
+  $tasks['install_select_profile']['display'] = FALSE;
+}
+
+/**
+ * Custom installation task; perform final steps and redirect the user to the new site if there are no errors.
+ *
+ * @param $install_state
+ *   An array of information about the current installation state.
+ *
+ * @return
+ *   A message informing the user about errors if there was some.
+ */
+function ucsf_installprofile2_install_finished(&$install_state) {
+  drupal_set_title(st('@drupal installation complete', array('@drupal' => drupal_install_profile_distribution_name())), PASS_THROUGH);
+  $messages = drupal_set_message();
+
+  //  Let's put the Profile as Drupal Standard... So that we can remove the profile easily.
+  variable_set('install_profile', drupal_get_profile());
+  variable_set('install_task', 'done');
+
+  // Flush all caches to ensure that any full bootstraps during the installer
+  // do not leave stale cached data, and that any content types or other items
+  // registered by the install profile are registered correctly.
+  drupal_flush_all_caches();
+
+  // Install profiles are always loaded last
+  db_update('system')
+    ->fields(array('weight' => 1000))
+    ->condition('type', 'module')
+    ->condition('name', drupal_get_profile())
+    ->execute();
+
+  // Cache a fully-built schema.
+  drupal_get_schema(NULL, TRUE);
+
+  // Run cron to populate update status tables (if available) so that users
+  // will be warned if they've installed an out of date Drupal version.
+  // Will also trigger indexing of profile-supplied content or feeds.
+  drupal_cron_run();
+
+  if (isset($messages['error'])) {
+    $output = '<p>' . (isset($messages['error']) ? st('Review the messages above before visiting <a href="@url">your new site</a>.', array('@url' => url(''))) : st('<a href="@url">Visit your new site</a>.', array('@url' => url('')))) . '</p>';
+    return $output;
+  }
+  else {
+    // Since any module can add a drupal_set_message, this can bug the user
+    // when we redirect him to the front page. For a better user experience,
+    // remove all the message that are only "notifications" message.
+    drupal_get_messages('status', TRUE);
+    drupal_get_messages('completed', TRUE);
+    // Migrate adds its messages under the wrong type, see #1659150.
+    //drupal_get_messages('ok', TRUE);
+
+    // If we don't install drupal using Drush, redirect the user to the front
+    // page.
+    if (!drupal_is_cli()) {
+      if (module_exists('overlay')) {
+        //drupal_goto('', array('fragment' => 'overlay=admin/help/getting-started'));
+        drupal_goto('<front>');
+      }
+      else {
+        //drupal_goto('admin/help/getting-started');
+        drupal_goto('<front>');
+      }
+    }
+  }
+}
+
+function _ucsf_installprofile2_filter_formats(){
+    // Add text formats.
+  $comments_format = array(
+    'format' => 'comments',
+    'name' => 'Comments',
+    'weight' => 5,
+    'filters' => array(
+      // URL filter.
+      'filter_url' => array(
+        'weight' => 0,
+        'status' => 1,
+      ),
+      // HTML filter.
+      'filter_html' => array(
+        'weight' => 1,
+        'status' => 1,
+        'settings' => array(
+          'allowed_html' => '<a> <em> <b> <i> <strong> <u> <p> <br> <u> <strike>',
+        ),
+      ),
+      // Line break filter.
+      'filter_autop' => array(
+        'weight' => 2,
+        'status' => 1,
+      ),
+      // HTML corrector filter.
+      'filter_htmlcorrector' => array(
+        'weight' => 10,
+        'status' => 1,
+      ),
+    ),
+  );
+  $comments_format = (object) $comments_format;
+  filter_format_save($comments_format);
+
+  $webedit_format = array(
+    'format' => 'webedit',
+    'name' => 'Webedit',
+    'weight' => 1,
+  );
+
+  $webedit_format = (object) $webedit_format;
+  filter_format_save($webedit_format);
+
+  $full_html_format = array(
+    'format' => 'full_html',
+    'name' => 'Full HTML - No editor',
+    'weight' => 7,
+    'filters' => array(
+      // URL filter.
+      'filter_url' => array(
+        'weight' => 0,
+        'status' => 1,
+      ),
+      // Line break filter.
+      'filter_autop' => array(
+        'weight' => 1,
+        'status' => 1,
+      ),
+      // HTML corrector filter.
+      'filter_htmlcorrector' => array(
+        'weight' => 10,
+        'status' => 1,
+      ),
+    ),
+  );
+
+  $full_html_format = (object) $full_html_format;
+  filter_format_save($full_html_format);
+
+  // Enable default permissions for system roles.
+
+  variable_set('comments_format_permission', filter_permission_name($comments_format));
+  variable_set('webedit_format_permission', filter_permission_name($webedit_format));
+  variable_set('full_html_format_format', filter_permission_name($full_html_format));
+}
+
+function _ucsf_installprofile2_enable_theme(){
+  // Enable the admin theme.
+  $admin_theme = 'seven';
+  // No need to enable the theme to be used in the admin section
+  // theme_enable(array($admin_theme));
+  variable_set('admin_theme', $admin_theme);
+  variable_set('node_admin_theme', '1');
+
+  // Enable base theme
+  $theme = 'ucsf_base';
+  theme_enable(array($theme));
+  variable_set('theme_default', $theme);
+  theme_enable(array('teal'));
+  theme_enable(array('orange'));
+  theme_disable(array('bartik'));
+}
+
+function _ucsf_installprofile2_content_types(){
+  // Insert default pre-defined node types into the database. For a complete
+  // list of available node type attributes, refer to the node type API
+  // documentation at: http://api.drupal.org/api/HEAD/function/hook_node_info.
+  $types = array(
+    array(
+      'type' => 'page',
+      'name' => st('Basic page'),
+      'base' => 'node_content',
+      'description' => st("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
+    array(
+      'type' => 'article',
+      'name' => st('Article'),
+      'base' => 'node_content',
+      'description' => st('Use <em>articles</em> for time-sensitive content like news, press releases or blog posts.'),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
+    array(
+      'type' => 'news',
+      'name' => st('News'),
+      'base' => 'node_content',
+      'description' => st('Content type to create News.'),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
+    array(
+      'type' => 'events',
+      'name' => st('Events'),
+      'base' => 'node_content',
+      'description' => st('Content type to create Events.'),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
+    array(
+      'type' => 'publications',
+      'name' => st('Publications'),
+      'base' => 'node_content',
+      'description' => st('Content type to create Publications.'),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
+  );
+
+  foreach ($types as $type) {
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+
+    variable_set('node_options_' . $type->type, array('status'));
+    variable_set('comment_' . $type->type, COMMENT_NODE_HIDDEN);
+    variable_set('node_submitted_' . $type->type, FALSE);
+    if($type->type == 'page'){
+      variable_set('pathauto_node_'. $type->type .'_pattern', '[node:title]');
+    } else {
+      variable_set('pathauto_node_'. $type->type .'_pattern', $type->type . '/[node:title]');
+    }
+
+    node_add_body_field($type);
+  }
+
+  /*
+    Variable updates for node types after defaults
+    have been applied universally from above.
+    */
+
+    // News
+    variable_set('node_submitted_news', TRUE);
+    variable_set('date_format_news', 'ucsf_long_date');
+
+    // Webform
+    variable_set('node_submitted_webform', FALSE);
+    variable_set('comment_webform', COMMENT_NODE_HIDDEN);
+
+
+  // Insert default pre-defined RDF mapping into the database.
+  $rdf_mappings = array(
+    array(
+      'type' => 'node',
+      'bundle' => 'page',
+      'mapping' => array(
+        'rdftype' => array('foaf:Document'),
+      ),
+    ),
+    array(
+      'type' => 'node',
+      'bundle' => 'article',
+      'mapping' => array(
+        'field_image' => array(
+          'predicates' => array('og:image', 'rdfs:seeAlso'),
+          'type' => 'rel',
+        ),
+        'field_tags' => array(
+          'predicates' => array('dc:subject'),
+          'type' => 'rel',
+        ),
+      ),
+    ),
+  );
+}
+
+function _ucsf_installprofile2_fields(){
+
+  $vocabulary = (object) array(
+    'name' => st('Event Location'),
+    'description' => st('Events Location vocabulary.'),
+    'machine_name' => 'event_location',
+  );
+  taxonomy_vocabulary_save($vocabulary);
+
+  $field = array(
+    'field_name' => 'field_event_location',
+    'type' => 'taxonomy_term_reference',
+    // Set cardinality to unlimited for tagging.
+    //'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+    'settings' => array(
+      'allowed_values' => array(
+        array(
+          'vocabulary' => 'event_location',
+          'parent' => 0,
+        ),
+      ),
+    ),
+  );
+  field_create_field($field);
+
+  $instance = array(
+    'field_name' => 'field_event_location',
+    'entity_type' => 'node',
+    'label' => 'Location',
+    'bundle' => 'events',
+    'description' => '',
+    'widget' => array(
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 2,
+    ),
+    'display' => array(
+      'default' => array(
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => -2,
+      ),
+    ),
+  );
+  field_create_instance($instance);
+
+
+    // Create a default vocabulary named "Tags", enabled for the 'article' content type.
+  $description = st('Use tags to group articles on similar topics into categories.');
+  $help = st('Enter a comma-separated list of words to describe your content.');
+  $vocabulary = (object) array(
+    'name' => st('Tags'),
+    'description' => $description,
+    'machine_name' => 'tags',
+    'help' => $help,
+
+  );
+  taxonomy_vocabulary_save($vocabulary);
+
+  $field = array(
+    'field_name' => 'field_' . $vocabulary->machine_name,
+    'type' => 'taxonomy_term_reference',
+    // Set cardinality to unlimited for tagging.
+    'cardinality' => FIELD_CARDINALITY_UNLIMITED,
+    'settings' => array(
+      'allowed_values' => array(
+        array(
+          'vocabulary' => $vocabulary->machine_name,
+          'parent' => 0,
+        ),
+      ),
+    ),
+  );
+  field_create_field($field);
+
+  $instance = array(
+    'field_name' => 'field_' . $vocabulary->machine_name,
+    'entity_type' => 'node',
+    'label' => 'Tags',
+    'bundle' => 'article',
+    'description' => $vocabulary->help,
+    'widget' => array(
+      'type' => 'taxonomy_autocomplete',
+      'weight' => -4,
+    ),
+    'display' => array(
+      'default' => array(
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 10,
+      ),
+    ),
+  );
+  field_create_instance($instance);
+
+
+  $field = array(
+    'field_name' => 'field_events_date',
+    'type' => 'datetime',
+    'settings' => array(
+      'granularity' => array(
+        'month' => 'month',
+        'day' => 'day',
+        'hour' => 'hour',
+        'minute' => 'minute',
+        'year' => 'year',
+        'second' => 0,
+      ),
+      'tz_handling' => 'site',
+      'timezone_db' => 'UTC',
+      'cache_enabled' => 0,
+      'cache_count' => 4,
+      'todate' => 'optional',
+    ),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+    ),
+  );
+  field_create_field($field);
+
+
+  $instance = array(
+    'field_name' => 'field_events_date',
+    'entity_type' => 'node',
+    'label' => 'Date',
+    'bundle' => 'events',
+    'description' => '',
+    'widget' => array(
+      'type' => 'date_popup',
+      'weight' => 1,
+      'module' => 'date',
+      'active' => 1,
+      'settings' => array(
+        'input_format' => 'm/d/Y - H:i:s',
+        'input_format_custom' => '',
+        'year_range' => '-3:+3',
+        'increment' => 15,
+        'label_position' => 'above',
+        'text_parts' => array(),
+      ),
+    ),
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value_code' => '',
+      'default_value2' => 'same',
+      'default_value_code2' => '',
+      'user_register_form' => '',
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'date_default',
+        'settings' => array(
+          'format_type' => 'long',
+          'multiple_number' => '',
+          'multiple_from' => '',
+          'multiple_to' => '',
+          'fromto' => 'both',
+        ),
+        'module' => 'date',
+        'weight' => -3,
+      ),
+    ),
+  );
+  field_create_instance($instance);
+
+
+  $field = array(
+    'field_name' => 'field_link',
+    'type' => 'link_field',
+    'settings' => array(
+      'attributes' => array(
+        'target' => 'default',
+        'class' => '',
+        'rel' => '',
+      ),
+      'url' => 0,
+      'title' => 'optional',
+      'title_value' => '',
+      'title_maxlength' => 128,
+      'enable_tokens' => 1,
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+    ),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+    ),
+  );
+  field_create_field($field);
+
+
+  $field = array(
+    'field_name' => 'field_slider_images_collection',
+    'type' => 'field_collection',
+    'settings' => array(
+    ),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+    ),
+    'cardinality' => -1,
+  );
+  field_create_field($field);
+
+
+  // Create an image field named "Image", enabled for the 'article' content type.
+  // Many of the following values will be defaulted, they're included here as an illustrative examples.
+  // See http://api.drupal.org/api/function/field_create_field/7
+
+  $field = array(
+    'field_name' => 'field_image',
+    'type' => 'image',
+    'cardinality' => 1,
+    'locked' => FALSE,
+    'indexes' => array('fid' => array('fid')),
+    'settings' => array(
+      'uri_scheme' => 'public',
+      'default_image' => FALSE,
+    ),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+    ),
+  );
+  field_create_field($field);
+
+
+  // Many of the following values will be defaulted, they're included here as an illustrative examples.
+  // See http://api.drupal.org/api/function/field_create_instance/7
+  $instance = array(
+    'field_name' => 'field_image',
+    'entity_type' => 'node',
+    'label' => 'Image',
+    'bundle' => 'article',
+    'description' => st('Upload an image to go with this article.'),
+    'required' => FALSE,
+
+    'settings' => array(
+      'file_directory' => 'field/image/article',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'alt_field' => TRUE,
+      'title_field' => '',
+    ),
+
+    'widget' => array(
+      'type' => 'image_image',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+        'preview_image_style' => 'thumbnail',
+      ),
+      'weight' => -1,
+    ),
+
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array('image_style' => 'large', 'image_link' => ''),
+        'weight' => -1,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array('image_style' => 'medium', 'image_link' => 'content'),
+        'weight' => -1,
+      ),
+    ),
+  );
+  field_create_instance($instance);
+
+
+  $instance = array(
+    'field_name' => 'field_slider_images_collection',
+    'entity_type' => 'node',
+    'label' => 'Slider Images',
+    'bundle' => 'page',
+    'required' => FALSE,
+
+    'settings' => array(
+      'user_register_form' => false,
+    ),
+
+    'widget' => array(
+      'type' => 'field_collection_embed',
+      'module' => 'field_collection',
+      'active' => 0,
+      'weight' => 32,
+    ),
+
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'hidden',
+        'settings' => array(),
+        'weight' => 32,
+      ),
+    ),
+  );
+  field_create_instance($instance);
+
+
+  $instance = array(
+    'field_name' => 'field_image',
+    'entity_type' => 'field_collection_item',
+    'label' => 'Image',
+    'bundle' => 'field_slider_images_collection',
+    'required' => FALSE,
+
+    'settings' => array(
+      'file_directory' => 'field/image/slider',
+      'file_extensions' => 'png gif jpg jpeg',
+      'alt_field' => FALSE,
+    ),
+
+    'widget' => array(
+      'type' => 'image_image',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+        'preview_image_style' => 'thumbnail',
+      ),
+      'weight' => -1,
+    ),
+
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array('image_style' => 'large', 'image_link' => ''),
+        'weight' => -1,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array('image_style' => 'medium', 'image_link' => 'content'),
+        'weight' => -1,
+      ),
+    ),
+  );
+  field_create_instance($instance);
+
+
+  $instance = array(
+    'field_name' => 'field_link',
+    'entity_type' => 'field_collection_item',
+    'label' => 'Link',
+    'bundle' => 'field_slider_images_collection',
+    'required' => FALSE,
+
+    'settings' => array(
+      'validate_url' => 1,
+      'url' => 0,
+      'title' => 'required',
+      'title_value' => '',
+      'title_maxlength' => '255',
+      'enable_tokens' => 1,
+      'display' => array (
+        'url_cutoff' => '80',
+      ),
+      'attributes' => array (
+        'target' => 'default',
+        'rel' => '',
+        'class' => '',
+        'configurable_title' => 0,
+        'title' => '',
+      ),
+      'rel_remove' => 'default',
+      'user_register_form' => false,
+    ),
+
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'link_default',
+        'settings' => array(),
+        'weight' => -1,
+      ),
+    ),
+  );
+  field_create_instance($instance);
+
+
+  $instance = array(
+    'field_name' => 'field_link',
+    'entity_type' => 'node',
+    'label' => 'Location Map URL',
+    'description' => 'Make sure to use http or https. Example http://maps.google.com/',
+    'bundle' => 'events',
+    'required' => FALSE,
+    'widget' => array('weight' => 3),
+    'settings' => array(
+      'validate_url' => 1,
+      'url' => 0,
+      'title' => 'value',
+      'title_value' => 'Map',
+      'title_maxlength' => '255',
+      'enable_tokens' => 1,
+      'display' => array (
+        'url_cutoff' => '80',
+      ),
+      'attributes' => array (
+        'target' => 'default',
+        'rel' => '',
+        'class' => '',
+        'configurable_title' => 0,
+        'title' => 'Map',
+      ),
+      'rel_remove' => 'default',
+      'user_register_form' => false,
+    ),
+
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'link_default',
+        'settings' => array(),
+        'weight' => -1,
+      ),
+    ),
+  );
+  field_create_instance($instance);
+
+
+  $instance = array(
+    'field_name' => 'field_image',
+    'entity_type' => 'node',
+    'label' => 'Image',
+    'bundle' => 'news',
+    'required' => FALSE,
+
+    'settings' => array(
+      'file_directory' => 'field/image/news',
+      'file_extensions' => 'png gif jpg jpeg',
+      'alt_field' => TRUE,
+    ),
+
+    'widget' => array(
+      'type' => 'image_image',
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+        'preview_image_style' => 'thumbnail',
+      ),
+      'weight' => -1,
+    ),
+
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array('image_style' => 'large', 'image_link' => ''),
+        'weight' => -1,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'type' => 'image',
+        'settings' => array('image_style' => 'medium', 'image_link' => 'content'),
+        'weight' => -1,
+      ),
+    ),
+  );
+  field_create_instance($instance);
+}
+
+function _ucsf_installprofile2_permissions(){
+  $comments_format_permission = variable_get('comments_format_permission');
+  $webedit_format_permission = variable_get('webedit_format_permission');
+
+  // Create a new role for editor`s
+  $role = new stdClass();
+  $role->name = 'editor';
+  $role->weight = 2;
+  user_role_save($role);
+  $permissions = array(
+    'create url aliases',
+    'access content overview',
+    'administer nodes',
+    'create page content',
+    'delete any page content',
+    'delete own page content',
+    'edit any page content',
+    'edit own page content',
+    'create events content',
+    'delete any events content',
+    'delete own events content',
+    'edit any events content',
+    'edit own events content',
+    'create news content',
+    'delete any news content',
+    'delete own news content',
+    'edit any news content',
+    'edit own news content',
+    'access site in maintenance mode',
+    'view the administration theme',
+    'access administration menu',
+    'flush caches',
+    'administer comments',
+    'edit own comments',
+    'access contextual links',
+    $comments_format_permission,
+    $webedit_format_permission,
+  );
+  user_role_grant_permissions($role->rid, $permissions);
+
+  // Create a default role for site administrators, with all available permissions assigned.
+  $admin_role = new stdClass();
+  $admin_role->name = 'administrator';
+  $admin_role->weight = 3;
+  user_role_save($admin_role);
+  user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+  // Set this as the administrator role.
+  variable_set('user_admin_role', $admin_role->rid);
+
+  // Assign user 1 the "administrator" role.
+  db_insert('users_roles')
+    ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+    ->execute();
+
+  // Assigning default permissions for anonymous and authenticated users
+  $anonymous_permissions = array('access content',
+                                 'access comments',
+                                 'search content',
+                                 'access PDF version',
+                                 'access print',
+                                 'access send by email',
+                                 $comments_format_permission);
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, $anonymous_permissions);
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content', 'access comments', 'post comments', 'skip comment approval', 'search content', 'access PDF version', 'access print', 'access send by email', $comments_format_permission));
+  //
+}
+
+function _ucsf_installprofile2_misc_config(){
+  // Configure Chosen.
+  variable_set('chosen_jquery_selector', '.view-filters .views-exposed-form select');
+  variable_set('chosen_minimum', 0);
+  variable_set('chosen_minimum_width', 200);
+  variable_set('chosen_search_contains', TRUE);
+  variable_set('site_frontpage', 'node/1');
+  variable_set('cache', 1);
+  variable_set('cache_lifetime', '300');
+  variable_set('block_cache', 1);
+  variable_set('page_cache_maximum_age', '600');
+  variable_set('page_compression', 1);
+  variable_set('preprocess_css', 1);
+  variable_set('preprocess_js', 1);
+
+  // Turn off error reporting
+  variable_set('error_level', '0');
+
+  // Dates updated
+  variable_set('date_format_long', 'F j, Y');
+  variable_set('date_format_medium', 'M j, Y');
+  variable_set('date_format_short', 'm-j-y');
+
+  // IMCE
+
+  $imce_profiles = variable_get('imce_profiles');
+  $imce_profiles[1]['dimensions'] = 0;
+  $imce_profiles[1]['directories'][0] = array(
+                                          'name' => 'wysiwyg',
+                                          'subnav' => 1,
+                                          'browse' => 1,
+                                          'upload' => 1,
+                                          'thumb' => 0,
+                                          'delete' => 1,
+                                          'resize' => 0
+                                        );
+  $imce_profiles[1]['thumbnails'] = array();
+
+  $imce_roles_profile = array(
+                      4 => array(
+                        'weight' => 0,
+                        'public_pid' => 1
+                        ),
+                      3 => array(
+                        'weight' => 0,
+                        'public_pid' => 1
+                        ),
+                      2 => array(
+                        'weight' => 11,
+                        'public_pid' => 0
+                        ),
+                      1 => array(
+                        'weight' => 12,
+                        'public_pid' => 0
+                        ),
+                      );
+
+  variable_set('imce_profiles', $imce_profiles);
+  variable_set('imce_roles_profiles', $imce_roles_profile);
+  variable_set('imce_settings_absurls', 0);
+  variable_set('imce_settings_disable_private', 1);
+  variable_set('imce_settings_replace','0');
+  variable_set('imce_settings_textarea','');
+  variable_set('imce_settings_thumb_method','scale_and_crop');
+
+  // Theme
+  $ucsf_base_settings = variable_get('theme_ucsf_base_settings');
+  $ucsf_base_settings['mothership_classes_field_label'] = 0;
+  variable_set('theme_ucsf_base_settings', $ucsf_base_settings);
+
+  $orange_settings = variable_get('theme_orange_settings');
+  $orange_settings['mothership_classes_field_label'] = 0;
+  variable_set('theme_orange_settings', $orange_settings);
+
+  $teal_settings = variable_get('theme_teal_settings');
+  $teal_settings['mothership_classes_field_label'] = 0;
+  variable_set('theme_teal_settings', $teal_settings);
+
+  registry_rebuild();
+
+}
+
+function _ucsf_installprofile2_importviews(){
+
+  /* Slider View */
+  $view = new view();
+  $view->name = 'slider';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Slider';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Slider';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'slideshow';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+  $handler->display->display_options['style_options']['slideshow_type'] = 'flexslider_views_slideshow';
+  $handler->display->display_options['style_options']['slideshow_skin'] = 'default';
+  $handler->display->display_options['style_options']['skin_info'] = array(
+    'class' => 'default',
+    'name' => 'Default',
+    'module' => 'views_slideshow',
+    'path' => '',
+    'stylesheets' => array(),
+  );
+  $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_pager']['weight'] = '1';
+  $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_pager']['type'] = 'views_slideshow_pager_fields';
+  $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_pager']['views_slideshow_pager_fields_fields'] = array(
+    'field_image' => 0,
+    'field_link' => 0,
+  );
+  $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_controls']['weight'] = '1';
+  $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_controls']['type'] = 'views_slideshow_controls_text';
+  $handler->display->display_options['style_options']['widgets']['top']['views_slideshow_slide_counter']['weight'] = '1';
+  $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_pager']['weight'] = '1';
+  $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_pager']['type'] = 'views_slideshow_pager_fields';
+  $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_pager']['views_slideshow_pager_fields_fields'] = array(
+    'field_image' => 0,
+    'field_link' => 0,
+  );
+  $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_controls']['enable'] = 1;
+  $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_controls']['weight'] = '1';
+  $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_controls']['hide_on_single_slide'] = 1;
+  $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_controls']['type'] = 'views_slideshow_controls_text';
+  $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_slide_counter']['weight'] = '1';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: Content: Slider Images (field_slider_images_collection) */
+  $handler->display->display_options['relationships']['field_slider_images_collection_value']['id'] = 'field_slider_images_collection_value';
+  $handler->display->display_options['relationships']['field_slider_images_collection_value']['table'] = 'field_data_field_slider_images_collection';
+  $handler->display->display_options['relationships']['field_slider_images_collection_value']['field'] = 'field_slider_images_collection_value';
+  $handler->display->display_options['relationships']['field_slider_images_collection_value']['label'] = 'field_slider_images_collection';
+  $handler->display->display_options['relationships']['field_slider_images_collection_value']['delta'] = '-1';
+  /* Field: Field: Image */
+  $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
+  $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['relationship'] = 'field_slider_images_collection_value';
+  $handler->display->display_options['fields']['field_image']['label'] = '';
+  $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_image']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_image']['type'] = 'flexslider';
+  $handler->display->display_options['fields']['field_image']['settings'] = array(
+    'optionset' => 'default',
+  );
+  /* Field: Field: Location Map */
+  $handler->display->display_options['fields']['field_link']['id'] = 'field_link';
+  $handler->display->display_options['fields']['field_link']['table'] = 'field_data_field_link';
+  $handler->display->display_options['fields']['field_link']['field'] = 'field_link';
+  $handler->display->display_options['fields']['field_link']['relationship'] = 'field_slider_images_collection_value';
+  $handler->display->display_options['fields']['field_link']['label'] = '';
+  $handler->display->display_options['fields']['field_link']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_link']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_link']['click_sort_column'] = 'url';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
+  /* Display: Slider - Block */
+  $handler = $view->new_display('block', 'Slider - Block', 'slider_block');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $translatables['slider'] = array(
+    t('Master'),
+    t('Slider'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('field_slider_images_collection'),
+    t('All'),
+    t('Slider - Block'),
+  );
+
+  $view->save();
+
+  /* News View */
+  $view = new view();
+  $view->name = 'news';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'News';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'News';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'See all';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '4';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Field: Image */
+  $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
+  $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['label'] = '';
+  $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_image']['settings'] = array(
+    'image_style' => 'ucsf_square_thumbnail',
+    'image_link' => 'content',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'F d, Y';
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_summary_or_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '600',
+  );
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'news' => 'news',
+  );
+
+  /* Display: News - Page */
+  $handler = $view->new_display('page', 'News - Page', 'page');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Field: Image */
+  $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
+  $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['label'] = '';
+  $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_image']['settings'] = array(
+    'image_style' => 'ucsf_thumbnail',
+    'image_link' => 'content',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'F d, Y';
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_summary_or_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '600',
+  );
+  $handler->display->display_options['path'] = 'news';
+
+  /* Display: News - Block */
+  $handler = $view->new_display('block', 'News - Block', 'news_block');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['use_more'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'See all';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Field: Image */
+  $handler->display->display_options['fields']['field_image']['id'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['table'] = 'field_data_field_image';
+  $handler->display->display_options['fields']['field_image']['field'] = 'field_image';
+  $handler->display->display_options['fields']['field_image']['label'] = '';
+  $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_image']['settings'] = array(
+    'image_style' => 'ucsf_square_thumbnail',
+    'image_link' => 'content',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = '';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'F d, Y';
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_summary_or_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '600',
+  );
+  $translatables['news'] = array(
+    t('Master'),
+    t('News'),
+    t('See all'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('News - Page'),
+    t('more'),
+    t('News - Block'),
+  );
+
+  $view->save();
+
+
+  /* Events View */
+  $view = new view();
+  $view->name = 'events';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Events';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Events';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['body']['alter']['text'] = '[title]
+    [body]';
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_summary_or_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '200',
+  );
+  /* Field: Content: Date */
+  $handler->display->display_options['fields']['field_events_date']['id'] = 'field_events_date';
+  $handler->display->display_options['fields']['field_events_date']['table'] = 'field_data_field_events_date';
+  $handler->display->display_options['fields']['field_events_date']['field'] = 'field_events_date';
+  $handler->display->display_options['fields']['field_events_date']['label'] = '';
+  $handler->display->display_options['fields']['field_events_date']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_events_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_events_date']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Location */
+  $handler->display->display_options['fields']['field_event_location']['id'] = 'field_event_location';
+  $handler->display->display_options['fields']['field_event_location']['table'] = 'field_data_field_event_location';
+  $handler->display->display_options['fields']['field_event_location']['field'] = 'field_event_location';
+  $handler->display->display_options['fields']['field_event_location']['label'] = '';
+  $handler->display->display_options['fields']['field_event_location']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_event_location']['alter']['text'] = '<div class="event-date">[field_events_date]</div>
+      <div class="event-location">[field_event_location]</div>';
+  $handler->display->display_options['fields']['field_event_location']['element_class'] = 'event-meta';
+  $handler->display->display_options['fields']['field_event_location']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_event_location']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_event_location']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_event_location']['type'] = 'taxonomy_term_reference_plain';
+  /* Sort criterion: Content: Date -  start date (field_events_date) */
+  $handler->display->display_options['sorts']['field_events_date_value']['id'] = 'field_events_date_value';
+  $handler->display->display_options['sorts']['field_events_date_value']['table'] = 'field_data_field_events_date';
+  $handler->display->display_options['sorts']['field_events_date_value']['field'] = 'field_events_date_value';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'events' => 'events',
+  );
+  /* Filter criterion: Date: Date (node) */
+  $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['table'] = 'node';
+  $handler->display->display_options['filters']['date_filter']['field'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['operator'] = '>';
+  $handler->display->display_options['filters']['date_filter']['granularity'] = 'minute';
+  $handler->display->display_options['filters']['date_filter']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['date_filter']['default_date'] = 'now';
+  $handler->display->display_options['filters']['date_filter']['year_range'] = '-10:+3';
+  $handler->display->display_options['filters']['date_filter']['date_fields'] = array(
+    'field_data_field_events_date.field_events_date_value' => 'field_data_field_events_date.field_events_date_value',
+    'field_data_field_events_date.field_events_date_value2' => 'field_data_field_events_date.field_events_date_value2',
+  );
+
+  /* Display: Upcoming Events - Page */
+  $handler = $view->new_display('page', 'Upcoming Events - Page', 'upcoming_events_page');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['path'] = 'events/upcoming';
+  $handler->display->display_options['menu']['type'] = 'default tab';
+  $handler->display->display_options['menu']['title'] = 'Upcoming';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['tab_options']['type'] = 'normal';
+  $handler->display->display_options['tab_options']['title'] = 'Events';
+  $handler->display->display_options['tab_options']['weight'] = '9';
+  $handler->display->display_options['tab_options']['name'] = 'main-menu';
+
+  /* Display: Upcoming Events - Block */
+  $handler = $view->new_display('block', 'Upcoming Events - Block', 'upcoming_events_block');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['use_more'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'See all';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Date */
+  $handler->display->display_options['fields']['field_events_date']['id'] = 'field_events_date';
+  $handler->display->display_options['fields']['field_events_date']['table'] = 'field_data_field_events_date';
+  $handler->display->display_options['fields']['field_events_date']['field'] = 'field_events_date';
+  $handler->display->display_options['fields']['field_events_date']['label'] = '';
+  $handler->display->display_options['fields']['field_events_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_events_date']['settings'] = array(
+    'format_type' => 'medium',
+    'fromto' => 'value',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = '';
+  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['body']['type'] = 'text_summary_or_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '200',
+  );
+
+  /* Display: Past Events - Page */
+  $handler = $view->new_display('page', 'Past Events - Page', 'past_events_page');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Date -  start date (field_events_date) */
+  $handler->display->display_options['sorts']['field_events_date_value']['id'] = 'field_events_date_value';
+  $handler->display->display_options['sorts']['field_events_date_value']['table'] = 'field_data_field_events_date';
+  $handler->display->display_options['sorts']['field_events_date_value']['field'] = 'field_events_date_value';
+  $handler->display->display_options['sorts']['field_events_date_value']['order'] = 'DESC';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'events' => 'events',
+  );
+  /* Filter criterion: Date: Date (node) */
+  $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['table'] = 'node';
+  $handler->display->display_options['filters']['date_filter']['field'] = 'date_filter';
+  $handler->display->display_options['filters']['date_filter']['operator'] = '<=';
+  $handler->display->display_options['filters']['date_filter']['granularity'] = 'minute';
+  $handler->display->display_options['filters']['date_filter']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['date_filter']['default_date'] = 'now';
+  $handler->display->display_options['filters']['date_filter']['year_range'] = '-10:+3';
+  $handler->display->display_options['filters']['date_filter']['date_fields'] = array(
+    'field_data_field_events_date.field_events_date_value' => 'field_data_field_events_date.field_events_date_value',
+    'field_data_field_events_date.field_events_date_value2' => 'field_data_field_events_date.field_events_date_value2',
+  );
+  $handler->display->display_options['filters']['date_filter']['date_method'] = 'AND';
+  $handler->display->display_options['path'] = 'events/past';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'Past';
+  $handler->display->display_options['menu']['weight'] = '1';
+  $handler->display->display_options['menu']['name'] = 'main-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['tab_options']['type'] = 'tab';
+  $handler->display->display_options['tab_options']['title'] = 'Past';
+  $handler->display->display_options['tab_options']['weight'] = '1';
+  $translatables['events'] = array(
+    t('Master'),
+    t('Events'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('[title]
+    [body]'),
+    t('<div class="event-date">[field_events_date]</div>
+      <div class="event-location">[field_event_location]</div>'),
+    t('Upcoming Events - Page'),
+    t('Upcoming Events - Block'),
+    t('See all'),
+    t('Past Events - Page'),
+  );
+
+  $view->save();
+
+}
+
+function _ucsf_installprofile2_import(){
+  _ucsf_installprofile2_import_taxonomy_terms();
+
+  _ucsf_import_pages();
+  //_ucsf_import_slider();
+  _ucsf_import_news();
+  _ucsf_import_events();
+  _ucsf_import_webform();
+  //_ucsf_import_callout();
+}
+
+function _ucsf_import_news(){
+  $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile2').'/import/news.xml';
+  if(file_exists($nodes_xml)) {
+    $xmlObject = simplexml_load_file($nodes_xml);
+    drupal_mkdir('public://field');
+    drupal_mkdir('public://field/image');
+    drupal_mkdir('public://field/image/news');
+
+    foreach ($xmlObject->node as $item) {
+      $node = new stdClass();
+      $node->type = 'news';
+      $node->title = $item->title;
+      node_object_prepare($node);
+      $node->body['und'][0]['value']   = $item->body;
+      $node->body['und'][0]['format']  = 'webedit';
+      $image_path = drupal_get_path('profile', 'ucsf_installprofile2') . '/import/images/' . $item->image;
+      $file = (object)array(
+        "uid" => 1,
+        "uri" => $image_path,
+        "filemime" => file_get_mimetype($image_path),
+        "status" => 1
+      );
+      $file = file_copy($file, 'public://field/image/news', FILE_EXISTS_REPLACE);
+      $node->field_image['und'][0] = (array)$file;
+      $node = node_submit($node);
+      node_save($node);
+    }
+  }
+}
+
+function _ucsf_import_events(){
+  $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile2').'/import/events.xml';
+  if(file_exists($nodes_xml)) {
+    $xmlObject = simplexml_load_file($nodes_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+    foreach ($xmlObject->node as $item) {
+      $node = new stdClass();
+      $node->type = 'events';
+      $node->title = $item->title;
+      node_object_prepare($node);
+      $node->body['und'][0]['value']   = $item->body;
+      $node->body['und'][0]['format']  = 'webedit';
+      $node->field_events_date['und'][0]['value'] = $item->date->start_date;
+      $node->field_events_date['und'][0]['value2'] = $item->date->end_date;
+      $node->field_event_location['und'][0]['tid'] = $item->location;
+      $node->field_link['und'][0]['url'] = $item->location_map;
+      $node = node_submit($node);
+      node_save($node);
+    }
+  }
+}
+
+function _ucsf_import_webform(){
+  $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile2').'/import/webform.xml';
+  if(file_exists($nodes_xml)) {
+    $xmlObject = simplexml_load_file($nodes_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+    foreach ($xmlObject->node as $item) {
+      $node = new stdClass();
+      $node->type = 'webform';
+      $node->title = $item->title;
+      node_object_prepare($node);
+      $node->body['und'][0]['value']   = $item->body;
+      $node->body['und'][0]['format']  = 'webedit';
+      $node = node_submit($node);
+      node_save($node);
+
+      $i = 0;
+      foreach ($item->webform_components->component as $component) {
+        db_insert('webform_component')
+          ->fields(array(
+            'nid' => $node->nid,
+            'cid' => $i+1,
+            'pid' =>0,
+            'form_key' => $component->form_key,
+            'name' => $component->name,
+            'type' => $component->type,
+            'value' => '',
+            'extra' => $component->extra,
+            'mandatory' => 0,
+            'weight' => $i,
+          ))
+          ->execute();
+        $i++;
+      }
+    }
+  }
+}
+
+function _ucsf_import_pages(){
+  $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile2').'/import/page.xml';
+  if(file_exists($nodes_xml)) {
+    $xmlObject = simplexml_load_file($nodes_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+    foreach ($xmlObject->node as $item) {
+      $node = new stdClass();
+      $node->type = 'page';
+      $node->title = $item->title;
+      node_object_prepare($node);
+      $node->body['und'][0]['value']   = $item->body;
+      //$node->body['und'][0]['summary'] = text_summary($item->body);
+      $node->body['und'][0]['format']  = 'webedit';
+
+      $node = node_submit($node);
+      node_save($node);
+      unset($node->is_new);
+
+      if(isset($item->slides)) {
+        $delta = 0;
+        drupal_mkdir('public://field');
+        drupal_mkdir('public://field/image');
+        drupal_mkdir('public://field/image/slider');
+        foreach ($item->slides->slide as $slide) {
+          $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_slider_images_collection'));
+          $field_collection_item->setHostEntity('node', $node);
+
+          $image_path = drupal_get_path('profile', 'ucsf_installprofile2') . '/import/images/' . $slide->image;
+          $file = (object)array(
+            "uid" => 1,
+            "uri" => $image_path,
+            "filemime" => file_get_mimetype($image_path),
+            "status" => 1
+          );
+          $file = file_copy($file, 'public://field/image/slider', FILE_EXISTS_REPLACE);
+          $field_collection_item->field_image['und'][0] = (array)$file;
+          //drupal_set_message('slide : <pre>'.print_r($slide, 1).'</pre>');
+          //drupal_set_message('title : '.$slide->link->title);
+          $field_collection_item->field_link['und'][0]['url'] = $slide->link->url;
+          $field_collection_item->field_link['und'][0]['title'] = $slide->link->title;
+
+          $field_collection_item->save();
+          $node->field_slider_images_collection['und'][$delta]['value'] = $field_collection_item->item_id;
+          $delta ++;
+        }
+        $node = node_submit($node);
+        node_save($node);
+      }
+    }
+  }
+}
+
+function _ucsf_installprofile2_menus(){
+  $footer['menu_name'] = 'footer';
+  $footer['title'] = 'Footer Menu';
+  $footer['description'] = 'Menu displayed in the footer';
+  menu_save($footer);
+
+  $header['menu_name'] = 'header';
+  $header['title'] = 'Header Menu';
+  $header['description'] = 'Menu displayed in the header';
+  menu_save($header);
+
+  drupal_static_reset();
+
+  $links[] = array(
+    'link_path' => 'node/26',
+    'link_title' => 'Contact Us',
+    'menu_name' => 'footer',
+  );
+  $links[] = array(
+    'link_path' => 'node/2',
+    'link_title' => 'About Us',
+    'menu_name' => 'footer',
+  );
+  $links[] = array(
+    'link_path' => 'http://www.ucsf.edu',
+    'link_title' => 'UCSF Main Site',
+    'menu_name' => 'footer',
+  );
+  $links[] = array(
+    'link_path' => 'http://www.ucsf.edu',
+    'link_title' => 'University of California, San Francisco',
+    'menu_name' => 'header',
+  );
+  $links[] = array(
+    'link_path' => 'http://www.ucsf.edu/about_ucsf/',
+    'link_title' => 'About UCSF',
+    'menu_name' => 'header',
+  );
+  $links[] = array(
+    'link_path' => 'http://www.ucsf.edu/ucsf/search',
+    'link_title' => 'Search UCSF',
+    'menu_name' => 'header',
+  );
+  $links[] = array(
+    'link_path' => 'http://www.ucsfhealth.org/',
+    'link_title' => 'UCSF Medical Center',
+    'menu_name' => 'header',
+  );
+  $links[] = array(
+    'link_path' => '<front>',
+    'link_title' => 'Home',
+    'menu_name' => 'main-menu',
+  );
+  $links[] = array(
+    'link_path' => 'news',
+    'link_title' => 'News',
+    'router_path' => 'news',
+    'menu_name' => 'main-menu',
+    'customized' => 1,
+  );
+  $links[] = array(
+    'link_path' => 'node/2',
+    'link_title' => 'About',
+    'menu_name' => 'main-menu',
+  );
+  $links[] = array(
+    'link_path' => 'node/4',
+    'link_title' => 'Services',
+    'menu_name' => 'main-menu',
+  );
+  $links[] = array(
+    'link_path' => 'node/5',
+    'link_title' => 'Secondary Page',
+    'menu_name' => 'main-menu',
+    'level' => 1,
+  );
+  $links[] = array(
+    'link_path' => 'node/6',
+    'link_title' => 'Tertiary Page ',
+    'menu_name' => 'main-menu',
+    'level' => 2,
+  );
+  $links[] = array(
+    'link_path' => 'node/7',
+    'link_title' => 'Other Tertiary Page',
+    'menu_name' => 'main-menu',
+    'level' => 2,
+  );
+  $links[] = array(
+    'link_path' => 'node/8',
+    'link_title' => 'An other Secondary Page',
+    'menu_name' => 'main-menu',
+    'level' => 1,
+  );
+  $links[] = array(
+    'link_path' => 'node/9',
+    'link_title' => 'And a last Secondary Page',
+    'menu_name' => 'main-menu',
+    'level' => 1,
+  );
+  $links[] = array(
+    'link_path' => 'node/3',
+    'link_title' => 'Styleguide',
+    'menu_name' => 'main-menu',
+    'level' => 0,
+  );
+
+  $i=0;
+  $plid0 = 0;
+  $plid1 = 0;
+  $plid2 = 0;
+  foreach ($links as $link) {
+    $link['weight'] = $i;
+    if(isset($link['level'])){
+      $level = $link['level'];
+      $link['plid'] = $plid{$level-1};
+      unset($link['level']);
+    } else{
+      $level = 0;
+      $plid1 = 0;
+      $plid2 = 0;
+    }
+    $plid{$level} = menu_link_save($link);
+    $i++;
+  }
+
+  variable_set('menu_block_ids', array(1,2));
+  variable_set("menu_block_1_title_link", 0);
+  variable_set("menu_block_1_admin_title", 'Main Menu - Level 1');
+  variable_set("menu_block_1_parent", 'main-menu:0');
+  variable_set("menu_block_1_level", "1");
+  variable_set("menu_block_1_follow", 0);
+  variable_set("menu_block_1_depth", "1");
+  variable_set("menu_block_1_expanded", 0);
+  variable_set("menu_block_1_sort", 0);
+
+  variable_set("menu_block_2_title_link", 1);
+  variable_set("menu_block_2_admin_title", 'Main Menu - Level 2+');
+  variable_set("menu_block_2_parent", 'main-menu:0');
+  variable_set("menu_block_2_level", "2");
+  variable_set("menu_block_2_follow", 0);
+  variable_set("menu_block_2_depth", "0");
+  variable_set("menu_block_2_expanded", 1);
+  variable_set("menu_block_2_sort", 0);
+
+
+}
+
+function _ucsf_installprofile2_blocks(){
+  $default_themes = array('ucsf_base', 'orange', 'teal');
+  $blocks = array(
+    array(
+      'module' => 'menu',
+      'delta' => 'header',
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'top_header',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => '<none>',
+      'cache' => DRUPAL_NO_CACHE,
+    ),
+    array(
+      'module' => 'search',
+      'delta' => 'form',
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'header',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => '<none>',
+      'cache' => DRUPAL_NO_CACHE,
+    ),
+    array(
+      'module' => 'menu_block',
+      'delta' => 1,
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 1,
+      'region' => 'header',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => '<none>',
+      'cache' => DRUPAL_NO_CACHE,
+    ),
+    array(
+      'module' => 'menu_block',
+      'delta' => 2,
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 1,
+      'region' => 'sidebar_first',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => '',
+      'cache' => DRUPAL_NO_CACHE,
+    ),
+    array(
+      'module' => 'block',
+      'delta' => 1,
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'sidebar_second',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => 'Callout Box',
+      'cache' => DRUPAL_NO_CACHE,
+      'body' => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate. Velit.</p>',
+      'info' => 'Sidebar - Callout',
+      'format' => 'webedit',
+      'css_class' => 'callout-box',
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'news-news_block',
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 1,
+      'region' => 'sidebar_second',
+      'visibility' => 0,
+      'pages' => 'news',
+      'title' => '',
+      'cache' => DRUPAL_NO_CACHE,
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'events-upcoming_events_block',
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 1,
+      'region' => 'sidebar_second',
+      'visibility' => 0,
+      'pages' => 'events',
+      'title' => '',
+      'cache' => DRUPAL_NO_CACHE,
+    ),
+    array(
+      'module' => 'views',
+      'delta' => 'slider-slider_block',
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content_top',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => '<none>',
+      'cache' => DRUPAL_NO_CACHE,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'main',
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 1,
+      'region' => 'content',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => '',
+      'cache' => DRUPAL_NO_CACHE,
+    ),
+    array(
+      'module' => 'ucsftemplate_tweaks',
+      'delta' => 'footer_contact',
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'footer_top',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => '',
+      'cache' => DRUPAL_CACHE_PER_ROLE,
+      'css_class' => 'footer-contact-us',
+    ),
+    array(
+      'module' => 'ucsftemplate_tweaks',
+      'delta' => 'footer_socialmedias',
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 1,
+      'region' => 'footer_top',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => '',
+      'cache' => DRUPAL_CACHE_PER_ROLE,
+      'css_class' => 'footer-socialmedias',
+    ),
+    array(
+      'module' => 'menu',
+      'delta' => 'footer',
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 2,
+      'region' => 'footer',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => '<none>',
+      'cache' => DRUPAL_NO_CACHE,
+    ),
+    array(
+      'module' => 'ucsftemplate_tweaks',
+      'delta' => 'footer_copyright',
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 3,
+      'region' => 'footer',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => '',
+      'cache' => DRUPAL_CACHE_PER_ROLE,
+      'css_class' => 'footer-copyright',
+    ),
+    array(
+      'module' => 'switchtheme',
+      'delta' => 'switch_form',
+      'theme' => $default_themes,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'footer',
+      'visibility' => 0,
+      'pages' => '',
+      'title' => '',
+      'cache' => DRUPAL_CACHE_PER_ROLE,
+    ),
+  );
+
+  drupal_static_reset();
+  _block_rehash();
+  foreach ($blocks as $record) {
+
+    $custom_block = FALSE;
+
+    if(isset($record['body'])){
+      $fields = array(
+        'body' => $record['body'],
+        'info' => $record['info'],
+        'format' => $record['format'],
+      );
+      db_insert('block_custom')
+      ->fields($fields)
+      ->execute();
+      $custom_block = TRUE;
+    }
+
+    foreach($record['theme'] as $block_theme){
+      $fields = array(
+        'module' => $record['module'],
+        'delta' => $record['delta'],
+        'theme' => $block_theme,
+        'status' => $record['status'],
+        'weight' => $record['weight'],
+        'visibility' => $record['visibility'],
+        'region' => $record['region'],
+        'pages' => $record['pages'],
+        'title' => $record['title'],
+        'cache' => $record['cache'],
+      );
+      db_insert('block')
+        ->fields($fields)
+        ->execute();
+    }
+    if($record['css_class'] != '') {
+      $fields = array(
+        'module' => $record['module'],
+        'delta' => $record['delta'],
+        'css_class' => $record['css_class'],
+      );
+      db_insert('block_class')
+      ->fields($fields)
+      ->execute();
+    }
+  }
+}
+/*
+  Create taxonomy Terms
+*/
+function _ucsf_installprofile2_import_taxonomy_terms() {
+  $terms_xml = drupal_get_path('profile', 'ucsf_installprofile2').'/import/taxonomy-terms.xml';
+  if(file_exists($terms_xml)) {
+    $xmlObject = simplexml_load_file($terms_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+    foreach ($xmlObject->term as $item) {
+      taxonomy_term_save((object) array(
+        'name' => $item->title,
+        'vid' => $item->vid,
+      ));
+    }
+  }
+}
+
+/**
+ * Implements hook_install().
+ */
+function ucsf_installprofile2_install() {
+  _ucsf_installprofile2_filter_formats();
+  _ucsf_installprofile2_enable_theme();
+  _ucsf_installprofile2_content_types();
+  _ucsf_installprofile2_fields();
+  _ucsf_installprofile2_permissions();
+  _ucsf_installprofile2_import();
+  _ucsf_installprofile2_importviews();
+  _ucsf_installprofile2_menus();
+  _ucsf_installprofile2_blocks();
+  _ucsf_installprofile2_misc_config();
+}

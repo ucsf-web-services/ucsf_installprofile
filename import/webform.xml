@@ -1,0 +1,45 @@
+<?xml version='1.0' standalone='yes'?>
+<nodes>
+ <node>
+  <title>Contact</title>
+  <body>
+  </body>
+  <webform_components>
+    <component>
+      <form_key>firstname</form_key>
+      <name>Firstname</name>
+      <type>textfield</type>
+      <weight>0</weight>
+      <extra>a:5:{s:13:"title_display";s:6:"before";s:7:"private";i:0;s:8:"disabled";i:0;s:6:"unique";i:0;s:20:"conditional_operator";s:1:"=";}</extra>
+    </component>
+    <component>
+      <form_key>lastname</form_key>
+      <name>Lastname</name>
+      <type>textfield</type>
+      <weight>1</weight>
+      <extra>a:5:{s:13:"title_display";s:6:"before";s:7:"private";i:0;s:8:"disabled";i:0;s:6:"unique";i:0;s:20:"conditional_operator";s:1:"=";}</extra>
+    </component>
+    <component>
+      <form_key>email_address</form_key>
+      <name>Email Address</name>
+      <type>email</type>
+      <weight>2</weight>
+      <extra>a:5:{s:13:"title_display";s:6:"before";s:7:"private";i:0;s:8:"disabled";i:0;s:6:"unique";i:0;s:20:"conditional_operator";s:1:"=";}</extra>
+    </component>
+    <component>
+      <form_key>subject</form_key>
+      <name>Subject</name>
+      <type>textfield</type>
+      <weight>3</weight>
+      <extra>a:5:{s:13:"title_display";s:6:"before";s:7:"private";i:0;s:8:"disabled";i:0;s:6:"unique";i:0;s:20:"conditional_operator";s:1:"=";}</extra>
+    </component>
+    <component>
+      <form_key>message</form_key>
+      <name>Message</name>
+      <type>textarea</type>
+      <weight>4</weight>
+      <extra>a:5:{s:13:"title_display";i:0;s:7:"private";i:0;s:9:"resizable";i:1;s:8:"disabled";i:0;s:20:"conditional_operator";s:1:"=";}</extra>
+    </component>
+  </webform_components>
+ </node>
+</nodes>

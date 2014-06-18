@@ -1,0 +1,259 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function ucsftemplate_tweaks_install() {
+  variable_set('footer_contact_title', 'University of California, San Francisco');
+  variable_set('footer_contact_address1', '500 Parnassus Ave');
+  variable_set('footer_contact_address2', 'San Francisco, CA 94143');
+  variable_set('footer_contact_phone', '(415) 476-9000');
+  variable_set('footer_contact_fax', '(415) 476-9634');
+  variable_set('footer_socialmedias_title', 'Connect with us');
+  variable_set('footer_socialmedias_twitter', 'http://www.twitter.com');
+  variable_set('footer_socialmedias_facebook', 'http://www.facebook.com');
+  variable_set('footer_socialmedias_googleplus', 'http://www.google.com');
+  variable_set('footer_copyright_copy', '&copy; ' . date('Y') . ' The Regents of the University of California');
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function ucsftemplate_tweaks_block_info() {
+  $blocks['footer_contact'] = array(
+    'info' => t('Footer - Contact Infos'),
+  );
+  $blocks['footer_socialmedias'] = array(
+    'info' => t('Footer - Social Medias'),
+  );
+  $blocks['footer_copyright'] = array(
+    'info' => t('Footer - Copyright'),
+  );
+
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function ucsftemplate_tweaks_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    
+    case 'footer_contact':
+      $block['subject'] = variable_get('footer_contact_title', 'University of California, San Francisco');
+      $content = '';
+      $content .= '<div class="footer-contact">';
+      if(variable_get('footer_contact_address1') != '' || variable_get('footer_contact_address2') != ''){
+        $content .= '<div class="footer-contact-address">';
+        $content .= variable_get('footer_contact_address1', '500 Parnassus Ave') . '<br/>';
+        $content .= variable_get('footer_contact_address2', 'San Francisco, CA 94143');
+        $content .= '</div>';
+      }
+      if(variable_get('footer_contact_phone') != '' || variable_get('footer_contact_fax') != ''){
+        $content .= '<div class="footer-contact-phonefax">';
+        if(variable_get('footer_contact_phone') != ''){
+          $content .= '<b>Phone:</b> '.variable_get('footer_contact_phone', '(415) 476-9000').'</br>';
+        }
+        if(variable_get('footer_contact_fax') != ''){
+          $content .= '<b>Fax:</b> '.variable_get('footer_contact_fax', '(415) 476-9634');
+        }
+        $content .= '</div>';
+      }
+      $content .= '</div>';
+      $block['content'] = $content;
+    break;
+    case 'footer_socialmedias':
+      $block['subject'] = variable_get('footer_socialmedias_title', 'Connect with us');
+      $content = '';
+      $content .= '<div class="footer-socialmedias">';
+      if(variable_get('footer_socialmedias_twitter') != ''){
+        $content .= l('Twitter', variable_get('footer_socialmedias_twitter', 'http://www.twitter.com'), array('target' => '_blank', 'attributes' => array('class' => 'footer-twitter')));
+      }
+      if(variable_get('footer_socialmedias_facebook') != ''){
+        $content .= l('Facebook', variable_get('footer_socialmedias_facebook', 'http://www.facebook.com'), array('target' => '_blank', 'attributes' => array('class' => 'footer-facebook')));
+      }
+      if(variable_get('footer_socialmedias_googleplus') != ''){
+        $content .= l('Google Plus', variable_get('footer_socialmedias_googleplus', 'http://www.google.com'), array('target' => '_blank', 'attributes' => array('class' => 'footer-googleplus')));
+      }
+      $content .= '</div>';
+      $block['content'] = $content;
+
+    break;
+    case 'footer_copyright':
+      $block['subject'] = '';
+      $content = '';
+      $content .= variable_get('footer_copyright_copy', ''. date('Y') . ' The Regents of the University of California');
+      $block['content'] = $content;
+    break;
+
+
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function ucsftemplate_tweaks_block_configure($delta = '') {
+  $form = array();
+  switch ($delta) {
+    case 'footer_contact':
+      $form['title'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Title'),
+        '#default_value' => variable_get('footer_contact_title', 'University of California, San Francisco'),
+        '#description' => '',
+      );
+      $form['footer_contact_address1'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Address 1'),
+        '#default_value' => variable_get('footer_contact_address1', '500 Parnassus Ave'),
+      );
+      $form['footer_contact_address2'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Address 2'),
+        '#default_value' => variable_get('footer_contact_address2', 'San Francisco, CA 94143'),
+      );
+      $form['footer_contact_phone'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Phone Number'),
+        '#default_value' => variable_get('footer_contact_phone', '(415) 476-9000'),
+      );
+      $form['footer_contact_fax'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Fax Number'),
+        '#default_value' => variable_get('footer_contact_fax', '(415) 476-9634'),
+      );
+    break;
+    case 'footer_socialmedias':
+      $form['title'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Title'),
+        '#default_value' => variable_get('footer_socialmedias_title', 'Connect with us'),
+        '#description' => '',
+      );
+      $form['footer_socialmedias_twitter'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Twitter URL'),
+        '#default_value' => variable_get('footer_socialmedias_twitter', 'http://www.twitter.com'),
+      );
+      $form['footer_socialmedias_facebook'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Facebook URL'),
+        '#default_value' => variable_get('footer_socialmedias_facebook', 'http://www.facebook.com'),
+      );
+      $form['footer_socialmedias_googleplus'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Google Plus URL'),
+        '#default_value' => variable_get('footer_socialmedias_googleplus', 'http://www.google.com'),
+      );
+    break;
+    case 'footer_copyright':
+      $form['title'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Title'),
+        '#default_value' => '',
+        '#description' => '',
+        '#access' => FALSE,
+      );
+      $form['footer_copyright_copy'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Copyright'),
+        '#default_value' => variable_get('footer_copyright_copy', '' . date('Y') . ' The Regents of the University of California'),
+      );
+    break;
+
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+
+function ucsftemplate_tweaks_block_save($delta = '', $edit = array()) {
+  switch ($delta) {
+    case 'footer_contact':
+      variable_set('footer_contact_title', $edit['title']);
+      variable_set('footer_contact_address1', $edit['footer_contact_address1']);
+      variable_set('footer_contact_address2', $edit['footer_contact_address2']);
+      variable_set('footer_contact_phone', $edit['footer_contact_phone']);
+      variable_set('footer_contact_fax', $edit['footer_contact_fax']);
+    break;
+    case 'footer_socialmedias':
+      variable_set('footer_socialmedias_title', $edit['title']);
+      variable_set('footer_socialmedias_twitter', $edit['footer_socialmedias_twitter']);
+      variable_set('footer_socialmedias_facebook', $edit['footer_socialmedias_facebook']);
+      variable_set('footer_socialmedias_googleplus', $edit['footer_socialmedias_googleplus']);
+    break;
+    case 'footer_copyright':
+      variable_set('footer_copyright_copy', $edit['footer_copyright_copy']);
+    break;
+  }
+}
+
+
+/**
+ * Implements hook_image_default_styles().
+ */
+function ucsftemplate_tweaks_image_default_styles() {
+  $styles = array();
+
+  // Default thumbs 
+  $styles['ucsf_thumbnail'] = array(
+    'effects' => array(
+      array(
+        'name' => 'image_scale_and_crop',
+        'data' => array('width' => 170, 'height' => 128),
+        'weight' => 0,
+      ),
+    ),
+  );
+  
+  $styles['ucsf_square_thumbnail'] = array(
+    'effects' => array(
+      array(
+        'name' => 'image_scale_and_crop',
+        'data' => array('width' => 70, 'height' => 70),
+        'weight' => 0,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+
+/**
+ * Implements hook_date_format_types().
+ */
+function ucsftemplate_tweaks_date_format_types() {
+  // Define the core date format types.
+  return array(
+    'ucsf_long_date' => t('UCSF Long Date'), 
+    'ucsf_medium_date' => t('UCSF Medium Date'), 
+    'ucsf_short_date' => t('UCSF Short Date'),
+  );
+}
+
+/**
+ * Implements hook_date_formats().
+ */
+function ucsftemplate_tweaks_date_formats() {
+  return array(
+    array(
+      'type' => 'ucsf_long_date', 
+      'format' => 'F j, Y',
+    ),
+    array(
+      'type' => 'ucsf_medium_date', 
+      'format' => 'M j, Y',
+    ),
+    array(
+      'type' => 'ucsf_short_date', 
+      'format' => 'm-j-y',
+    ),
+  );
+}
