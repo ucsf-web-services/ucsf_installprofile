@@ -9,6 +9,52 @@ projects[drupal][version] = "7.28"
 ; Contributed modules
 ; ----------------------------------------------------------------
 
+projects[ctools][subdir] = "contrib"
+projects[ctools][version] = "1.4"
+projects[ctools][type] = "module"
+
+projects[pasteformat][subdir] = "contrib"
+projects[pasteformat][version] = "1.5"
+projects[pasteformat][type] = "module"
+
+projects[features][subdir] = "contrib"
+projects[features][version] = "1.0"
+projects[features][type] = "module"
+
+projects[strongarm][subdir] = "contrib"
+projects[strongarm][version] = "2.0"
+projects[strongarm][type] = "module"
+
+projects[entity][subdir] = "contrib"
+projects[entity][version] = "1.4"
+projects[entity][type] = "module"
+
+projects[views][subdir] = "contrib"
+projects[views][version] = "3.8"
+projects[views][type] = "module"
+
+projects[views_bulk_operations][subdir] = "contrib"
+projects[views_bulk_operations][version] = "3.2"
+projects[views_bulk_operations][type] = "module"
+
+projects[date][subdir] = "contrib"
+projects[date][version] = "2.7"
+projects[date][type] = "module"
+
+projects[date_api][subdir] = "contrib"
+projects[date_api][version] = "2.7"
+projects[date_api][type] = "module"
+
+project[ckeditor_link][subdir] = "patched"
+project[ckeditor_link][version] = "2.3"
+project[ckeditor_link][type] = "module"
+project[ckeditor_link][patch][] = "https://drupal.org/files/issues/ckeditor_link-autocomplete_on_return_validate-2178379.patch"
+
+project[node_edit_protection][subdir] = "patched"
+project[node_edit_protection][version] = "1.0"
+project[node_edit_protection][type] = "module"
+project[node_edit_protection][patch][] = "https://drupal.org/files/issues/wysiwyg_protection-1276370-1.patch"
+
 ; Contributed themes
 ; ----------------------------------------------------------------
 
