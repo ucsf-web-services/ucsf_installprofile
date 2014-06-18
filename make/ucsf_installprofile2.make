@@ -216,6 +216,138 @@ projects[ucsf_base][type] = "theme"
 
 ; Libraries
 ; ----------------------------------------------------------------
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[chosen][download][type] = ""
+libraries[chosen][download][url] = ""
+libraries[chosen][directory_name] = "chosen"
+libraries[chosen][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[ckeditor][download][type] = ""
+libraries[ckeditor][download][url] = ""
+libraries[ckeditor][directory_name] = "ckeditor"
+libraries[ckeditor][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[modernizr][download][type] = ""
+libraries[modernizr][download][url] = ""
+libraries[modernizr][directory_name] = "modernizr"
+libraries[modernizr][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[tinymce][download][type] = ""
+libraries[tinymce][download][url] = ""
+libraries[tinymce][directory_name] = "tinymce"
+libraries[tinymce][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[colorbox][download][type] = ""
+libraries[colorbox][download][url] = ""
+libraries[colorbox][directory_name] = "colorbox"
+libraries[colorbox][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[iCalcreator][download][type] = ""
+libraries[iCalcreator][download][url] = ""
+libraries[iCalcreator][directory_name] = "iCalcreator"
+libraries[iCalcreator][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[flexslider][download][type] = ""
+libraries[flexslider][download][url] = ""
+libraries[flexslider][directory_name] = "flexslider"
+libraries[flexslider][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[PHPExcel][download][type] = ""
+libraries[PHPExcel][download][url] = ""
+libraries[PHPExcel][directory_name] = "PHPExcel"
+libraries[PHPExcel][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[respondjs][download][type] = ""
+libraries[respondjs][download][url] = ""
+libraries[respondjs][directory_name] = "respondjs"
+libraries[respondjs][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[json2][download][type] = ""
+libraries[json2][download][url] = ""
+libraries[json2][directory_name] = "json2"
+libraries[json2][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[jquery.imgareaselect][download][type] = ""
+libraries[jquery.imgareaselect][download][url] = ""
+libraries[jquery.imgareaselect][directory_name] = "jquery.imgareaselect"
+libraries[jquery.imgareaselect][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[SolrPhpClient][download][type] = ""
+libraries[SolrPhpClient][download][url] = ""
+libraries[SolrPhpClient][directory_name] = "SolrPhpClient"
+libraries[SolrPhpClient][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[jquery.imagesloaded][download][type] = ""
+libraries[jquery.imagesloaded][download][url] = ""
+libraries[jquery.imagesloaded][directory_name] = "jquery.imagesloaded"
+libraries[jquery.imagesloaded][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[Jcrop][download][type] = ""
+libraries[Jcrop][download][url] = ""
+libraries[Jcrop][directory_name] = "Jcrop"
+libraries[Jcrop][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[markitup][download][type] = ""
+libraries[markitup][download][url] = ""
+libraries[markitup][directory_name] = "markitup"
+libraries[markitup][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[superfish][download][type] = ""
+libraries[superfish][download][url] = ""
+libraries[superfish][directory_name] = "superfish"
+libraries[superfish][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[jquery.cycle][download][type] = ""
+libraries[jquery.cycle][download][url] = ""
+libraries[jquery.cycle][directory_name] = "jquery.cycle"
+libraries[jquery.cycle][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[plupload][download][type] = ""
+libraries[plupload][download][url] = ""
+libraries[plupload][directory_name] = "plupload"
+libraries[plupload][type] = "library"
+
+; Please fill the following out. Type may be one of get, git, bzr or svn,
+; and url is the url of the download.
+libraries[dompdf][download][type] = ""
+libraries[dompdf][download][url] = ""
+libraries[dompdf][directory_name] = "dompdf"
+libraries[dompdf][type] = "library"
 
 ; Profiles
 ; ----------------------------------------------------------------
