@@ -62,8 +62,41 @@ projects[menu_block][version] = "2.3"
 projects[menu_block][type] = "module"
 
 projects[chosen][subdir] = "contrib"
-projects[chosen][version] = "7.x-2.0-alpha4"
+projects[chosen][version] = "2.0-alpha4"
 projects[chosen][type] = "module"
+
+projects[entityreference][subdir] = "contrib"
+projects[entityreference][version] = "1.1"
+projects[entityreference][type] = "module"
+
+projects[image_url_formatter][subdir] = "contrib"
+projects[image_url_formatter][version] = "1.0"
+projects[image_url_formatter][type] = "module"
+
+projects[libraries][subdir] = "contrib"
+projects[libraries][version] = "2.2"
+projects[libraries][type] = "module"
+
+projects[link][subdir] = "contrib"
+projects[link][version] = "1.2"
+projects[link][type] = "module"
+
+projects[menu_attributes][subdir] = "contrib"
+projects[menu_attributes][version] = "1.0-rc2"
+projects[menu_attributes][type] = "module"
+
+projects[module_filter][subdir] = "contrib"
+projects[module_filter][version] = "1.7"
+projects[module_filter][type] = "module"
+
+projects[mpac][subdir] = "contrib"
+projects[mpac][version] = "1.1"
+projects[mpac][type] = "module"
+
+project[pathauto][subdir] = "patched"
+project[pathauto][version] = "1.2"
+project[pathauto][type] = "module"
+project[pathauto][patch][] = "https://www.drupal.org/files/pathauto-persist-936222-130-pathauto-state.patch"
 
 project[ckeditor_link][subdir] = "patched"
 project[ckeditor_link][version] = "2.3"
