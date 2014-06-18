@@ -45,6 +45,22 @@ projects[date_api][subdir] = "contrib"
 projects[date_api][version] = "2.7"
 projects[date_api][type] = "module"
 
+projects[admin_menu][subdir] = "contrib"
+projects[admin_menu][version] = "3.0-rc4"
+projects[admin_menu][type] = "module"
+
+projects[admin_views][subdir] = "contrib"
+projects[admin_views][version] = "1.3"
+projects[admin_views][type] = "module"
+
+projects[block_class][subdir] = "contrib"
+projects[block_class][version] = "1.2"
+projects[block_class][type] = "module"
+
+projects[menu_block][subdir] = "contrib"
+projects[menu_block][version] = "2.3"
+projects[menu_block][type] = "module"
+
 project[ckeditor_link][subdir] = "patched"
 project[ckeditor_link][version] = "2.3"
 project[ckeditor_link][type] = "module"
