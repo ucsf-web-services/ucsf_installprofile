@@ -82,24 +82,24 @@ project[node_edit_protection][patch][] = "https://drupal.org/files/issues/wysiwy
 ; ----------------------------------------------------------------
 projects[ucsf_images][download][type] = "git"
 projects[ucsf_images][download][url] = "git@bitbucket.org:ucsfdrupal/ucsf_images.git"
-projects[ucsf_images][download][tag] = "7.x-2.0-beta6"
+;projects[ucsf_images][download][tag] = "7.x-2.0-beta6"
+projects[ucsf_images][download][branch] = "master"
 projects[ucsf_images][type] = "module"
 projects[ucsf_images][subdir] = "custom"
-projects[ucsf_images][version] = "2.0-beta6"
 
 projects[ucsf_starterkit_images][download][type] = "git"
 projects[ucsf_starterkit_images][download][url] = "git@bitbucket.org:ucsfdrupal/ucsf_starterkit_images.git"
-projects[ucsf_starterkit_images][download][tag] = "7.x-1.1-beta6"
+;projects[ucsf_starterkit_images][download][tag] = "7.x-1.1-beta6"
+projects[ucsf_starterkit_images][download][branch] = "master"
 projects[ucsf_starterkit_images][type] = "module"
 projects[ucsf_starterkit_images][subdir] = "custom"
-projects[ucsf_starterkit_images][version] = "1.1-beta6"
 
 projects[ucsf_webedit][download][type] = "git"
 projects[ucsf_webedit][download][url] = "git@bitbucket.org:ucsfdrupal/ucsf_webedit.git"
-projects[ucsf_webedit][download][tag] = "7.x-1.0-beta10"
+;projects[ucsf_webedit][download][tag] = "7.x-1.0-beta10"
+projects[ucsf_webedit][download][branch] = "master"
 projects[ucsf_webedit][type] = "module"
 projects[ucsf_webedit][subdir] = "custom"
-projects[ucsf_webedit][version] = "1.0-beta10"
 
 ; Custom themes
 ; ----------------------------------------------------------------
