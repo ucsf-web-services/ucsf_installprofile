@@ -137,19 +137,17 @@ projects[search_api][subdir] = "contrib"
 projects[search_api][version] = "1.3"
 projects[search_api][type] = "module"
 
-; This is a patched version of development snapshot 7.x-2.2+8-dev.
+; This is a patched version of development snapshot 7.x-2.2+8-dev (commit cc248294da6c6b8a29064e503f43aabedb143700).
+; The raw patch can be found at:
+; https://gist.githubusercontent.com/stopfstedt/90d6cf47fb5f115ae498/raw/be4c6f58e02bd6b4ad0440dce714430f98f29f8e/wysiwyg-7.x-2.2+8-dev-ckeditor.patch
+; However, drush is barfing on the length of this URL.
+; Hence the short-URL alias as a workaround.
 ; [ST 2014/06/21]
 projects[wysiwyg][download][type] = "git"
 projects[wysiwyg][download][url] = "http://git.drupal.org/project/wysiwyg.git"
 projects[wysiwyg][download][revision] = "cc248294da6c6b8a29064e503f43aabedb143700"
 projects[wysiwyg][subdir] = "patched"
 projects[wysiwyg][type] = "module"
-; KLUDGE:
-; The raw patch can be found at:
-; https://gist.githubusercontent.com/stopfstedt/90d6cf47fb5f115ae498/raw/be4c6f58e02bd6b4ad0440dce714430f98f29f8e/wysiwyg-7.x-2.2+8-dev-ckeditor.patch
-; However, drush is barfing on the length of this URL.
-; Hence the short-URL alias as a workaround.
-; [ST 2014/06/21]
 projects[wysiwyg][patch][] = "http://bit.ly/1m7TQK3"
 
 projects[pathauto][subdir] = "patched"
