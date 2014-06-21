@@ -221,12 +221,17 @@ libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/releases
 libraries[chosen][directory_name] = "chosen"
 libraries[chosen][type] = "library"
 
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-libraries[ckeditor][download][type] = ""
-libraries[ckeditor][download][url] = ""
+libraries[ckeditor][download][type] = "file"
+libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.0.1/ckeditor_4.0.1_standard.zip"
 libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][type] = "library"
+
+libraries[ckeditor_plugin_colordialog][download][type] = "file"
+libraries[ckeditor_plugin_colordialog][download][url] = "http://download.ckeditor.com/colordialog/releases/colordialog_4.0.3.zip"
+libraries[ckeditor_plugin_colordialog][directory_name] = "ckeditor/plugins/colordialog"
+libraries[ckeditor_plugin_colordialog][type] = "library"
+
+
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
