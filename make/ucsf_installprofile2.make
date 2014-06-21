@@ -41,10 +41,6 @@ projects[date][subdir] = "contrib"
 projects[date][version] = "2.7"
 projects[date][type] = "module"
 
-projects[date_api][subdir] = "contrib"
-projects[date_api][version] = "2.7"
-projects[date_api][type] = "module"
-
 projects[admin_menu][subdir] = "contrib"
 projects[admin_menu][version] = "3.0-rc4"
 projects[admin_menu][type] = "module"
@@ -113,10 +109,6 @@ projects[imce][subdir] = "contrib"
 projects[imce][version] = "1.7"
 projects[imce][type] = "module"
 
-projects[wysiwyg][subdir] = "contrib"
-projects[wysiwyg][version] = "2.2+8-dev"
-projects[wysiwyg][type] = "module"
-
 projects[imce_wysiwyg][subdir] = "contrib"
 projects[imce_wysiwyg][version] = "1.0"
 projects[imce_wysiwyg][type] = "module"
@@ -145,20 +137,35 @@ projects[search_api][subdir] = "contrib"
 projects[search_api][version] = "1.3"
 projects[search_api][type] = "module"
 
-project[pathauto][subdir] = "patched"
-project[pathauto][version] = "1.2"
-project[pathauto][type] = "module"
-project[pathauto][patch][] = "https://www.drupal.org/files/pathauto-persist-936222-130-pathauto-state.patch"
+; This is a patched version of development snapshot 7.x-2.2+8-dev.
+; [ST 2014/06/21]
+projects[wysiwyg][download][type] = "git"
+projects[wysiwyg][download][url] = "http://git.drupal.org/project/wysiwyg.git"
+projects[wysiwyg][download][revision] = "cc248294da6c6b8a29064e503f43aabedb143700"
+projects[wysiwyg][subdir] = "patched"
+projects[wysiwyg][type] = "module"
+; KLUDGE:
+; The raw patch can be found at:
+; https://gist.githubusercontent.com/stopfstedt/90d6cf47fb5f115ae498/raw/be4c6f58e02bd6b4ad0440dce714430f98f29f8e/wysiwyg-7.x-2.2+8-dev-ckeditor.patch
+; However, drush is barfing on the length of this URL.
+; Hence the short-URL alias as a workaround.
+; [ST 2014/06/21]
+projects[wysiwyg][patch][] = "http://bit.ly/1m7TQK3"
 
-project[ckeditor_link][subdir] = "patched"
-project[ckeditor_link][version] = "2.3"
-project[ckeditor_link][type] = "module"
-project[ckeditor_link][patch][] = "https://drupal.org/files/issues/ckeditor_link-autocomplete_on_return_validate-2178379.patch"
+projects[pathauto][subdir] = "patched"
+projects[pathauto][version] = "1.2"
+projects[pathauto][type] = "module"
+projects[pathauto][patch][] = "https://www.drupal.org/files/pathauto-persist-936222-130-pathauto-state.patch"
 
-project[node_edit_protection][subdir] = "patched"
-project[node_edit_protection][version] = "1.0"
-project[node_edit_protection][type] = "module"
-project[node_edit_protection][patch][] = "https://drupal.org/files/issues/wysiwyg_protection-1276370-1.patch"
+projects[ckeditor_link][subdir] = "patched"
+projects[ckeditor_link][version] = "2.3"
+projects[ckeditor_link][type] = "module"
+projects[ckeditor_link][patch][] = "https://drupal.org/files/issues/ckeditor_link-autocomplete_on_return_validate-2178379.patch"
+
+projects[node_edit_protection][subdir] = "patched"
+projects[node_edit_protection][version] = "1.0"
+projects[node_edit_protection][type] = "module"
+projects[node_edit_protection][patch][] = "https://drupal.org/files/issues/wysiwyg_protection-1276370-1.patch"
 
 ; Contributed themes
 ; ----------------------------------------------------------------
@@ -196,7 +203,6 @@ projects[feature_print_module][download][branch] = "master"
 projects[feature_print_module][type] = "module"
 projects[feature_print_module][subdir] = "custom"
 
-
 ; Custom themes
 ; ----------------------------------------------------------------
 projects[orange][download][type] = "git"
@@ -231,7 +237,7 @@ libraries[ckeditor_plugin_colordialog][download][url] = "http://download.ckedito
 libraries[ckeditor_plugin_colordialog][directory_name] = "ckeditor/plugins/colordialog"
 libraries[ckeditor_plugin_colordialog][type] = "library"
 
-
+; TODO: Add further ckeditor plugins. [ST 2014/06/21]
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
@@ -351,6 +357,7 @@ libraries[dompdf][download][type] = ""
 libraries[dompdf][download][url] = ""
 libraries[dompdf][directory_name] = "dompdf"
 libraries[dompdf][type] = "library"
+
 
 ; Profiles
 ; ----------------------------------------------------------------
