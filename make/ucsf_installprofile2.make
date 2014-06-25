@@ -238,6 +238,12 @@ projects[media_browser_edit][download][branch] = "master"
 projects[media_browser_edit][type] = "module"
 projects[media_browser_edit][subdir] = "custom"
 
+projects[square_crop][download][type] = "git"
+projects[square_crop][download][url] = "git@bitbucket.org:ucsfdrupal/square_crop.git"
+;projects[square_crop][download][tag] = "7.x-1.0"
+projects[square_crop][download][branch] = "master"
+projects[square_crop][type] = "module"
+projects[square_crop][subdir] = "custom"
 
 ; Custom themes
 ; ----------------------------------------------------------------
