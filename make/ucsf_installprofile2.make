@@ -137,7 +137,22 @@ projects[search_api][subdir] = "contrib"
 projects[search_api][version] = "1.3"
 projects[search_api][type] = "module"
 
-; This is a patched version of development snapshot 7.x-2.2+8-dev (commit cc248294da6c6b8a29064e503f43aabedb143700).
+projects[entity_view_mode][subdir] = "contrib"
+projects[entity_view_mode][version] = "1.0-rc1"
+projects[entity_view_mode][type] = "module"
+
+projects[file_entity][subdir] = "contrib"
+projects[file_entity][version] = "2.0-alpha2"
+projects[file_entity][type] = "module"
+
+; development snapshot 7.x-2.0-alpha3+29-dev
+projects[media][download][type] = "git"
+projects[media][download][url] = "http://git.drupal.org/project/media.git"
+projects[media][download][revision] = "1faada200ab8584bdd6d692ec0d0b568b649081f"
+projects[media][subdir] = "contrib"
+projects[media][type] = "module"
+
+; This is a patched version of development snapshot 7.x-2.2+8-dev
 ; The raw patch can be found at:
 ; https://gist.githubusercontent.com/stopfstedt/90d6cf47fb5f115ae498/raw/be4c6f58e02bd6b4ad0440dce714430f98f29f8e/wysiwyg-7.x-2.2+8-dev-ckeditor.patch
 ; However, drush is barfing on the length of this URL.
@@ -200,6 +215,14 @@ projects[feature_print_module][download][url] = "git@bitbucket.org:ucsfdrupal/fe
 projects[feature_print_module][download][branch] = "master"
 projects[feature_print_module][type] = "module"
 projects[feature_print_module][subdir] = "custom"
+
+projects[manualcrop_media_wyswiyg][download][type] = "git"
+projects[manualcrop_media_wyswiyg][download][url] = "git@bitbucket.org:ucsfdrupal/manualcrop_media_wysiwyg.git"
+;projects[manualcrop_media_wyswiyg][download][tag] = "7.x-1.0-beta1"
+projects[manualcrop_media_wyswiyg][download][branch] = "master"
+projects[manualcrop_media_wyswiyg][type] = "module"
+projects[manualcrop_media_wyswiyg][subdir] = "custom"
+
 
 ; Custom themes
 ; ----------------------------------------------------------------
