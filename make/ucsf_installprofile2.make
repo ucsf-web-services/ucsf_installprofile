@@ -152,6 +152,10 @@ projects[media][download][revision] = "1faada200ab8584bdd6d692ec0d0b568b649081f"
 projects[media][subdir] = "contrib"
 projects[media][type] = "module"
 
+projects[media_vimeo][subdir] = "contrib"
+projects[media_vimeo][version] = "1.0-beta5"
+projects[media_vimeo][type] = "module"
+
 ; This is a patched version of development snapshot 7.x-2.2+8-dev
 ; The raw patch can be found at:
 ; https://gist.githubusercontent.com/stopfstedt/90d6cf47fb5f115ae498/raw/be4c6f58e02bd6b4ad0440dce714430f98f29f8e/wysiwyg-7.x-2.2+8-dev-ckeditor.patch
