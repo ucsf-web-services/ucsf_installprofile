@@ -155,7 +155,7 @@ projects[media][type] = "module"
 ; development snapshot 7.x-1.4+70-dev
 projects[manualcrop][download][type] = "git"
 projects[manualcrop][download][url] = "http://git.drupal.org/project/manualcrop.git"
-projects[manualcrop][download][revision] = "1faada200ab8584bdd6d692ec0d0b568b649081f"
+projects[manualcrop][download][revision] = "6cad8c8748ae6e82e3b7317f7a9379685cfb61f9"
 projects[manualcrop][subdir] = "contrib"
 projects[manualcrop][type] = "module"
 
