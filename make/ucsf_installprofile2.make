@@ -223,6 +223,13 @@ projects[manualcrop_media_wyswiyg][download][branch] = "master"
 projects[manualcrop_media_wyswiyg][type] = "module"
 projects[manualcrop_media_wyswiyg][subdir] = "custom"
 
+projects[media_browser_edit][download][type] = "git"
+projects[media_browser_edit][download][url] = "git@bitbucket.org:ucsfdrupal/media_browser_edit.git"
+;projects[media_browser_edit][download][tag] = "7.x-1.1"
+projects[media_browser_edit][download][branch] = "master"
+projects[media_browser_edit][type] = "module"
+projects[media_browser_edit][subdir] = "custom"
+
 
 ; Custom themes
 ; ----------------------------------------------------------------
