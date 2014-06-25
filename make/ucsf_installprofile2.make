@@ -171,6 +171,13 @@ projects[print][subdir] = "contrib"
 projects[print][version] = "1.3"
 projects[print][type] = "module"
 
+;development snapshot 7.x-1.1+49-dev
+projects[picture][download][type] = "git"
+projects[picture][download][url] = "http://git.drupal.org/project/picture.git"
+projects[picture][download][revision] = "979f10358d558fd71feac2aaab2934fc6c004678"
+projects[picture][subdir] = "contrib"
+projects[picture][type] = "module"
+
 ; This is a patched version of development snapshot 7.x-2.2+8-dev
 ; The raw patch can be found at:
 ; https://gist.githubusercontent.com/stopfstedt/90d6cf47fb5f115ae498/raw/be4c6f58e02bd6b4ad0440dce714430f98f29f8e/wysiwyg-7.x-2.2+8-dev-ckeditor.patch
