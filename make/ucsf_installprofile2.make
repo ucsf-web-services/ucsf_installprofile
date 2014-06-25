@@ -167,6 +167,10 @@ projects[media_youtube][subdir] = "contrib"
 projects[media_youtube][version] = "2.0-rc1"
 projects[media_youtube][type] = "module"
 
+projects[print][subdir] = "contrib"
+projects[print][version] = "1.3"
+projects[print][type] = "module"
+
 ; This is a patched version of development snapshot 7.x-2.2+8-dev
 ; The raw patch can be found at:
 ; https://gist.githubusercontent.com/stopfstedt/90d6cf47fb5f115ae498/raw/be4c6f58e02bd6b4ad0440dce714430f98f29f8e/wysiwyg-7.x-2.2+8-dev-ckeditor.patch
