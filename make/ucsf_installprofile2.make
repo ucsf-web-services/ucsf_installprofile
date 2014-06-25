@@ -145,6 +145,19 @@ projects[file_entity][subdir] = "contrib"
 projects[file_entity][version] = "2.0-alpha2"
 projects[file_entity][type] = "module"
 
+projects[media_vimeo][subdir] = "contrib"
+projects[media_vimeo][version] = "1.0-beta5"
+projects[media_vimeo][type] = "module"
+
+projects[media_youtube][subdir] = "contrib"
+projects[media_youtube][version] = "2.0-rc1"
+projects[media_youtube][type] = "module"
+
+projects[print][subdir] = "contrib"
+projects[print][version] = "1.3"
+projects[print][type] = "module"
+
+
 ; development snapshot 7.x-2.0-alpha3+29-dev
 projects[media][download][type] = "git"
 projects[media][download][url] = "http://git.drupal.org/project/media.git"
@@ -158,18 +171,6 @@ projects[manualcrop][download][url] = "http://git.drupal.org/project/manualcrop.
 projects[manualcrop][download][revision] = "6cad8c8748ae6e82e3b7317f7a9379685cfb61f9"
 projects[manualcrop][subdir] = "contrib"
 projects[manualcrop][type] = "module"
-
-projects[media_vimeo][subdir] = "contrib"
-projects[media_vimeo][version] = "1.0-beta5"
-projects[media_vimeo][type] = "module"
-
-projects[media_youtube][subdir] = "contrib"
-projects[media_youtube][version] = "2.0-rc1"
-projects[media_youtube][type] = "module"
-
-projects[print][subdir] = "contrib"
-projects[print][version] = "1.3"
-projects[print][type] = "module"
 
 ;development snapshot 7.x-1.1+49-dev
 projects[picture][download][type] = "git"
