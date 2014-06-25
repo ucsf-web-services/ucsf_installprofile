@@ -152,6 +152,13 @@ projects[media][download][revision] = "1faada200ab8584bdd6d692ec0d0b568b649081f"
 projects[media][subdir] = "contrib"
 projects[media][type] = "module"
 
+; development snapshot 7.x-1.4+70-dev
+projects[manualcrop][download][type] = "git"
+projects[manualcrop][download][url] = "http://git.drupal.org/project/manualcrop.git"
+projects[manualcrop][download][revision] = "1faada200ab8584bdd6d692ec0d0b568b649081f"
+projects[manualcrop][subdir] = "contrib"
+projects[manualcrop][type] = "module"
+
 projects[media_vimeo][subdir] = "contrib"
 projects[media_vimeo][version] = "1.0-beta5"
 projects[media_vimeo][type] = "module"
