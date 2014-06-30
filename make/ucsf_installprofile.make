@@ -419,11 +419,9 @@ libraries[dompdf][download][url] = ""
 libraries[dompdf][directory_name] = "dompdf"
 libraries[dompdf][type] = "library"
 
-
 ; Profiles
 ; ----------------------------------------------------------------
-projects[ucsf_installprofile2][download][type] = "git"
-projects[ucsf_installprofile2][download][url] = "git@bitbucket.org:ucsfdrupal/ucsf_installprofile2.git"
-projects[ucsf_installprofile2][branch] = "master"
-projects[ucsf_installprofile2][type] = "profile"
-
+projects[ucsf_installprofile][download][type] = "git"
+projects[ucsf_installprofile][download][url] = "git@bitbucket.org:ucsfdrupal/ucsf_installprofile.git"
+projects[ucsf_installprofile][branch] = "master"
+projects[ucsf_installprofile][type] = "profile"
