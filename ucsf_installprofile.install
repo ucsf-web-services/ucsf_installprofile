@@ -8,8 +8,8 @@
 /**
  * Implements hook_install_tasks_alter().
  */
-function ucsf_installprofile2_install_tasks_alter(&$tasks, $install_state) {
-  $tasks['install_finished']['function'] = 'ucsf_installprofile2_install_finished';
+function ucsf_installprofile_install_tasks_alter(&$tasks, $install_state) {
+  $tasks['install_finished']['function'] = 'ucsf_installprofile_install_finished';
   $tasks['install_select_profile']['display'] = FALSE;
 }
 
@@ -22,7 +22,7 @@ function ucsf_installprofile2_install_tasks_alter(&$tasks, $install_state) {
  * @return
  *   A message informing the user about errors if there was some.
  */
-function ucsf_installprofile2_install_finished(&$install_state) {
+function ucsf_installprofile_install_finished(&$install_state) {
   drupal_set_title(st('@drupal installation complete', array('@drupal' => drupal_install_profile_distribution_name())), PASS_THROUGH);
   $messages = drupal_set_message();
 
@@ -78,7 +78,7 @@ function ucsf_installprofile2_install_finished(&$install_state) {
   }
 }
 
-function _ucsf_installprofile2_filter_formats(){
+function _ucsf_installprofile_filter_formats(){
     // Add text formats.
   $comments_format = array(
     'format' => 'comments',
@@ -155,7 +155,7 @@ function _ucsf_installprofile2_filter_formats(){
   variable_set('full_html_format_format', filter_permission_name($full_html_format));
 }
 
-function _ucsf_installprofile2_enable_theme(){
+function _ucsf_installprofile_enable_theme(){
   // Enable the admin theme.
   $admin_theme = 'seven';
   // No need to enable the theme to be used in the admin section
@@ -172,7 +172,7 @@ function _ucsf_installprofile2_enable_theme(){
   theme_disable(array('bartik'));
 }
 
-function _ucsf_installprofile2_content_types(){
+function _ucsf_installprofile_content_types(){
   // Insert default pre-defined node types into the database. For a complete
   // list of available node type attributes, refer to the node type API
   // documentation at: http://api.drupal.org/api/HEAD/function/hook_node_info.
@@ -280,7 +280,7 @@ function _ucsf_installprofile2_content_types(){
   );
 }
 
-function _ucsf_installprofile2_fields(){
+function _ucsf_installprofile_fields(){
 
   $vocabulary = (object) array(
     'name' => st('Event Location'),
@@ -749,7 +749,7 @@ function _ucsf_installprofile2_fields(){
   field_create_instance($instance);
 }
 
-function _ucsf_installprofile2_permissions(){
+function _ucsf_installprofile_permissions(){
   $comments_format_permission = variable_get('comments_format_permission');
   $webedit_format_permission = variable_get('webedit_format_permission');
 
@@ -816,7 +816,7 @@ function _ucsf_installprofile2_permissions(){
   //
 }
 
-function _ucsf_installprofile2_misc_config(){
+function _ucsf_installprofile_misc_config(){
   // Configure Chosen.
   variable_set('chosen_jquery_selector', '.view-filters .views-exposed-form select');
   variable_set('chosen_minimum', 0);
@@ -881,6 +881,13 @@ function _ucsf_installprofile2_misc_config(){
   variable_set('imce_settings_textarea','');
   variable_set('imce_settings_thumb_method','scale_and_crop');
 
+  // KLUDGE!
+  // Fixate the jQuery version to 1.5.
+  // Otherwise, the "jQuery Update" module will pick the latest available 1.x version,
+  // which is 1.10, and which does not jive well with our theme.
+  // [ST 2014/06/19]
+  variable_set('jquery_update_jquery_version', '1.5');
+
   // Theme
   $ucsf_base_settings = variable_get('theme_ucsf_base_settings');
   $ucsf_base_settings['mothership_classes_field_label'] = 0;
@@ -898,7 +905,7 @@ function _ucsf_installprofile2_misc_config(){
 
 }
 
-function _ucsf_installprofile2_importviews(){
+function _ucsf_installprofile_importviews(){
 
   /* Slider View */
   $view = new view();
@@ -1472,8 +1479,8 @@ function _ucsf_installprofile2_importviews(){
 
 }
 
-function _ucsf_installprofile2_import(){
-  _ucsf_installprofile2_import_taxonomy_terms();
+function _ucsf_installprofile_import(){
+  _ucsf_installprofile_import_taxonomy_terms();
 
   _ucsf_import_pages();
   //_ucsf_import_slider();
@@ -1484,7 +1491,7 @@ function _ucsf_installprofile2_import(){
 }
 
 function _ucsf_import_news(){
-  $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile2').'/import/news.xml';
+  $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile').'/import/news.xml';
   if(file_exists($nodes_xml)) {
     $xmlObject = simplexml_load_file($nodes_xml);
     drupal_mkdir('public://field');
@@ -1498,7 +1505,7 @@ function _ucsf_import_news(){
       node_object_prepare($node);
       $node->body['und'][0]['value']   = $item->body;
       $node->body['und'][0]['format']  = 'webedit';
-      $image_path = drupal_get_path('profile', 'ucsf_installprofile2') . '/import/images/' . $item->image;
+      $image_path = drupal_get_path('profile', 'ucsf_installprofile') . '/import/images/' . $item->image;
       $file = (object)array(
         "uid" => 1,
         "uri" => $image_path,
@@ -1514,7 +1521,7 @@ function _ucsf_import_news(){
 }
 
 function _ucsf_import_events(){
-  $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile2').'/import/events.xml';
+  $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile').'/import/events.xml';
   if(file_exists($nodes_xml)) {
     $xmlObject = simplexml_load_file($nodes_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
     foreach ($xmlObject->node as $item) {
@@ -1535,7 +1542,7 @@ function _ucsf_import_events(){
 }
 
 function _ucsf_import_webform(){
-  $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile2').'/import/webform.xml';
+  $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile').'/import/webform.xml';
   if(file_exists($nodes_xml)) {
     $xmlObject = simplexml_load_file($nodes_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
     foreach ($xmlObject->node as $item) {
@@ -1571,7 +1578,7 @@ function _ucsf_import_webform(){
 }
 
 function _ucsf_import_pages(){
-  $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile2').'/import/page.xml';
+  $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile').'/import/page.xml';
   if(file_exists($nodes_xml)) {
     $xmlObject = simplexml_load_file($nodes_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
     foreach ($xmlObject->node as $item) {
@@ -1596,7 +1603,7 @@ function _ucsf_import_pages(){
           $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_slider_images_collection'));
           $field_collection_item->setHostEntity('node', $node);
 
-          $image_path = drupal_get_path('profile', 'ucsf_installprofile2') . '/import/images/' . $slide->image;
+          $image_path = drupal_get_path('profile', 'ucsf_installprofile') . '/import/images/' . $slide->image;
           $file = (object)array(
             "uid" => 1,
             "uri" => $image_path,
@@ -1621,7 +1628,7 @@ function _ucsf_import_pages(){
   }
 }
 
-function _ucsf_installprofile2_menus(){
+function _ucsf_installprofile_menus(){
   $footer['menu_name'] = 'footer';
   $footer['title'] = 'Footer Menu';
   $footer['description'] = 'Menu displayed in the footer';
@@ -1769,7 +1776,7 @@ function _ucsf_installprofile2_menus(){
 
 }
 
-function _ucsf_installprofile2_blocks(){
+function _ucsf_installprofile_blocks(){
   $default_themes = array('ucsf_base', 'orange', 'teal');
   $blocks = array(
     array(
@@ -1999,8 +2006,8 @@ function _ucsf_installprofile2_blocks(){
 /*
   Create taxonomy Terms
 */
-function _ucsf_installprofile2_import_taxonomy_terms() {
-  $terms_xml = drupal_get_path('profile', 'ucsf_installprofile2').'/import/taxonomy-terms.xml';
+function _ucsf_installprofile_import_taxonomy_terms() {
+  $terms_xml = drupal_get_path('profile', 'ucsf_installprofile').'/import/taxonomy-terms.xml';
   if(file_exists($terms_xml)) {
     $xmlObject = simplexml_load_file($terms_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
     foreach ($xmlObject->term as $item) {
@@ -2015,15 +2022,15 @@ function _ucsf_installprofile2_import_taxonomy_terms() {
 /**
  * Implements hook_install().
  */
-function ucsf_installprofile2_install() {
-  _ucsf_installprofile2_filter_formats();
-  _ucsf_installprofile2_enable_theme();
-  _ucsf_installprofile2_content_types();
-  _ucsf_installprofile2_fields();
-  _ucsf_installprofile2_permissions();
-  _ucsf_installprofile2_import();
-  _ucsf_installprofile2_importviews();
-  _ucsf_installprofile2_menus();
-  _ucsf_installprofile2_blocks();
-  _ucsf_installprofile2_misc_config();
+function ucsf_installprofile_install() {
+  _ucsf_installprofile_filter_formats();
+  _ucsf_installprofile_enable_theme();
+  _ucsf_installprofile_content_types();
+  _ucsf_installprofile_fields();
+  _ucsf_installprofile_permissions();
+  _ucsf_installprofile_import();
+  _ucsf_installprofile_importviews();
+  _ucsf_installprofile_menus();
+  _ucsf_installprofile_blocks();
+  _ucsf_installprofile_misc_config();
 }

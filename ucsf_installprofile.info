@@ -1,4 +1,4 @@
-name = UCSF Starter Kit Install Profile (v2)
+name = UCSF Starter Kit Install Profile
 description = Install with Drupal pre-configured for UCSF use.
 core = 7.x
 distribution_name = UCSF Drupal Starter Kit

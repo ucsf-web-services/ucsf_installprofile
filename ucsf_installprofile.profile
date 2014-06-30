@@ -4,7 +4,7 @@
  *
  * Allows the profile to alter the site configuration form.
  */
-function ucsf_installprofile2_form_install_configure_form_alter(&$form, $form_state) {
+function ucsf_installprofile_form_install_configure_form_alter(&$form, $form_state) {
   drupal_get_messages('status', TRUE);
   drupal_get_messages('completed', TRUE);
   // Set a default name for the dev site and change title's label.
@@ -69,7 +69,7 @@ function ucsf_installprofile2_form_install_configure_form_alter(&$form, $form_st
 
   // Add a custom validation that needs to be trigger before the original one,
   // where we can copy the site's mail as the admin account's mail.
-  array_unshift($form['#validate'], 'ucsf_installprofile2_custom_setting');
+  array_unshift($form['#validate'], 'ucsf_installprofile_custom_setting');
 
 }
 
@@ -77,7 +77,7 @@ function ucsf_installprofile2_form_install_configure_form_alter(&$form, $form_st
  * Validate callback; Populate the admin account mail, user and password with
  * custom values.
  */
-function ucsf_installprofile2_custom_setting(&$form, &$form_state) {
+function ucsf_installprofile_custom_setting(&$form, &$form_state) {
   $form_state['values']['account']['mail'] = $form_state['values']['site_mail'];
   // Use our custom values only the corresponding checkbox is checked.
   phpinfo();
@@ -94,20 +94,20 @@ function ucsf_installprofile2_custom_setting(&$form, &$form_state) {
 
 /**
  * Implements hook_form_FORM_ID_alter().
- * Set UCSF Installprofile2 as the default profile.
+ * Set UCSF Installprofile as the default profile.
  * @link https://drupal.org/comment/6265432#comment-6265432
  */
 if (!function_exists('system_form_install_select_profile_form_alter')) {
   function system_form_install_select_profile_form_alter(&$form, $form_state) {
     foreach ($form['profile'] as $key => $element) {
-      $form['profile'][$key]['#value'] = 'ucsf_installprofile2';
+      $form['profile'][$key]['#value'] = 'ucsf_installprofile';
     }
   }
 }
 else if (!function_exists('filter_form_install_select_profile_form_alter')) {
   function filter_form_install_select_profile_form_alter(&$form, $form_state) {
     foreach ($form['profile'] as $key => $element) {
-      $form['profile'][$key]['#value'] = 'ucsf_installprofile2';
+      $form['profile'][$key]['#value'] = 'ucsf_installprofile';
     }
   }
 }
