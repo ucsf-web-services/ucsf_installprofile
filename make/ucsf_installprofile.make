@@ -157,14 +157,6 @@ projects[print][subdir] = "contrib"
 projects[print][version] = "1.3"
 projects[print][type] = "module"
 
-
-; development snapshot 7.x-2.0-alpha3+29-dev
-projects[media][download][type] = "git"
-projects[media][download][url] = "http://git.drupal.org/project/media.git"
-projects[media][download][revision] = "1faada200ab8584bdd6d692ec0d0b568b649081f"
-projects[media][subdir] = "contrib"
-projects[media][type] = "module"
-
 ; development snapshot 7.x-1.4+70-dev
 projects[manualcrop][download][type] = "git"
 projects[manualcrop][download][url] = "http://git.drupal.org/project/manualcrop.git"
@@ -191,6 +183,14 @@ projects[wysiwyg][download][revision] = "cc248294da6c6b8a29064e503f43aabedb14370
 projects[wysiwyg][subdir] = "patched"
 projects[wysiwyg][type] = "module"
 projects[wysiwyg][patch][] = "http://bit.ly/1m7TQK3"
+
+; development snapshot 7.x-2.0-alpha3+29-dev, patched.
+projects[media][download][type] = "git"
+projects[media][download][url] = "http://git.drupal.org/project/media.git"
+projects[media][download][revision] = "1faada200ab8584bdd6d692ec0d0b568b649081f"
+projects[media][subdir] = "patched"
+projects[media][type] = "module"
+projects[media][patch][] = "https://www.drupal.org/files/issues/media-browser-incompatibilities-2164823-8.patch"
 
 projects[pathauto][subdir] = "patched"
 projects[pathauto][version] = "1.2"
