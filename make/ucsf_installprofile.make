@@ -264,6 +264,13 @@ projects[square_crop][download][branch] = "master"
 projects[square_crop][type] = "module"
 projects[square_crop][subdir] = "custom"
 
+projects[ucsftemplate_tweaks][download][type] = "git"
+projects[ucsftemplate_tweaks][download][url] = "git@bitbucket.org:ucsfdrupal/ucsftemplate_tweaks.git"
+;projects[ucsftemplate_tweaks][download][tag] = "7.x-1.0"
+projects[ucsftemplate_tweaks][download][branch] = "master"
+projects[ucsftemplate_tweaks][type] = "module"
+projects[ucsftemplate_tweaks][subdir] = "custom"
+
 ; Custom themes
 ; ----------------------------------------------------------------
 projects[orange][download][type] = "git"
