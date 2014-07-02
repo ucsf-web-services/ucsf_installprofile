@@ -398,13 +398,6 @@ libraries[respondjs][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
-libraries[markitup][download][type] = ""
-libraries[markitup][download][url] = ""
-libraries[markitup][directory_name] = "markitup"
-libraries[markitup][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
 libraries[superfish][download][type] = ""
 libraries[superfish][download][url] = ""
 libraries[superfish][directory_name] = "superfish"
