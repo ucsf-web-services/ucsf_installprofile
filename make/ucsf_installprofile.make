@@ -290,16 +290,20 @@ projects[ucsf_base][type] = "theme"
 
 ; Libraries
 ; ----------------------------------------------------------------
+
+; chosen dependency
 libraries[chosen][download][type] = "file"
 libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/releases/download/1.0.0/chosen_v1.0.0.zip"
 libraries[chosen][directory_name] = "chosen"
 libraries[chosen][type] = "library"
 
+; ucsf_webedit dependency
 libraries[ckeditor][download][type] = "file"
 libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.0.1/ckeditor_4.0.1_standard.zip"
 libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][type] = "library"
 
+; ucsf_webedit dependency
 libraries[ckeditor_plugin_colordialog][download][type] = "file"
 libraries[ckeditor_plugin_colordialog][download][url] = "http://download.ckeditor.com/colordialog/releases/colordialog_4.0.3.zip"
 libraries[ckeditor_plugin_colordialog][directory_name] = "ckeditor/plugins/colordialog"
@@ -307,6 +311,7 @@ libraries[ckeditor_plugin_colordialog][type] = "library"
 
 ; TODO: Add further ckeditor plugins. [ST 2014/06/21]
 
+; flexslider dependency
 ; Replace FlexSlider libs that drush make downloaded previously
 ; with specific version 1.8
 libraries[flexslider][download][type] = "file"
@@ -326,6 +331,21 @@ libraries[jquery.imagesloaded][download][type] = "file"
 libraries[jquery.imagesloaded][download][url] = "https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz"
 libraries[jquery.imagesloaded][directory_name] = "jquery.imagesloaded"
 libraries[jquery.imagesloaded][type] = "library"
+
+; views_slideshow dependency
+libraries[json2][download][type] = "git"
+libraries[json2][download][url] = "https://github.com/douglascrockford/JSON-js"
+libraries[json2][download][revision] = "40f3377a631eaedeec877379f9cb338046cac0e0"
+libraries[json2][directory_name] = "json2"
+libraries[json2][type] = "library"
+
+; views_slideshow dependency
+; jQuery Cycle Plugin, version 2.9999.5 (10-APR-2012)
+libraries[jquery.cycle][download][type] = "git"
+libraries[jquery.cycle][download][url] = "https://github.com/malsup/cycle"
+libraries[jquery.cycle][download][revision] = "b1dc72bc44405523317e2a016972075a07437b16"
+libraries[jquery.cycle][directory_name] = "jquery.cycle"
+libraries[jquery.cycle][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
@@ -371,13 +391,6 @@ libraries[respondjs][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
-libraries[json2][download][type] = ""
-libraries[json2][download][url] = ""
-libraries[json2][directory_name] = "json2"
-libraries[json2][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
 libraries[SolrPhpClient][download][type] = ""
 libraries[SolrPhpClient][download][url] = ""
 libraries[SolrPhpClient][directory_name] = "SolrPhpClient"
@@ -403,13 +416,6 @@ libraries[superfish][download][type] = ""
 libraries[superfish][download][url] = ""
 libraries[superfish][directory_name] = "superfish"
 libraries[superfish][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-libraries[jquery.cycle][download][type] = ""
-libraries[jquery.cycle][download][url] = ""
-libraries[jquery.cycle][directory_name] = "jquery.cycle"
-libraries[jquery.cycle][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
