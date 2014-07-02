@@ -384,13 +384,6 @@ libraries[tinymce][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
-libraries[iCalcreator][download][type] = ""
-libraries[iCalcreator][download][url] = ""
-libraries[iCalcreator][directory_name] = "iCalcreator"
-libraries[iCalcreator][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
 libraries[PHPExcel][download][type] = ""
 libraries[PHPExcel][download][url] = ""
 libraries[PHPExcel][directory_name] = "PHPExcel"
