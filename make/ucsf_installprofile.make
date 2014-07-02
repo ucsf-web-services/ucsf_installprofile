@@ -398,13 +398,6 @@ libraries[respondjs][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
-libraries[SolrPhpClient][download][type] = ""
-libraries[SolrPhpClient][download][url] = ""
-libraries[SolrPhpClient][directory_name] = "SolrPhpClient"
-libraries[SolrPhpClient][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
 libraries[Jcrop][download][type] = ""
 libraries[Jcrop][download][url] = ""
 libraries[Jcrop][directory_name] = "Jcrop"
