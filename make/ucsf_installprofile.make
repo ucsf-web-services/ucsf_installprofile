@@ -157,6 +157,11 @@ projects[print][subdir] = "contrib"
 projects[print][version] = "1.3"
 projects[print][type] = "module"
 
+; used by picture module
+projects[colorbox][subdir] = "contrib"
+projects[colorbox][version] = "2.6"
+projects[colorbox][type] = "module"
+
 ; development snapshot 7.x-1.4+70-dev
 projects[manualcrop][download][type] = "git"
 projects[manualcrop][download][url] = "http://git.drupal.org/project/manualcrop.git"
@@ -291,19 +296,19 @@ projects[ucsf_base][type] = "theme"
 ; Libraries
 ; ----------------------------------------------------------------
 
-; chosen dependency
+; chosen module dependency
 libraries[chosen][download][type] = "file"
 libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/releases/download/1.0.0/chosen_v1.0.0.zip"
 libraries[chosen][directory_name] = "chosen"
 libraries[chosen][type] = "library"
 
-; ucsf_webedit dependency
+; wysiwyg module dependency
 libraries[ckeditor][download][type] = "file"
 libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.0.1/ckeditor_4.0.1_standard.zip"
 libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][type] = "library"
 
-; ucsf_webedit dependency
+; wysiwyg module dependency
 libraries[ckeditor_plugin_colordialog][download][type] = "file"
 libraries[ckeditor_plugin_colordialog][download][url] = "http://download.ckeditor.com/colordialog/releases/colordialog_4.0.3.zip"
 libraries[ckeditor_plugin_colordialog][directory_name] = "ckeditor/plugins/colordialog"
@@ -311,7 +316,7 @@ libraries[ckeditor_plugin_colordialog][type] = "library"
 
 ; TODO: Add further ckeditor plugins. [ST 2014/06/21]
 
-; flexslider dependency
+; flexslider module dependency
 ; Replace FlexSlider libs that drush make downloaded previously
 ; with specific version 1.8
 libraries[flexslider][download][type] = "file"
@@ -320,26 +325,26 @@ libraries[flexslider][download][subtree] = "FlexSlider-1.8"
 libraries[flexslider][directory_name] = "flexslider"
 libraries[flexslider][type] = "library"
 
-; manualcrop dependency
+; manualcrop module dependency
 libraries[jquery.imgareaselect][download][type] = "file"
 libraries[jquery.imgareaselect][download][url] = "http://odyniec.net/projects/imgareaselect/jquery.imgareaselect-0.9.10.zip"
 libraries[jquery.imgareaselect][directory_name] = "jquery.imgareaselect"
 libraries[jquery.imgareaselect][type] = "library"
 
-; manualcrop dependency
+; manualcrop module dependency
 libraries[jquery.imagesloaded][download][type] = "file"
 libraries[jquery.imagesloaded][download][url] = "https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz"
 libraries[jquery.imagesloaded][directory_name] = "jquery.imagesloaded"
 libraries[jquery.imagesloaded][type] = "library"
 
-; views_slideshow dependency
+; views_slideshow module dependency
 libraries[json2][download][type] = "git"
 libraries[json2][download][url] = "https://github.com/douglascrockford/JSON-js"
 libraries[json2][download][revision] = "40f3377a631eaedeec877379f9cb338046cac0e0"
 libraries[json2][directory_name] = "json2"
 libraries[json2][type] = "library"
 
-; views_slideshow dependency
+; views_slideshow module dependency
 ; jQuery Cycle Plugin, version 2.9999.5 (10-APR-2012)
 libraries[jquery.cycle][download][type] = "git"
 libraries[jquery.cycle][download][url] = "https://github.com/malsup/cycle"
@@ -356,6 +361,13 @@ libraries[dompdf][directory_name] = "dompdf"
 libraries[dompdf][type] = "library"
 libraries[dompdf][patch][]="http://bit.ly/1sYvGa6"
 
+; colorbox module dependency
+libraries[colorbox][download][type] = "git"
+libraries[colorbox][download][url] = "https://github.com/jackmoore/colorbox"
+libraries[colorbox][download][tag] = "1.5.9"
+libraries[colorbox][directory_name] = "colorbox"
+libraries[colorbox][type] = "library"
+
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
 libraries[modernizr][download][type] = ""
@@ -369,13 +381,6 @@ libraries[tinymce][download][type] = ""
 libraries[tinymce][download][url] = ""
 libraries[tinymce][directory_name] = "tinymce"
 libraries[tinymce][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-libraries[colorbox][download][type] = ""
-libraries[colorbox][download][url] = ""
-libraries[colorbox][directory_name] = "colorbox"
-libraries[colorbox][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
