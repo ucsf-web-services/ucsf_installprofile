@@ -396,13 +396,6 @@ libraries[respondjs][download][url] = ""
 libraries[respondjs][directory_name] = "respondjs"
 libraries[respondjs][type] = "library"
 
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-libraries[plupload][download][type] = ""
-libraries[plupload][download][url] = ""
-libraries[plupload][directory_name] = "plupload"
-libraries[plupload][type] = "library"
-
 ; Profiles
 ; ----------------------------------------------------------------
 projects[ucsf_installprofile][download][type] = "git"
