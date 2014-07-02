@@ -307,6 +307,14 @@ libraries[ckeditor_plugin_colordialog][type] = "library"
 
 ; TODO: Add further ckeditor plugins. [ST 2014/06/21]
 
+; Replace FlexSlider libs that drush make downloaded previously
+; with specific version 1.8
+libraries[flexslider][download][type] = "file"
+libraries[flexslider][download][url] = "https://github.com/downloads/woothemes/FlexSlider/FlexSlider-1.8.zip"
+libraries[flexslider][download][subtree] = "FlexSlider-1.8"
+libraries[flexslider][directory_name] = "flexslider"
+libraries[flexslider][type] = "library"
+
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
 libraries[modernizr][download][type] = ""
@@ -334,13 +342,6 @@ libraries[iCalcreator][download][type] = ""
 libraries[iCalcreator][download][url] = ""
 libraries[iCalcreator][directory_name] = "iCalcreator"
 libraries[iCalcreator][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-libraries[flexslider][download][type] = ""
-libraries[flexslider][download][url] = ""
-libraries[flexslider][directory_name] = "flexslider"
-libraries[flexslider][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
