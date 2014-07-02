@@ -315,6 +315,18 @@ libraries[flexslider][download][subtree] = "FlexSlider-1.8"
 libraries[flexslider][directory_name] = "flexslider"
 libraries[flexslider][type] = "library"
 
+; manualcrop dependency
+libraries[jquery.imgareaselect][download][type] = "file"
+libraries[jquery.imgareaselect][download][url] = "http://odyniec.net/projects/imgareaselect/jquery.imgareaselect-0.9.10.zip"
+libraries[jquery.imgareaselect][directory_name] = "jquery.imgareaselect"
+libraries[jquery.imgareaselect][type] = "library"
+
+; manualcrop dependency
+libraries[jquery.imagesloaded][download][type] = "file"
+libraries[jquery.imagesloaded][download][url] = "https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz"
+libraries[jquery.imagesloaded][directory_name] = "jquery.imagesloaded"
+libraries[jquery.imagesloaded][type] = "library"
+
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
 libraries[modernizr][download][type] = ""
@@ -366,24 +378,10 @@ libraries[json2][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
-libraries[jquery.imgareaselect][download][type] = ""
-libraries[jquery.imgareaselect][download][url] = ""
-libraries[jquery.imgareaselect][directory_name] = "jquery.imgareaselect"
-libraries[jquery.imgareaselect][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
 libraries[SolrPhpClient][download][type] = ""
 libraries[SolrPhpClient][download][url] = ""
 libraries[SolrPhpClient][directory_name] = "SolrPhpClient"
 libraries[SolrPhpClient][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-libraries[jquery.imagesloaded][download][type] = ""
-libraries[jquery.imagesloaded][download][url] = ""
-libraries[jquery.imagesloaded][directory_name] = "jquery.imagesloaded"
-libraries[jquery.imagesloaded][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
