@@ -398,13 +398,6 @@ libraries[respondjs][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
-libraries[Jcrop][download][type] = ""
-libraries[Jcrop][download][url] = ""
-libraries[Jcrop][directory_name] = "Jcrop"
-libraries[Jcrop][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
 libraries[markitup][download][type] = ""
 libraries[markitup][download][url] = ""
 libraries[markitup][directory_name] = "markitup"
