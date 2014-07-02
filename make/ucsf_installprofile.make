@@ -370,20 +370,6 @@ libraries[colorbox][type] = "library"
 
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
-libraries[modernizr][download][type] = ""
-libraries[modernizr][download][url] = ""
-libraries[modernizr][directory_name] = "modernizr"
-libraries[modernizr][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-libraries[tinymce][download][type] = ""
-libraries[tinymce][download][url] = ""
-libraries[tinymce][directory_name] = "tinymce"
-libraries[tinymce][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
 libraries[PHPExcel][download][type] = ""
 libraries[PHPExcel][download][url] = ""
 libraries[PHPExcel][directory_name] = "PHPExcel"
