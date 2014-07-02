@@ -368,13 +368,6 @@ libraries[colorbox][download][tag] = "1.5.9"
 libraries[colorbox][directory_name] = "colorbox"
 libraries[colorbox][type] = "library"
 
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-libraries[PHPExcel][download][type] = ""
-libraries[PHPExcel][download][url] = ""
-libraries[PHPExcel][directory_name] = "PHPExcel"
-libraries[PHPExcel][type] = "library"
-
 ; Profiles
 ; ----------------------------------------------------------------
 projects[ucsf_installprofile][download][type] = "git"
