@@ -347,6 +347,15 @@ libraries[jquery.cycle][download][revision] = "b1dc72bc44405523317e2a016972075a0
 libraries[jquery.cycle][directory_name] = "jquery.cycle"
 libraries[jquery.cycle][type] = "library"
 
+; print module dependency
+; dompdf libs, patched version 0.6.0-beta3.
+; see: https://gist.githubusercontent.com/stopfstedt/4a16f72e2ac761263b5a/raw/d6bc79ff9c0cad01ad858f73d39c445f0c7e085f/dompdf_0-6-0_beta3-alphachannel-fix.patch
+libraries[dompdf][download][type] = "file"
+libraries[dompdf][download][url] = "https://dompdf.googlecode.com/files/dompdf_0-6-0_beta3.zip"
+libraries[dompdf][directory_name] = "dompdf"
+libraries[dompdf][type] = "library"
+libraries[dompdf][patch][]="http://bit.ly/1sYvGa6"
+
 ; Please fill the following out. Type may be one of get, git, bzr or svn,
 ; and url is the url of the download.
 libraries[modernizr][download][type] = ""
@@ -423,13 +432,6 @@ libraries[plupload][download][type] = ""
 libraries[plupload][download][url] = ""
 libraries[plupload][directory_name] = "plupload"
 libraries[plupload][type] = "library"
-
-; Please fill the following out. Type may be one of get, git, bzr or svn,
-; and url is the url of the download.
-libraries[dompdf][download][type] = ""
-libraries[dompdf][download][url] = ""
-libraries[dompdf][directory_name] = "dompdf"
-libraries[dompdf][type] = "library"
 
 ; Profiles
 ; ----------------------------------------------------------------
