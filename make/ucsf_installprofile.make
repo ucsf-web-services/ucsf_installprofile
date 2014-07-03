@@ -308,11 +308,20 @@ libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEd
 libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][type] = "library"
 
-; wysiwyg module dependency
+; colordialog plugin for ckeditor
 libraries[ckeditor_plugin_colordialog][download][type] = "file"
 libraries[ckeditor_plugin_colordialog][download][url] = "http://download.ckeditor.com/colordialog/releases/colordialog_4.0.3.zip"
 libraries[ckeditor_plugin_colordialog][directory_name] = "ckeditor/plugins/colordialog"
 libraries[ckeditor_plugin_colordialog][type] = "library"
+
+; webkit-span-fix plugin for ckeditor, patched.
+; see: https://gist.githubusercontent.com/stopfstedt/95117fa48bd1d1489345/raw/47cc878f32011ba5013e90eb8a1cd0eb32106cd2/webkit-span-fix.patch
+libraries[ckeditor_plugin_webkit-span-fix][download][type] = "git"
+libraries[ckeditor_plugin_webkit-span-fix][download][url] = "https://github.com/RomanMinkin/webkit-span-fix.git"
+libraries[ckeditor_plugin_webkit-span-fix][download][revision] = "41d67060384ade6babc2ac1d84a56f49b64a7368"
+libraries[ckeditor_plugin_webkit-span-fix][directory_name] = "ckeditor/plugins/webkit-span-fix"
+libraries[ckeditor_plugin_webkit-span-fix][type] = "library"
+libraries[ckeditor_plugin_webkit-span-fix][patch][] = "http://bit.ly/VfcoOs"
 
 ; TODO: Add further ckeditor plugins. [ST 2014/06/21]
 
@@ -339,7 +348,7 @@ libraries[jquery.imagesloaded][type] = "library"
 
 ; views_slideshow module dependency
 libraries[json2][download][type] = "git"
-libraries[json2][download][url] = "https://github.com/douglascrockford/JSON-js"
+libraries[json2][download][url] = "https://github.com/douglascrockford/JSON-js.git"
 libraries[json2][download][revision] = "40f3377a631eaedeec877379f9cb338046cac0e0"
 libraries[json2][directory_name] = "json2"
 libraries[json2][type] = "library"
@@ -363,7 +372,7 @@ libraries[dompdf][patch][]="http://bit.ly/1sYvGa6"
 
 ; colorbox module dependency
 libraries[colorbox][download][type] = "git"
-libraries[colorbox][download][url] = "https://github.com/jackmoore/colorbox"
+libraries[colorbox][download][url] = "https://github.com/jackmoore/colorbox.git"
 libraries[colorbox][download][tag] = "1.5.9"
 libraries[colorbox][directory_name] = "colorbox"
 libraries[colorbox][type] = "library"
