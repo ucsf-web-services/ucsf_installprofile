@@ -157,10 +157,21 @@ projects[print][subdir] = "contrib"
 projects[print][version] = "1.3"
 projects[print][type] = "module"
 
-; used by picture module
+; required by picture module
 projects[colorbox][subdir] = "contrib"
 projects[colorbox][version] = "2.6"
 projects[colorbox][type] = "module"
+
+; required by pathauto module
+projects[token][subdir] = "contrib"
+projects[token][version] = "1.5"
+projects[token][type] = "module"
+
+;required by picture and ucsf_starterkit_inmages module
+projects[breakpoints][subdir] = "contrib"
+projects[breakpoints][version] = "1.1"
+projects[breakpoints][type] = "module"
+
 
 ; development snapshot 7.x-1.4+70-dev
 projects[manualcrop][download][type] = "git"
