@@ -80,7 +80,6 @@ function ucsf_installprofile_form_install_configure_form_alter(&$form, $form_sta
 function ucsf_installprofile_custom_setting(&$form, &$form_state) {
   $form_state['values']['account']['mail'] = $form_state['values']['site_mail'];
   // Use our custom values only the corresponding checkbox is checked.
-  phpinfo();
   if ($form_state['values']['override_account_informations'] == TRUE) {
     if ($form_state['input']['pass']['pass1'] == $form_state['input']['pass']['pass2']) {
       $form_state['values']['account']['name'] = $form_state['values']['name'];
