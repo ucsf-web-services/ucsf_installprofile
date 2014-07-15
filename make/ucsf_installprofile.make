@@ -315,75 +315,9 @@ libraries[chosen][type] = "library"
 
 ; wysiwyg module dependency
 libraries[ckeditor][download][type] = "file"
-libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.0.1/ckeditor_4.0.1_standard.zip"
+libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.0.1/ckeditor_4.0.1_full.zip"
 libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][type] = "library"
-
-; colordialog plugin for ckeditor
-libraries[ckeditor_plugin_colordialog][download][type] = "file"
-libraries[ckeditor_plugin_colordialog][download][url] = "http://download.ckeditor.com/colordialog/releases/colordialog_4.0.1.zip"
-libraries[ckeditor_plugin_colordialog][directory_name] = "ckeditor/plugins/colordialog"
-libraries[ckeditor_plugin_colordialog][type] = "library"
-
-; find plugin for ckeditor
-libraries[ckeditor_plugin_find][download][type] = "file"
-libraries[ckeditor_plugin_find][download][url] = "http://download.ckeditor.com/find/releases/find_4.0.1.zip"
-libraries[ckeditor_plugin_find][directory_name] = "ckeditor/plugins/find"
-libraries[ckeditor_plugin_find][type] = "library"
-
-; flash plugin for ckeditor
-libraries[ckeditor_plugin_flash][download][type] = "file"
-libraries[ckeditor_plugin_flash][download][url] = "http://download.ckeditor.com/flash/releases/flash_4.0.1.zip"
-libraries[ckeditor_plugin_flash][directory_name] = "ckeditor/plugins/flash"
-libraries[ckeditor_plugin_flash][type] = "library"
-
-; forms plugin for ckeditor
-libraries[ckeditor_plugin_forms][download][type] = "file"
-libraries[ckeditor_plugin_forms][download][url] = "http://download.ckeditor.com/forms/releases/forms_4.0.1.zip"
-libraries[ckeditor_plugin_forms][directory_name] = "ckeditor/plugins/forms"
-libraries[ckeditor_plugin_forms][type] = "library"
-
-; iframe plugin for ckeditor
-libraries[ckeditor_plugin_iframe][download][type] = "file"
-libraries[ckeditor_plugin_iframe][download][url] = "http://download.ckeditor.com/iframe/releases/iframe_4.0.1.zip"
-libraries[ckeditor_plugin_iframe][directory_name] = "ckeditor/plugins/iframe"
-libraries[ckeditor_plugin_iframe][type] = "library"
-
-; liststyle plugin for ckeditor
-libraries[ckeditor_plugin_liststyle][download][type] = "file"
-libraries[ckeditor_plugin_liststyle][download][url] = "http://download.ckeditor.com/liststyle/releases/liststyle_4.0.1.zip"
-libraries[ckeditor_plugin_liststyle][directory_name] = "ckeditor/plugins/liststyle"
-libraries[ckeditor_plugin_liststyle][type] = "library"
-
-; pagebreak plugin for ckeditor
-libraries[ckeditor_plugin_pagebreak][download][type] = "file"
-libraries[ckeditor_plugin_pagebreak][download][url] = "http://download.ckeditor.com/pagebreak/releases/pagebreak_4.0.1.zip"
-libraries[ckeditor_plugin_pagebreak][directory_name] = "ckeditor/plugins/pagebreak"
-libraries[ckeditor_plugin_pagebreak][type] = "library"
-
-; preview plugin for ckeditor
-libraries[ckeditor_plugin_preview][download][type] = "file"
-libraries[ckeditor_plugin_preview][download][url] = "http://download.ckeditor.com/preview/releases/preview_4.0.1.zip"
-libraries[ckeditor_plugin_preview][directory_name] = "ckeditor/plugins/preview"
-libraries[ckeditor_plugin_preview][type] = "library"
-
-; showblocks plugin for ckeditor
-libraries[ckeditor_plugin_showblocks][download][type] = "file"
-libraries[ckeditor_plugin_showblocks][download][url] = "http://download.ckeditor.com/showblocks/releases/showblocks_4.0.1.zip"
-libraries[ckeditor_plugin_showblocks][directory_name] = "ckeditor/plugins/showblocks"
-libraries[ckeditor_plugin_showblocks][type] = "library"
-
-; smiley plugin for ckeditor
-libraries[ckeditor_plugin_smiley][download][type] = "file"
-libraries[ckeditor_plugin_smiley][download][url] = "http://download.ckeditor.com/smiley/releases/smiley_4.0.1.zip"
-libraries[ckeditor_plugin_smiley][directory_name] = "ckeditor/plugins/smiley"
-libraries[ckeditor_plugin_smiley][type] = "library"
-
-; templates plugin for ckeditor
-libraries[ckeditor_plugin_templates][download][type] = "file"
-libraries[ckeditor_plugin_templates][download][url] = "http://download.ckeditor.com/templates/releases/templates_4.0.1.zip"
-libraries[ckeditor_plugin_templates][directory_name] = "ckeditor/plugins/templates"
-libraries[ckeditor_plugin_templates][type] = "library"
 
 ; webkit-span-fix plugin for ckeditor, patched.
 ; see: https://gist.githubusercontent.com/stopfstedt/95117fa48bd1d1489345/raw/47cc878f32011ba5013e90eb8a1cd0eb32106cd2/webkit-span-fix.patch
@@ -393,8 +327,6 @@ libraries[ckeditor_plugin_webkit-span-fix][download][revision] = "41d67060384ade
 libraries[ckeditor_plugin_webkit-span-fix][directory_name] = "ckeditor/plugins/webkit-span-fix"
 libraries[ckeditor_plugin_webkit-span-fix][type] = "library"
 libraries[ckeditor_plugin_webkit-span-fix][patch][] = "http://bit.ly/VfcoOs"
-
-; TODO: Add further ckeditor plugins. [ST 2014/06/21]
 
 ; flexslider module dependency
 ; Replace FlexSlider libs that drush make downloaded previously
