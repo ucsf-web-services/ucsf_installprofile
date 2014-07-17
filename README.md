@@ -17,15 +17,15 @@ git clone --branch 7.x-1.x https://github.com/ucsf-drupal/ucsf_installprofile.gi
 
 cd ucsf_installprofile
 #
-# build the distribution
+# Build the distribution.
 #
 drush make --prepare-install make/ucsf_installprofile.make webroot
-# for development purposes, run the dev makefile instead
+# For development purposes, run the dev makefile instead.
 # drush make --prepare-install make/ucsf_installprofile-dev.make webroot
 
 cd webroot
 #
-# install a site using the distro
+# Install a site using the distro.
 #
 drush site-install ucsf_installprofile --db-url="mysql://DBUSER:DBPASS@localhost/DBNAME"
 ```
