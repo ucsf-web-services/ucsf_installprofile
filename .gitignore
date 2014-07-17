@@ -3,3 +3,4 @@
 *.patch
 *.diff
 /webroot
+/.idea
