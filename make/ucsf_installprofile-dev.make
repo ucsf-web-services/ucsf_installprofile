@@ -20,11 +20,11 @@ projects[ucsf_starterkit_images][download][url] = "git@github.com:ucsf-drupal/uc
 projects[ucsf_starterkit_images][download][branch] = "7.x-1.x"
 projects[ucsf_starterkit_images][type] = "module"
 projects[ucsf_starterkit_images][subdir] = "custom"
-projects[ucsf_starterkit][options][working-copy] = TRUE
+projects[ucsf_starterkit_images][options][working-copy] = TRUE
 
 projects[ucsf_webedit][download][type] = "git"
 projects[ucsf_webedit][download][url] = "git@github.com:ucsf-drupal/ucsf_webedit.git"
-;projects[ucsf_webedit][download][tag] = "7.x-1.0-beta10"
+;projects[ucsf_webedit][download][tag] = "7.x-1.0-beta11"
 projects[ucsf_webedit][download][branch] = "7.x-1.x"
 projects[ucsf_webedit][type] = "module"
 projects[ucsf_webedit][subdir] = "custom"
