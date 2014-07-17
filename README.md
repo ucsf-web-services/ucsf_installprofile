@@ -4,7 +4,9 @@ This is the Drupal installation profile for UCSF Starter Kit sites.
 
 ## Build and installation
 
-This requires Drush version 6 or up.
+Building the profile requires Drush 6 or up.
+
+Installing the profile can be done using Drupal's default web installer or via Drush.
 
 Create a full version with drush make:
 
