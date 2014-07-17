@@ -11,7 +11,7 @@ Create a full version with drush make:
 ```bash
 #
 # Get the codebase.
-# Note: For production deployments, please checkout out the lastest stable release tag.
+# Note: For production deployments, please checkout out the latest stable release tag.
 #
 git clone --branch 7.x-1.x https://github.com/ucsf-drupal/ucsf_installprofile.git
 
