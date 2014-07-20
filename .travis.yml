@@ -30,7 +30,7 @@ script:
   - mysql -e 'CREATE DATABASE starterkit'
 
   # build the distribution using Drush make.
-  - drush make --prepare-install make/ucsf_installprofile-dev.make webroot
+  - drush make --prepare-install make/ucsf_installprofile.make webroot
 
   - cd webroot
 
