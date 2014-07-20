@@ -5,7 +5,7 @@
         "behat/mink-extension": "1.2.*",
         "behat/mink-selenium2-driver": "1.1.*",
         "emagister/selenium-server": "2.*",
-        "drupal/drupal-extension": "*",
+        "drupal/drupal-extension": "1.0.*@stable",
         "sauce/connect": ">=3.0",
         "jakoch/phantomjs-installer": "dev-master"
     },
