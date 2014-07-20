@@ -10,4 +10,4 @@ Feature: Homepage
     Then I should see the heading "Welcome"
 
   Scenario: Main Content
-    Then I should see "Cras justo odio, dapibus ac facilisis in, egestas eget quam." in the "main-content" region
+    Then I should see "Cras justo odio, dapibus ac facilisis in, egestas eget quam." in the "Content" region
