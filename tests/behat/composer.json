@@ -1,0 +1,24 @@
+{
+    "require": {
+        "behat/behat": "2.5.*",
+        "behat/mink": "1.5.*",
+        "behat/mink-extension": "1.2.*",
+        "behat/mink-selenium2-driver": "1.1.*",
+        "emagister/selenium-server": "2.*",
+        "drupal/drupal-extension": "1.0.*@stable",
+        "sauce/connect": ">=3.0",
+        "jakoch/phantomjs-installer": "dev-master"
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "bin-dir": "bin/"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ],
+        "post-update-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ]
+    }
+}
