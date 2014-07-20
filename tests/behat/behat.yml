@@ -14,7 +14,15 @@ default:
         capabilities: { "browser": "firefox", "version": "26" }
     Drupal\DrupalExtension\Extension:
       blackbox: ~
-      region_map: ~
+      region_map:
+       Content: ".content"
+       Top Header: ".top-region-container"
+       Header: ".header-region"
+       Footer Top: ".footer-top"
+       Footer: ".footer"
+       Sidebar First: ".sidebar-first"
+       Sidebar Second: ".sidebar-second"
+       Highlighted: ".drupal-messages"
   filters:
    # don't process scenarios and features tagged as "ignored"
     tags: '~@ignored'
@@ -25,3 +33,10 @@ browser:
   extensions:
     Behat\MinkExtension\Extension:
       default_session: selenium2
+
+# Use this profile to run all tests in a headless browser (PhantomJS)
+headless:
+  extensions:
+    Behat\MinkExtension\Extension:
+      selenium2:
+        wd_host: "http://localhost:8080/wd/hub"
