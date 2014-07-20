@@ -1,4 +1,4 @@
-# Behat Tests for the UCSF Starter Kit Drupal distribution
+# How to run Behat tests
 
 The assumption is that you are doing this on a recent Linux distro.
 
