@@ -1,4 +1,8 @@
+[![Build Status](https://travis-ci.org/ucsf-drupal/ucsf_installprofile.svg?branch=7.x-1.x)](https://travis-ci.org/ucsf-drupal/ucsf_installprofile)
+
 # UCSF Starter Kit
+
+
 
 This is the Drupal installation profile for UCSF Starter Kit sites.
 
