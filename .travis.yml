@@ -1,11 +1,11 @@
 language: php
 
 php:
+  - 5.3
   - 5.4
   - 5.5
 
 mysql:
-  database: starterkit
   username: root
   encoding: utf8
 
@@ -16,6 +16,9 @@ install:
   # install php packages required for running a web server from drush on php 5.4
   - sudo apt-get install -y --force-yes php5-cgi php5-mysql
 
+  # install apache
+  - sudo apt-get install apache2 libapache2-mod-fastcgi
+
   # add composer's global bin directory to the path
   # see: https://github.com/drush-ops/drush#install---composer
   - sed -i '1i export PATH="$HOME/.composer/vendor/bin:$PATH"' $HOME/.bashrc
@@ -24,11 +27,22 @@ install:
   # install drush globally
   - composer global require drush/drush:6.*
 
-script:
+before_script:
+  # enable php-fpm
+  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+  - sudo a2enmod rewrite actions fastcgi alias
+  - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+
+  # configure apache virtual hosts
+  - sudo cp -f build/travis-ci-apache /etc/apache2/sites-available/default
+  - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
+  - sudo service apache2 restart
 
   # create a new database
   - mysql -e 'CREATE DATABASE starterkit'
 
+script:
   # build the distribution using Drush make.
   - drush make --prepare-install make/ucsf_installprofile.make webroot
 
@@ -37,7 +51,5 @@ script:
   # create new site, stubbing sendmail path with true to prevent delivery errors and manually resolving drush path
   - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes site-install ucsf_installprofile --db-url=mysql://root:@127.0.0.1/starterkit
 
-  # start a web server on port 8080, run in the background; wait for initialization to complete.
-  - drush runserver 127.0.0.1:8888 &
-  - until netstat -an 2>/dev/null | grep '8888.*LISTEN'; do true; done
+
 
