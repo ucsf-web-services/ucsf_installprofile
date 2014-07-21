@@ -2,7 +2,7 @@
 default:
   extensions:
     Behat\MinkExtension\Extension:
-      base_url: http://localhost:8888
+      base_url: http://localhost
       default_session: goutte
       javascript_session: selenium2
       browser_name: "firefox"
