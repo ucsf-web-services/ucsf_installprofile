@@ -35,7 +35,7 @@ script:
   - cd webroot
 
   # create new site, stubbing sendmail path with true to prevent delivery errors and manually resolving drush path
-  - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes site-install --profile=ucsf_installprofile --no-server --db-url=mysql://root:@127.0.0.1/starterkit
+  - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes site-install ucsf_installprofile --db-url=mysql://root:@127.0.0.1/starterkit
 
   # start a web server on port 8080, run in the background; wait for initialization to complete.
   - drush runserver 127.0.0.1:8888 &
