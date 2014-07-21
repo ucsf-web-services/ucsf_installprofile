@@ -40,7 +40,6 @@ before_script:
   # configure apache virtual hosts
   - sudo cp -f build/travis-ci-apache /etc/apache2/sites-available/default
   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
-  - sudo service apache2 restart
 
   # create a new database
   - mysql -e 'CREATE DATABASE starterkit'
@@ -56,6 +55,10 @@ before_script:
 script:
   # build the distribution using Drush make.
   - drush make --prepare-install make/ucsf_installprofile.make webroot
+
+  # restart apache
+  - sudo service apache2 restart
+  - until netstat -an 2>/dev/null | grep '80.*LISTEN'; do true; done
 
   - cd ${TRAVIS_BUILD_DIR}/webroot
 
