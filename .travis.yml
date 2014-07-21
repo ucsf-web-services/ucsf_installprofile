@@ -27,6 +27,9 @@ install:
   # install drush globally
   - composer global require drush/drush:6.*
 
+  #  install behat and co
+  - composer install -d tests/behat
+
 before_script:
   # enable php-fpm
   - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
@@ -42,6 +45,14 @@ before_script:
   # create a new database
   - mysql -e 'CREATE DATABASE starterkit'
 
+  # start Selenium as hub server for Behat tests
+  - java -jar ${TRAVIS_BUILD_DIR}/tests/behat/bin/selenium-server.jar -role hub > /dev/null &
+  - until netstat -an 2>/dev/null | grep '4444.*LISTEN'; do true; done
+
+  # start Phantom for headless Behat tests
+  - phantomjs --webdriver=8080 --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --ignore-ssl-errors=true > /dev/null &
+  - until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do true; done
+
 script:
   # build the distribution using Drush make.
   - drush make --prepare-install make/ucsf_installprofile.make webroot
@@ -51,5 +62,5 @@ script:
   # create new site, stubbing sendmail path with true to prevent delivery errors and manually resolving drush path
   - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes site-install ucsf_installprofile --db-url=mysql://root:@127.0.0.1/starterkit
 
-
-
+  # run behat tests
+  - ${TRAVIS_BUILD_DIR}/tests/behat/bin/behat -p headless
