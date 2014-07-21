@@ -57,10 +57,10 @@ script:
   # build the distribution using Drush make.
   - drush make --prepare-install make/ucsf_installprofile.make webroot
 
-  - cd webroot
+  - cd ${TRAVIS_BUILD_DIR}/webroot
 
   # create new site, stubbing sendmail path with true to prevent delivery errors and manually resolving drush path
   - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes site-install ucsf_installprofile --db-url=mysql://root:@127.0.0.1/starterkit
 
   # run behat tests
-  - ${TRAVIS_BUILD_DIR}/tests/behat/bin/behat -p headless
+  - ${TRAVIS_BUILD_DIR}/tests/behat/bin/behat -c ${TRAVIS_BUILD_DIR}/tests/behat/behat.yml -p headless
