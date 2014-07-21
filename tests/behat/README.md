@@ -1,6 +1,8 @@
 # How to run Behat tests
 
-The assumption is that you are doing this on a recent Linux distro.
+The assumption is that you are the site is being served up on `localhost`, port `80`.
+
+These instructions were compiled on a recent Linux (Fedora) environment, Mac users should be able to follow along without problems.
 
 ## Prerequisites
 
@@ -62,7 +64,8 @@ At the very least, you must have PHP 5.3.5+ and the Firefox browser installed in
 
    Make sure your `php-xml` PHP extension is installed or up-to-date.
 
-    ```
+    ```bash
+    # Fedora/RHEL/CentOS
     sudo yum install php-xml
     ```
 
@@ -70,7 +73,8 @@ At the very least, you must have PHP 5.3.5+ and the Firefox browser installed in
 
    Make sure you have installed the `php-mbstring` PHP extension.
 
-    ```
+    ```bash
+    # Fedora/RHEL/CentOS
     sudo yum install php-mbstring
     ```
 
@@ -78,6 +82,6 @@ At the very least, you must have PHP 5.3.5+ and the Firefox browser installed in
 
    Behat is probably not picking up the type of terminal you're using.  Forcing it to run in ANSI mode will probably fix it.
 
-    ```
+    ```bash
     bin/behat --ansi
     ```
