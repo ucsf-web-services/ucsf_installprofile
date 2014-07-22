@@ -1,69 +1,86 @@
 language: php
 
 php:
-  - 5.3
-  - 5.4
-  - 5.5
+- 5.3
+- 5.4
+- 5.5
 
+addons:
+  sauce_connect: true
+
+env:
+  global:
+  # sauce credentials
+  - secure: UgGn0v9xb5z6yZYk1KMXAX0U3du/cUdBmzXyc8W8rnALqkOftNxwlSnrDzAqEO81ec+NFgqoFraFij3abVjGQzl2zvhhiJSoXphv4CVsQt1PenlDGOFc+H1yidvomP/fr/mI/Lry0mqkm2WZRjOs+e/Uy8i/xOpOPGoI2qr6oMY=
+  - secure: Kd/R8nJVVKLt+MSCutJt/krq08mejC0dhKojW4+0WrXlMWstBg3K+F+OiC1L4W092ETiQvlVDZ1vqb/YZIQepChI1Jo6rLGfsQ9+IyL1fxyjK7jo1nn6vHLEf2QhTbbuhVNmfnWtOCpDqSum+eydXebonx7A5seG4q2uy8KyJxw=
+
+  matrix:
+  - BEHAT_PROFILE='default'
+  - BEHAT_PROFILE='win7ie9'
+  - BEHAT_PROFILE='win7ie10'
+  - BEHAT_PROFILE='win8ie11'
+  - BEHAT_PROFILE='osxchrome'
+  - BEHAT_PROFILE='osxsafari'
+  - BEHAT_PROFILE='phantomjs'
 mysql:
   username: root
   encoding: utf8
 
 before_install:
-  - sudo apt-get update > /dev/null
+- composer self-update
+- sudo apt-get update -qq
 
 install:
-  # install php packages required for running a web server from drush on php 5.4
-  - sudo apt-get install -y --force-yes php5-cgi php5-mysql
+# install php packages required for running a web server from drush on php 5.4
+- sudo apt-get install -y --force-yes php5-cgi php5-mysql
 
-  # install apache
-  - sudo apt-get install apache2 libapache2-mod-fastcgi
+# install apache
+- sudo apt-get install apache2 libapache2-mod-fastcgi
 
-  # add composer's global bin directory to the path
-  # see: https://github.com/drush-ops/drush#install---composer
-  - sed -i '1i export PATH="$HOME/.composer/vendor/bin:$PATH"' $HOME/.bashrc
-  - source $HOME/.bashrc
+# add composer's global bin directory to the path
+# see: https://github.com/drush-ops/drush#install---composer
+- sed -i '1i export PATH="$HOME/.composer/vendor/bin:$PATH"' $HOME/.bashrc
+- source $HOME/.bashrc
 
-  # install drush globally
-  - composer global require drush/drush:6.*
+# install drush globally
+- composer global require drush/drush:6.*
 
-  #  install behat and co
-  - composer install -d tests/behat
+# install behat and co
+- composer install -d tests/behat
 
 before_script:
-  # enable php-fpm
-  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
-  - sudo a2enmod rewrite actions fastcgi alias
-  - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+# enable php-fpm
+- sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+- sudo a2enmod rewrite actions fastcgi alias
+- echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+- ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
 
-  # configure apache virtual hosts
-  - sudo cp -f build/travis-ci-apache /etc/apache2/sites-available/default
-  - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
+# configure apache virtual hosts
+- sudo cp -f build/travis-ci-apache /etc/apache2/sites-available/default
+- sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
 
-  # create a new database
-  - mysql -e 'CREATE DATABASE starterkit'
+# create a new database
+- mysql -e 'CREATE DATABASE starterkit'
 
-  # start Selenium as hub server for Behat tests
-  - java -jar ${TRAVIS_BUILD_DIR}/tests/behat/bin/selenium-server.jar -role hub > /dev/null &
-  - until netstat -an 2>/dev/null | grep '4444.*LISTEN'; do true; done
+# start Selenium as hub server for Behat tests
+- if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (java -jar ${TRAVIS_BUILD_DIR}/tests/behat/bin/selenium-server.jar -role hub > /dev/null &); fi
+- if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (until netstat -an 2>/dev/null | grep '4444.*LISTEN'; do true; done); fi
 
-  # start Phantom for headless Behat tests
-  - phantomjs --webdriver=8080 --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --ignore-ssl-errors=true > /dev/null &
-  - until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do true; done
+# start Phantom for headless Behat tests
+- if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (phantomjs --webdriver=8080 --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --ignore-ssl-errors=true > /dev/null &); fi
+- if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do true; done); fi
 
 script:
-  # build the distribution using Drush make.
-  - drush make --prepare-install make/ucsf_installprofile.make webroot
+# build the distribution using Drush make.
+- drush make --prepare-install make/ucsf_installprofile.make webroot
 
-  # restart apache
-  - sudo service apache2 restart
-  - until netstat -an 2>/dev/null | grep '80.*LISTEN'; do true; done
+# restart apache
+- sudo service apache2 restart
+- until netstat -an 2>/dev/null | grep '80.*LISTEN'; do true; done
+- cd ${TRAVIS_BUILD_DIR}/webroot
 
-  - cd ${TRAVIS_BUILD_DIR}/webroot
+# create new site, stubbing sendmail path with true to prevent delivery errors and manually
+- php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes site-install ucsf_installprofile --db-url=mysql://root:@127.0.0.1/starterkit
 
-  # create new site, stubbing sendmail path with true to prevent delivery errors and manually resolving drush path
-  - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes site-install ucsf_installprofile --db-url=mysql://root:@127.0.0.1/starterkit
-
-  # run behat tests
-  - ${TRAVIS_BUILD_DIR}/tests/behat/bin/behat -c ${TRAVIS_BUILD_DIR}/tests/behat/behat.yml -p headless
+# run behat tests
+- ${TRAVIS_BUILD_DIR}/tests/behat/bin/behat -c ${TRAVIS_BUILD_DIR}/tests/behat/behatci.yml -p ${BEHAT_PROFILE}
