@@ -26,6 +26,17 @@ default:
   filters:
     tags: "~@ignore"
 
+# Run tests with win7 ie8
+win7ie8:
+  extensions:
+    Behat\MinkExtension\Extension:
+      saucelabs:
+        browser: "internet explorer"
+        capabilities:
+          name: "win7ie8"
+          platform: "Windows 7"
+          version: 8
+
 # Run tests with win7 ie9
 win7ie9:
   extensions:
