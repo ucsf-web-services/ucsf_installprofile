@@ -5,6 +5,9 @@ php:
 - 5.4
 - 5.5
 
+addons:
+  sauce_connect: true
+
 env:
   global:
   - secure: UgGn0v9xb5z6yZYk1KMXAX0U3du/cUdBmzXyc8W8rnALqkOftNxwlSnrDzAqEO81ec+NFgqoFraFij3abVjGQzl2zvhhiJSoXphv4CVsQt1PenlDGOFc+H1yidvomP/fr/mI/Lry0mqkm2WZRjOs+e/Uy8i/xOpOPGoI2qr6oMY=
