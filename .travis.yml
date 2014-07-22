@@ -11,8 +11,8 @@ addons:
 env:
   global:
   # sauce credentials
-  - secure: UgGn0v9xb5z6yZYk1KMXAX0U3du/cUdBmzXyc8W8rnALqkOftNxwlSnrDzAqEO81ec+NFgqoFraFij3abVjGQzl2zvhhiJSoXphv4CVsQt1PenlDGOFc+H1yidvomP/fr/mI/Lry0mqkm2WZRjOs+e/Uy8i/xOpOPGoI2qr6oMY=
-  - secure: Kd/R8nJVVKLt+MSCutJt/krq08mejC0dhKojW4+0WrXlMWstBg3K+F+OiC1L4W092ETiQvlVDZ1vqb/YZIQepChI1Jo6rLGfsQ9+IyL1fxyjK7jo1nn6vHLEf2QhTbbuhVNmfnWtOCpDqSum+eydXebonx7A5seG4q2uy8KyJxw=
+  - secure: e8wfi1R+IPKQOaDGF7aOQ0lNsN/yUZ5iBEKw1V0hAUhaiDa+g4Jsi62JDEV9Qn41+scMlGPXuPHu5OrF8AP7jmJNQjucX2Mw3xPUSUbCzp5gb/Iz1a0dVOAdlrgUaW3YO8g1eGFWSWPBNY/1Ijc5/aM1ScZnH4IAiksU8kVtzn4=
+  - secure: pTorUDt4Gye1b7hKuIy4yp5O2KrA2AL88DwIaanDPMWpPsuZ/IPCqnGEjsuYg1JKHB+Xj1u/p1gqTcKTtboZ3X4Wu/OP9sTii6BwVGcYJcAhaBpwBpzSHnwYYkV+ICnPV+pp7xD/urlJ3jVjzyJF7U1Ggw75ZwmgD8pega9RkjE=
 
   matrix:
   - BEHAT_PROFILE='default'
