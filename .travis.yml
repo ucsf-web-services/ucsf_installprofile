@@ -14,10 +14,14 @@ env:
   - secure: UgGn0v9xb5z6yZYk1KMXAX0U3du/cUdBmzXyc8W8rnALqkOftNxwlSnrDzAqEO81ec+NFgqoFraFij3abVjGQzl2zvhhiJSoXphv4CVsQt1PenlDGOFc+H1yidvomP/fr/mI/Lry0mqkm2WZRjOs+e/Uy8i/xOpOPGoI2qr6oMY=
   - secure: Kd/R8nJVVKLt+MSCutJt/krq08mejC0dhKojW4+0WrXlMWstBg3K+F+OiC1L4W092ETiQvlVDZ1vqb/YZIQepChI1Jo6rLGfsQ9+IyL1fxyjK7jo1nn6vHLEf2QhTbbuhVNmfnWtOCpDqSum+eydXebonx7A5seG4q2uy8KyJxw=
 
-  # declare env vars with default values
-  - START_LOCAL_SELENIUM=false
-  - BEHAT_PROFILE=false
-
+  matrix:
+  - BEHAT_PROFILE='default'
+  - BEHAT_PROFILE='win7ie9'
+  - BEHAT_PROFILE='win7ie10'
+  - BEHAT_PROFILE='win8ie11'
+  - BEHAT_PROFILE='osxchrome'
+  - BEHAT_PROFILE='osxsafari'
+  - BEHAT_PROFILE='phantomjs'
 mysql:
   username: root
   encoding: utf8
@@ -59,12 +63,12 @@ before_script:
 - mysql -e 'CREATE DATABASE starterkit'
 
 # start Selenium as hub server for Behat tests
-- java -jar ${TRAVIS_BUILD_DIR}/tests/behat/bin/selenium-server.jar -role hub > /dev/null &
-- until netstat -an 2>/dev/null | grep '4444.*LISTEN'; do true; done
+- if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (java -jar ${TRAVIS_BUILD_DIR}/tests/behat/bin/selenium-server.jar -role hub > /dev/null &); fi
+- if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (until netstat -an 2>/dev/null | grep '4444.*LISTEN'; do true; done); fi
 
 # start Phantom for headless Behat tests
-- phantomjs --webdriver=8080 --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --ignore-ssl-errors=true > /dev/null &
-- until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do true; done
+- if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (phantomjs --webdriver=8080 --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --ignore-ssl-errors=true > /dev/null &); fi
+- if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do true; done); fi
 
 script:
 # build the distribution using Drush make.
@@ -79,4 +83,4 @@ script:
 - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes site-install ucsf_installprofile --db-url=mysql://root:@127.0.0.1/starterkit
 
 # run behat tests
-- ${TRAVIS_BUILD_DIR}/tests/behat/bin/behat -c ${TRAVIS_BUILD_DIR}/tests/behat/behat.yml -p headless
+- ${TRAVIS_BUILD_DIR}/tests/behat/bin/behat -c ${TRAVIS_BUILD_DIR}/tests/behat/behatci.yml -p ${BEHAT_PROFILE}
