@@ -24,7 +24,7 @@ default:
        Sidebar Second: ".sidebar-second"
        Highlighted: ".drupal-messages"
   filters:
-   # don't process scenarios and features tagged as "ignored"
+    # don't process scenarios and features tagged as "ignored"
     tags: '~@ignored'
 
 
