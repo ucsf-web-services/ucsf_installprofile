@@ -22,6 +22,7 @@ env:
   - BEHAT_PROFILE='osxchrome'
   - BEHAT_PROFILE='osxsafari'
   - BEHAT_PROFILE='phantomjs'
+
 mysql:
   username: root
   encoding: utf8
