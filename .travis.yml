@@ -10,8 +10,13 @@ addons:
 
 env:
   global:
+  # sauce credentials
   - secure: UgGn0v9xb5z6yZYk1KMXAX0U3du/cUdBmzXyc8W8rnALqkOftNxwlSnrDzAqEO81ec+NFgqoFraFij3abVjGQzl2zvhhiJSoXphv4CVsQt1PenlDGOFc+H1yidvomP/fr/mI/Lry0mqkm2WZRjOs+e/Uy8i/xOpOPGoI2qr6oMY=
   - secure: Kd/R8nJVVKLt+MSCutJt/krq08mejC0dhKojW4+0WrXlMWstBg3K+F+OiC1L4W092ETiQvlVDZ1vqb/YZIQepChI1Jo6rLGfsQ9+IyL1fxyjK7jo1nn6vHLEf2QhTbbuhVNmfnWtOCpDqSum+eydXebonx7A5seG4q2uy8KyJxw=
+
+  # declare env vars with default values
+  - START_LOCAL_SELENIUM=false
+  - BEHAT_PROFILE=false
 
 mysql:
   username: root
