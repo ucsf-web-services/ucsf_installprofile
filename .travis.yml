@@ -15,6 +15,7 @@ env:
   - secure: u3HofJW0YT3zJKNGan87j1FxVmZSWNBAzaEyqcpWzUy8bwpIrmS91Cp9oC0Su3lI+J9+CkyPUZuaXTwFMqc/xFvgcANKmHUB6fp9dHS7qrLZSNCzMW/+5DWV46FItv1C5jI03eghwmvhEtIyCBsCH1jo19jM8bYSA7VJLxC7tp8=
   matrix:
   - BEHAT_PROFILE='default'
+  - BEHAT_PROFILE='winxpie7'
   - BEHAT_PROFILE='win7ie8'
   - BEHAT_PROFILE='win7ie9'
   - BEHAT_PROFILE='win7ie10'
