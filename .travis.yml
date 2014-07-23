@@ -5,14 +5,10 @@ php:
 - 5.4
 - 5.5
 
-addons:
-  sauce_connect: true
-
 env:
   global:
-  # sauce credentials
-  - secure: Zf1xeZarvGyx5cvpaBhJpYLmRLzS7Ys0SJokGeOHWV0nmC04tloRxAvF+//XRPDlPyrSg+6s/WMUW4txEOALG3BEZ+Zufa1ERrP/hO9inDPgjz6xULLIzyn6aUlxqsD26GIp4ARN7Opxz9sGF04M8d7o2LT/Beor4IPW2VyfwMc=
-  - secure: u3HofJW0YT3zJKNGan87j1FxVmZSWNBAzaEyqcpWzUy8bwpIrmS91Cp9oC0Su3lI+J9+CkyPUZuaXTwFMqc/xFvgcANKmHUB6fp9dHS7qrLZSNCzMW/+5DWV46FItv1C5jI03eghwmvhEtIyCBsCH1jo19jM8bYSA7VJLxC7tp8=
+  - SAUCE_USERNAME="ucsfdrupal"
+  - SAUCE_ACCESS_KEY="ff0f8d29-743a-49eb-a625-89c923877bbf"
   matrix:
   - BEHAT_PROFILE='default'
   - BEHAT_PROFILE='winxpie7'
@@ -71,11 +67,15 @@ before_script:
 # create a new database
 - mysql -e 'CREATE DATABASE starterkit'
 
-# start Selenium as hub server for Behat tests
+# start Sauce Connect
+- if [ "$BEHAT_PROFILE" != "phantomjs" ]; then (${TRAVIS_BUILD_DIR}/tests/behat/bin/sauce_connect --readyfile /tmp/scready.tmp --tunnel-identifier $TRAVIS_JOB_NUMBER $SAUCE_USERNAME $SAUCE_ACCESS_KEY > /dev/null &); fi
+- if [ "$BEHAT_PROFILE" != "phantomjs" ]; then (while [ ! -f /tmp/scready.tmp ]; do(sleep .5) done); fi
+
+# start Selenium as hub server
 - if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (java -jar ${TRAVIS_BUILD_DIR}/tests/behat/bin/selenium-server.jar -role hub > /dev/null &); fi
 - if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (until netstat -an 2>/dev/null | grep '4444.*LISTEN'; do true; done); fi
 
-# start Phantom for headless Behat tests
+# start PhantomJS
 - if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (phantomjs --webdriver=8080 --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --ignore-ssl-errors=true > /dev/null &); fi
 - if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do true; done); fi
 
