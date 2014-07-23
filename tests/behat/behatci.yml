@@ -26,6 +26,17 @@ default:
   filters:
     tags: "~@ignore"
 
+# Run tests with winxp ie7
+win7ie8:
+  extensions:
+    Behat\MinkExtension\Extension:
+      saucelabs:
+        browser: "internet explorer"
+        capabilities:
+          name: "winxpie7"
+          platform: "Windows XP"
+          version: 7
+
 # Run tests with win7 ie8
 win7ie8:
   extensions:
