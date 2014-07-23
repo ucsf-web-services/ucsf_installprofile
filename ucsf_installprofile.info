@@ -91,7 +91,6 @@ dependencies[] = wysiwyg_filter
 ; dependencies[] = clone
 
 ; Install Custom modules
-; dependencies[] = reset
 dependencies[] = ucsftemplate_tweaks
 
 
