@@ -56,10 +56,6 @@ before_script:
 - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
 
-# configure apache virtual hosts
-- sudo cp -f build/travis-ci-apache /etc/apache2/sites-available/default
-- sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
-
 # create a new database
 - mysql -e 'CREATE DATABASE starterkit'
 
@@ -73,10 +69,6 @@ before_script:
 
 script:
 
-# search/replace the repo name and branch in the makefile
-- sed -e "s?%TRAVIS_REPO_SLUG%?$TRAVIS_REPO_SLUG?g" --in-place make/build-ucsf_installprofile-ci.make
-- sed -e "s?%TRAVIS_BRANCH%?$TRAVIS_BRANCH?g" --in-place make/build-ucsf_installprofile-ci.make
-
 # build drupal and the profile into the webroot dir
 - drush make --prepare-install make/build-ucsf_installprofile-ci.make webroot
 
@@ -87,10 +79,21 @@ script:
 # delete temp dir
 - rm -rf tmp
 
+# move the webroot out of the profile to prevent path clobbering
+- mv webroot $TRAVIS_BUILD_DIR/../webroot
+
+- cd $TRAVIS_BUILD_DIR/../webroot
+
+# symlink to profile from the /profiles directory
+- ln -s $TRAVIS_BUILD_DIR profiles/ucsf_installprofile
+
+# configure apache virtual hosts
+- sudo cp -f $TRAVIS_BUILD_DIR/build/travis-ci-apache /etc/apache2/sites-available/default
+- sudo sed -e "s?%DOCROOT%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
+
 # restart apache
 - sudo service apache2 restart
 - until netstat -an 2>/dev/null | grep '80.*LISTEN'; do true; done
-- cd ${TRAVIS_BUILD_DIR}/webroot
 
 # create new site, stubbing sendmail path with true to prevent delivery errors and manually
 - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes site-install ucsf_installprofile --db-url=mysql://root:@127.0.0.1/starterkit
