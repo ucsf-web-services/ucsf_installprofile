@@ -81,13 +81,14 @@ script:
 
 # move the webroot out of the profile to prevent path clobbering
 - mv webroot $TRAVIS_BUILD_DIR/../webroot
+
 - cd $TRAVIS_BUILD_DIR/../webroot
 
 # symlink to profile from the /profiles directory
 - ln -s $TRAVIS_BUILD_DIR profiles/ucsf_installprofile
 
 # configure apache virtual hosts
-- sudo cp -f build/travis-ci-apache /etc/apache2/sites-available/default
+- sudo cp -f $TRAVIS_BUILD_DIR/build/travis-ci-apache /etc/apache2/sites-available/default
 - sudo sed -e "s?%DOCROOT%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
 
 # restart apache
