@@ -1494,10 +1494,7 @@ function _ucsf_import_news(){
   $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile').'/import/news.xml';
   if(file_exists($nodes_xml)) {
     $xmlObject = simplexml_load_file($nodes_xml);
-    drupal_mkdir('public://field');
-    drupal_mkdir('public://field/image');
     drupal_mkdir('public://field/image/news');
-
     foreach ($xmlObject->node as $item) {
       $node = new stdClass();
       $node->type = 'news';
@@ -1580,6 +1577,7 @@ function _ucsf_import_webform(){
 function _ucsf_import_pages(){
   $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile').'/import/page.xml';
   if(file_exists($nodes_xml)) {
+    drupal_mkdir('public://field/image/slider');
     $xmlObject = simplexml_load_file($nodes_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
     foreach ($xmlObject->node as $item) {
       $node = new stdClass();
@@ -1596,9 +1594,6 @@ function _ucsf_import_pages(){
 
       if(isset($item->slides)) {
         $delta = 0;
-        drupal_mkdir('public://field');
-        drupal_mkdir('public://field/image');
-        drupal_mkdir('public://field/image/slider');
         foreach ($item->slides->slide as $slide) {
           $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_slider_images_collection'));
           $field_collection_item->setHostEntity('node', $node);
