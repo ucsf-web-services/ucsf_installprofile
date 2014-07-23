@@ -2,5 +2,6 @@
 *.swp
 *.patch
 *.diff
+/tmp
 /webroot
 /.idea
