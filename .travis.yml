@@ -72,8 +72,20 @@ before_script:
 - if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do true; done); fi
 
 script:
-# build the distribution using Drush make.
-- drush make --prepare-install make/ucsf_installprofile.make webroot
+
+# search/replace the repo name and branch in the makefile
+- sed -e "s?%TRAVIS_REPO_SLUG%?$TRAVIS_REPO_SLUG?g" --in-place make/build-ucsf_installprofile-ci.make
+- sed -e "s?%TRAVIS_BRANCH%?$TRAVIS_BRANCH?g" --in-place make/build-ucsf_installprofile-ci.make
+
+# build drupal and the profile into the webroot dir
+- drush make --prepare-install make/build-ucsf_installprofile-ci.make webroot
+
+# build modules/themes/libs into a temp dir
+- drush make --no-cache --contrib-destination="." --no-core make/drupal-org.make tmp
+# move the temp directory's content into sites/all
+- cp -r tmp/* webroot/sites/all/
+# delete temp dir
+- rm -rf tmp
 
 # restart apache
 - sudo service apache2 restart
