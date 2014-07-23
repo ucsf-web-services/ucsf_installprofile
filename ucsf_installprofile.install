@@ -976,9 +976,9 @@ function _ucsf_installprofile_importviews(){
   $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_image']['type'] = 'flexslider';
   $handler->display->display_options['fields']['field_image']['settings'] = array(
-    'optionset' => 'default',
+    'image_style' => 'flexslider_full',
+    'image_link' => '',
   );
   /* Field: Field: Location Map */
   $handler->display->display_options['fields']['field_link']['id'] = 'field_link';
