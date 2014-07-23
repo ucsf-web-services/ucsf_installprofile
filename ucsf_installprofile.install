@@ -976,9 +976,9 @@ function _ucsf_installprofile_importviews(){
   $handler->display->display_options['fields']['field_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_image']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_image']['type'] = 'flexslider';
   $handler->display->display_options['fields']['field_image']['settings'] = array(
-    'image_style' => 'flexslider_full',
-    'image_link' => '',
+    'optionset' => 'default',
   );
   /* Field: Field: Location Map */
   $handler->display->display_options['fields']['field_link']['id'] = 'field_link';
@@ -1480,8 +1480,9 @@ function _ucsf_installprofile_importviews(){
 }
 
 function _ucsf_installprofile_import(){
+  drupal_mkdir('public://field');
+  drupal_mkdir('public://field/image');
   _ucsf_installprofile_import_taxonomy_terms();
-
   _ucsf_import_pages();
   //_ucsf_import_slider();
   _ucsf_import_news();
@@ -1494,18 +1495,15 @@ function _ucsf_import_news(){
   $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile').'/import/news.xml';
   if(file_exists($nodes_xml)) {
     $xmlObject = simplexml_load_file($nodes_xml);
-    drupal_mkdir('public://field');
-    drupal_mkdir('public://field/image');
     drupal_mkdir('public://field/image/news');
-
     foreach ($xmlObject->node as $item) {
       $node = new stdClass();
       $node->type = 'news';
-      $node->title = $item->title;
+      $node->title = (string) $item->title;
       node_object_prepare($node);
-      $node->body['und'][0]['value']   = $item->body;
+      $node->body['und'][0]['value']   = (string) $item->body;
       $node->body['und'][0]['format']  = 'webedit';
-      $image_path = drupal_get_path('profile', 'ucsf_installprofile') . '/import/images/' . $item->image;
+      $image_path = drupal_get_path('profile', 'ucsf_installprofile') . '/import/images/' . (string) $item->image;
       $file = (object)array(
         "uid" => 1,
         "uri" => $image_path,
@@ -1527,14 +1525,14 @@ function _ucsf_import_events(){
     foreach ($xmlObject->node as $item) {
       $node = new stdClass();
       $node->type = 'events';
-      $node->title = $item->title;
+      $node->title = (string) $item->title;
       node_object_prepare($node);
-      $node->body['und'][0]['value']   = $item->body;
+      $node->body['und'][0]['value']   = (string) $item->body;
       $node->body['und'][0]['format']  = 'webedit';
-      $node->field_events_date['und'][0]['value'] = $item->date->start_date;
-      $node->field_events_date['und'][0]['value2'] = $item->date->end_date;
-      $node->field_event_location['und'][0]['tid'] = $item->location;
-      $node->field_link['und'][0]['url'] = $item->location_map;
+      $node->field_events_date['und'][0]['value'] = (string) $item->date->start_date;
+      $node->field_events_date['und'][0]['value2'] = (string) $item->date->end_date;
+      $node->field_event_location['und'][0]['tid'] = (string) $item->location;
+      $node->field_link['und'][0]['url'] = (string) $item->location_map;
       $node = node_submit($node);
       node_save($node);
     }
@@ -1548,9 +1546,9 @@ function _ucsf_import_webform(){
     foreach ($xmlObject->node as $item) {
       $node = new stdClass();
       $node->type = 'webform';
-      $node->title = $item->title;
+      $node->title = (string) $item->title;
       node_object_prepare($node);
-      $node->body['und'][0]['value']   = $item->body;
+      $node->body['und'][0]['value']   = (string) $item->body;
       $node->body['und'][0]['format']  = 'webedit';
       $node = node_submit($node);
       node_save($node);
@@ -1562,11 +1560,11 @@ function _ucsf_import_webform(){
             'nid' => $node->nid,
             'cid' => $i+1,
             'pid' =>0,
-            'form_key' => $component->form_key,
-            'name' => $component->name,
-            'type' => $component->type,
+            'form_key' => (string) $component->form_key,
+            'name' => (string) $component->name,
+            'type' => (string) $component->type,
             'value' => '',
-            'extra' => $component->extra,
+            'extra' => (string) $component->extra,
             'mandatory' => 0,
             'weight' => $i,
           ))
@@ -1580,13 +1578,14 @@ function _ucsf_import_webform(){
 function _ucsf_import_pages(){
   $nodes_xml = drupal_get_path('profile', 'ucsf_installprofile').'/import/page.xml';
   if(file_exists($nodes_xml)) {
+    drupal_mkdir('public://field/image/slider');
     $xmlObject = simplexml_load_file($nodes_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
     foreach ($xmlObject->node as $item) {
       $node = new stdClass();
       $node->type = 'page';
-      $node->title = $item->title;
+      $node->title = (string) $item->title;
       node_object_prepare($node);
-      $node->body['und'][0]['value']   = $item->body;
+      $node->body['und'][0]['value']   = (string) $item->body;
       //$node->body['und'][0]['summary'] = text_summary($item->body);
       $node->body['und'][0]['format']  = 'webedit';
 
@@ -1596,14 +1595,11 @@ function _ucsf_import_pages(){
 
       if(isset($item->slides)) {
         $delta = 0;
-        drupal_mkdir('public://field');
-        drupal_mkdir('public://field/image');
-        drupal_mkdir('public://field/image/slider');
         foreach ($item->slides->slide as $slide) {
           $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_slider_images_collection'));
           $field_collection_item->setHostEntity('node', $node);
 
-          $image_path = drupal_get_path('profile', 'ucsf_installprofile') . '/import/images/' . $slide->image;
+          $image_path = drupal_get_path('profile', 'ucsf_installprofile') . '/import/images/' . (string) $slide->image;
           $file = (object)array(
             "uid" => 1,
             "uri" => $image_path,
@@ -1611,11 +1607,11 @@ function _ucsf_import_pages(){
             "status" => 1
           );
           $file = file_copy($file, 'public://field/image/slider', FILE_EXISTS_REPLACE);
-          $field_collection_item->field_image['und'][0] = (array)$file;
+          $field_collection_item->field_image['und'][0] = (array) $file;
           //drupal_set_message('slide : <pre>'.print_r($slide, 1).'</pre>');
           //drupal_set_message('title : '.$slide->link->title);
-          $field_collection_item->field_link['und'][0]['url'] = $slide->link->url;
-          $field_collection_item->field_link['und'][0]['title'] = $slide->link->title;
+          $field_collection_item->field_link['und'][0]['url'] = (string) $slide->link->url;
+          $field_collection_item->field_link['und'][0]['title'] = (string) $slide->link->title;
 
           $field_collection_item->save();
           $node->field_slider_images_collection['und'][$delta]['value'] = $field_collection_item->item_id;
@@ -2012,8 +2008,8 @@ function _ucsf_installprofile_import_taxonomy_terms() {
     $xmlObject = simplexml_load_file($terms_xml, 'SimpleXMLElement', LIBXML_NOCDATA);
     foreach ($xmlObject->term as $item) {
       taxonomy_term_save((object) array(
-        'name' => $item->title,
-        'vid' => $item->vid,
+        'name' => (string) $item->title,
+        'vid' => (string) $item->vid,
       ));
     }
   }
