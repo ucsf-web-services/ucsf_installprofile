@@ -1,9 +1,6 @@
 [![Build Status](https://travis-ci.org/ucsf-drupal/ucsf_installprofile.svg?branch=7.x-1.x)](https://travis-ci.org/ucsf-drupal/ucsf_installprofile) 
 [![Sauce Test Status](https://saucelabs.com/buildstatus/ucsfdrupal)](https://saucelabs.com/u/ucsfdrupal)
 
-
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/ucsfdrupal.svg)](https://saucelabs.com/u/ucsfdrupal)
-
 # UCSF Starter Kit
 
 This is the Drupal installation profile for UCSF Starter Kit sites.
