@@ -10,4 +10,4 @@ projects[ucsf_installprofile][download][url] = "git@github.com:ucsf-drupal/ucsf_
 ;projects[ucsf_installprofile][tag] = "7.x-1.0"
 projects[ucsf_installprofile][branch] = "7.x-1.x"
 projects[ucsf_installprofile][type] = "profile"
-projects[ucsf_installprofile][working-copy] = TRUE
+projects[ucsf_installprofile][options][working-copy] = TRUE

@@ -9,7 +9,7 @@ projects[ucsf_images][download][url] = "git@github.com:ucsf-drupal/ucsf_images.g
 projects[ucsf_images][download][branch] = "7.x-2.x"
 projects[ucsf_images][type] = "module"
 projects[ucsf_images][subdir] = "custom"
-projects[ucsf_images][working-copy] = TRUE
+projects[ucsf_images][options][working-copy] = TRUE
 
 projects[ucsf_starterkit_images][download][type] = "git"
 projects[ucsf_starterkit_images][download][url] = "git@github.com:ucsf-drupal/ucsf_starterkit_images.git"
@@ -17,7 +17,7 @@ projects[ucsf_starterkit_images][download][url] = "git@github.com:ucsf-drupal/uc
 projects[ucsf_starterkit_images][download][branch] = "7.x-1.x"
 projects[ucsf_starterkit_images][type] = "module"
 projects[ucsf_starterkit_images][subdir] = "custom"
-projects[ucsf_starterkit_images][working-copy] = TRUE
+projects[ucsf_starterkit_images][options][working-copy] = TRUE
 
 projects[ucsf_webedit][download][type] = "git"
 projects[ucsf_webedit][download][url] = "git@github.com:ucsf-drupal/ucsf_webedit.git"
@@ -25,7 +25,7 @@ projects[ucsf_webedit][download][url] = "git@github.com:ucsf-drupal/ucsf_webedit
 projects[ucsf_webedit][download][branch] = "7.x-1.x"
 projects[ucsf_webedit][type] = "module"
 projects[ucsf_webedit][subdir] = "custom"
-projects[ucsf_webedit][working-copy] = TRUE
+projects[ucsf_webedit][options][working-copy] = TRUE
 
 projects[feature_print_module][download][type] = "git"
 projects[feature_print_module][download][url] = "git@github.com:ucsf-drupal/feature_print_module.git"
@@ -33,7 +33,7 @@ projects[feature_print_module][download][url] = "git@github.com:ucsf-drupal/feat
 projects[feature_print_module][download][branch] = "7.x-1.x"
 projects[feature_print_module][type] = "module"
 projects[feature_print_module][subdir] = "custom"
-projects[feature_print_module][working-copy] = TRUE
+projects[feature_print_module][options][working-copy] = TRUE
 
 projects[manualcrop_media_wysiwyg][download][type] = "git"
 projects[manualcrop_media_wysiwyg][download][url] = "git@github.com:ucsf-drupal/manualcrop_media_wysiwyg.git"
@@ -41,7 +41,7 @@ projects[manualcrop_media_wysiwyg][download][url] = "git@github.com:ucsf-drupal/
 projects[manualcrop_media_wysiwyg][download][branch] = "7.x-1.x"
 projects[manualcrop_media_wysiwyg][type] = "module"
 projects[manualcrop_media_wysiwyg][subdir] = "custom"
-projects[manualcrop_media_wysiwyg][working-copy] = TRUE
+projects[manualcrop_media_wysiwyg][options][working-copy] = TRUE
 
 projects[media_browser_edit][download][type] = "git"
 projects[media_browser_edit][download][url] = "git@github.com:ucsf-drupal/media_browser_edit.git"
@@ -49,7 +49,7 @@ projects[media_browser_edit][download][url] = "git@github.com:ucsf-drupal/media_
 projects[media_browser_edit][download][branch] = "7.x-1.x"
 projects[media_browser_edit][type] = "module"
 projects[media_browser_edit][subdir] = "custom"
-projects[media_browser_edit][working-copy] = TRUE
+projects[media_browser_edit][options][working-copy] = TRUE
 
 projects[square_crop][download][type] = "git"
 projects[square_crop][download][url] = "git@github.com:ucsf-drupal/square_crop.git"
@@ -57,7 +57,7 @@ projects[square_crop][download][url] = "git@github.com:ucsf-drupal/square_crop.g
 projects[square_crop][download][branch] = "7.x-1.x"
 projects[square_crop][type] = "module"
 projects[square_crop][subdir] = "custom"
-projects[square_crop][working-copy] = TRUE
+projects[square_crop][options][working-copy] = TRUE
 
 projects[ucsftemplate_tweaks][download][type] = "git"
 projects[ucsftemplate_tweaks][download][url] = "git@github.com:ucsf-drupal/ucsftemplate_tweaks.git"
@@ -65,7 +65,7 @@ projects[ucsftemplate_tweaks][download][url] = "git@github.com:ucsf-drupal/ucsft
 projects[ucsftemplate_tweaks][download][branch] = "7.x-1.x"
 projects[ucsftemplate_tweaks][type] = "module"
 projects[ucsftemplate_tweaks][subdir] = "custom"
-projects[ucsftemplate_tweaks][working-copy] = TRUE
+projects[ucsftemplate_tweaks][options][working-copy] = TRUE
 
 ; Custom themes
 ; ----------------------------------------------------------------
@@ -74,21 +74,21 @@ projects[orange][download][url] = "git@github.com:ucsf-drupal/orange.git"
 ;projects[orange][download][tag] = "7.x-1.0"
 projects[orange][download][branch] = "7.x-1.x"
 projects[orange][type] = "theme"
-projects[orange][working-copy] = TRUE
+projects[orange][options][working-copy] = TRUE
 
 projects[teal][download][type] = "git"
 projects[teal][download][url] = "git@github.com:ucsf-drupal/teal.git"
 ;projects[teal][download][tag] = "7.x-1.0"
 projects[teal][download][branch] = "7.x-1.x"
 projects[teal][type] = "theme"
-projects[teal][working-copy] = TRUE
+projects[teal][options][working-copy] = TRUE
 
 projects[ucsf_base][download][type] = "git"
 projects[ucsf_base][download][url] = "git@github.com:ucsf-drupal/ucsf_base.git"
 ;projects[ucsf_base][download][tag] = "7.x-1.0"
 projects[ucsf_base][download][branch] = "7.x-1.x"
 projects[ucsf_base][type] = "theme"
-projects[ucsf_base][working-copy] = TRUE
+projects[ucsf_base][options][working-copy] = TRUE
 
 ; Contributed modules
 ; ----------------------------------------------------------------
