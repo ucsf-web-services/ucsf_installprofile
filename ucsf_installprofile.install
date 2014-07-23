@@ -1480,8 +1480,9 @@ function _ucsf_installprofile_importviews(){
 }
 
 function _ucsf_installprofile_import(){
+  drupal_mkdir('public://field');
+  drupal_mkdir('public://field/image');
   _ucsf_installprofile_import_taxonomy_terms();
-
   _ucsf_import_pages();
   //_ucsf_import_slider();
   _ucsf_import_news();
