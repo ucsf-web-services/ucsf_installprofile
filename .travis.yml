@@ -24,6 +24,7 @@ env:
   - BEHAT_PROFILE='phantomjs'
 
 matrix:
+   fast_finish: true
    exclude:
       - php: "5.4"
       - php: "5.5"
@@ -31,7 +32,7 @@ matrix:
      - php: "5.4"
        env: BEHAT_PROFILE="phantomjs"
      - php: "5.5"
-        env: BEHAT_PROFILE="phantomjs"
+       env: BEHAT_PROFILE="phantomjs"
 
 mysql:
   username: root
