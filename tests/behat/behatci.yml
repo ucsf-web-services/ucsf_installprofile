@@ -27,7 +27,7 @@ default:
     tags: "~@ignore"
 
 # Run tests with winxp ie7
-win7ie8:
+winxpie7:
   extensions:
     Behat\MinkExtension\Extension:
       saucelabs:
