@@ -1,6 +1,6 @@
 7.x-1.1
 -------
-- Fix frontpage slider display #1
+- Fixed frontpage slider display #1
 - Travis CI integration #2
 - Set up Behat testing infrastructure #3
 - Update Drupal Core to version 7.30 #6
