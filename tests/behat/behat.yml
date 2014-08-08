@@ -6,10 +6,7 @@ default:
       default_session: goutte
       javascript_session: selenium2
       browser_name: "firefox"
-      goutte:
-        guzzle_parameters:
-          curl.options: { "CURLOPT_SSLVERSION": "3" }
-          ssl.certificate_authority: false
+      goutte: ~
       selenium2:
         capabilities: { "browser": "firefox", "version": "26" }
     Drupal\DrupalExtension\Extension:
