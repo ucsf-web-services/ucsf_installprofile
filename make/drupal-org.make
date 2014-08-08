@@ -19,7 +19,7 @@ projects[ucsf_starterkit_images][subdir] = "custom"
 
 projects[ucsf_webedit][download][type] = "git"
 projects[ucsf_webedit][download][url] = "https://github.com/ucsf-drupal/ucsf_webedit.git"
-projects[ucsf_webedit][download][tag] = "7.x-1.0-beta11"
+projects[ucsf_webedit][download][tag] = "7.x-1.0-beta12"
 ;projects[ucsf_webedit][download][branch] = "7.x-1.x"
 projects[ucsf_webedit][type] = "module"
 projects[ucsf_webedit][subdir] = "custom"
@@ -314,21 +314,6 @@ libraries[chosen][download][type] = "file"
 libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/releases/download/1.0.0/chosen_v1.0.0.zip"
 libraries[chosen][directory_name] = "chosen"
 libraries[chosen][type] = "library"
-
-; wysiwyg module dependency
-libraries[ckeditor][download][type] = "file"
-libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.0.1/ckeditor_4.0.1_full.zip"
-libraries[ckeditor][directory_name] = "ckeditor"
-libraries[ckeditor][type] = "library"
-
-; webkit-span-fix plugin for ckeditor, patched.
-; see: https://gist.githubusercontent.com/stopfstedt/95117fa48bd1d1489345/raw/47cc878f32011ba5013e90eb8a1cd0eb32106cd2/webkit-span-fix.patch
-libraries[ckeditor_plugin_webkit-span-fix][download][type] = "git"
-libraries[ckeditor_plugin_webkit-span-fix][download][url] = "https://github.com/RomanMinkin/webkit-span-fix.git"
-libraries[ckeditor_plugin_webkit-span-fix][download][revision] = "41d67060384ade6babc2ac1d84a56f49b64a7368"
-libraries[ckeditor_plugin_webkit-span-fix][directory_name] = "ckeditor/plugins/webkit-span-fix"
-libraries[ckeditor_plugin_webkit-span-fix][type] = "library"
-libraries[ckeditor_plugin_webkit-span-fix][patch][] = "http://bit.ly/VfcoOs"
 
 ; flexslider module dependency
 ; Replace FlexSlider libs that drush make downloaded previously
