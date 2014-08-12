@@ -21,7 +21,7 @@ drush make --prepare-install make/build-ucsf_installprofile.make webroot
 # build modules/themes/libs into a temp dir
 drush make --no-cache --contrib-destination="." --no-core make/drupal-org.make tmp
 # move the temp directory's content into sites/all
-cp -r tmp/* webroot/sites/all/
+cp -r tmp/sites/all/* webroot/sites/all/
 # delete temp dir
 rm -rf tmp
 ```
@@ -38,7 +38,7 @@ git clone --branch 7.x-1.x https://github.com/ucsf-drupal/ucsf_installprofile.gi
 cd ucsf_installprofile
 drush make --prepare-install make/build-ucsf_installprofile-dev.make webroot
 drush make --no-cache --no-core make/drupal-org-dev.make tmp
-cp -r tmp/* webroot/sites/all/
+cp -r tmp/sites/all/* webroot/sites/all/
 rm -rf tmp
 ```
 
