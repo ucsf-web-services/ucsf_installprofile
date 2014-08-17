@@ -127,7 +127,7 @@ projects[block_class][version] = "1.2"
 projects[block_class][type] = "module"
 
 projects[menu_block][subdir] = "contrib"
-projects[menu_block][version] = "2.3"
+projects[menu_block][version] = "2.4"
 projects[menu_block][type] = "module"
 
 projects[chosen][subdir] = "contrib"
