@@ -190,7 +190,7 @@ projects[webform][version] = "3.20"
 projects[webform][type] = "module"
 
 projects[imce][subdir] = "contrib"
-projects[imce][version] = "1.7"
+projects[imce][version] = "1.9"
 projects[imce][type] = "module"
 
 projects[imce_wysiwyg][subdir] = "contrib"
