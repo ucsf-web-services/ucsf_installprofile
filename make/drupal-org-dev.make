@@ -166,7 +166,7 @@ projects[menu_attributes][version] = "1.0-rc2"
 projects[menu_attributes][type] = "module"
 
 projects[module_filter][subdir] = "contrib"
-projects[module_filter][version] = "1.7"
+projects[module_filter][version] = "1.8"
 projects[module_filter][type] = "module"
 
 projects[mpac][subdir] = "contrib"
