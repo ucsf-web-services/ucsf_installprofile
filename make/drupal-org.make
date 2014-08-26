@@ -159,7 +159,7 @@ projects[module_filter][version] = "1.8"
 projects[module_filter][type] = "module"
 
 projects[mpac][subdir] = "contrib"
-projects[mpac][version] = "1.1"
+projects[mpac][version] = "1.2"
 projects[mpac][type] = "module"
 
 projects[field_collection][subdir] = "contrib"
