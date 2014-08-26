@@ -134,7 +134,7 @@ projects[admin_views][version] = "1.3"
 projects[admin_views][type] = "module"
 
 projects[block_class][subdir] = "contrib"
-projects[block_class][version] = "1.2"
+projects[block_class][version] = "1.3"
 projects[block_class][type] = "module"
 
 projects[menu_block][subdir] = "contrib"
