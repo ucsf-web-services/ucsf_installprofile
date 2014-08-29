@@ -142,7 +142,7 @@ projects[menu_block][version] = "2.4"
 projects[menu_block][type] = "module"
 
 projects[chosen][subdir] = "contrib"
-projects[chosen][version] = "2.0-alpha4"
+projects[chosen][version] = "2.0-beta4"
 projects[chosen][type] = "module"
 
 projects[entityreference][subdir] = "contrib"
@@ -322,7 +322,7 @@ projects[mothership][type] = "theme"
 
 ; chosen module dependency
 libraries[chosen][download][type] = "file"
-libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/releases/download/1.0.0/chosen_v1.0.0.zip"
+libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip"
 libraries[chosen][directory_name] = "chosen"
 libraries[chosen][type] = "library"
 
