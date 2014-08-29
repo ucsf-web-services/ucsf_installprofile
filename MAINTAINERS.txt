@@ -1,0 +1,2 @@
+This project under active development and maintenance by the Website Services Group within UCSF's Information Technology Services organization; in collaboration with UCSF's Drupal community at large.
+For all inquiries, please contact webservices@ucsf.edu.
