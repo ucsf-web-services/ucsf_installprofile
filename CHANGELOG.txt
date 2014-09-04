@@ -1,3 +1,18 @@
+7.x-1.2
+-------
+- Added contribution guidelines. #25
+- Added maintainers file. #26
+- Updated Drupal Core to version 7.31. #28
+- Updated Date module to version 7.x-2.8. #31
+- Updated IMCE module to version 7.x-1.9. #33
+- Updated Menu Block module to version 7.x-2.4. #34
+- Updated MPAC module to version 7.x-1.2. #38
+- Updated Block Class module to version 7.x-1.2 #39
+- Updated Module Filter module to version 7.x-1.8 #40
+- Updated UCSF WebEdit module to version 7.x-1.0-beta14. #41
+- Updated Chosen module to version 7.x-2.0-beta4 and Chosen libs to version 1.1.0. #43
+- Updated UCSF Base theme to version 7.x-1.1. #45
+
 7.x-1.1
 -------
 - Fixed frontpage slider display #1
