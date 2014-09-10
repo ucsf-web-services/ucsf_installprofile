@@ -139,7 +139,7 @@ projects[entityreference][version] = "1.1"
 projects[entityreference][type] = "module"
 
 projects[image_url_formatter][subdir] = "contrib"
-projects[image_url_formatter][version] = "1.0"
+projects[image_url_formatter][version] = "1.4"
 projects[image_url_formatter][type] = "module"
 
 projects[libraries][subdir] = "contrib"
