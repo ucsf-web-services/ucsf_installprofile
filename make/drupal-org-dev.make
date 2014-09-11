@@ -5,7 +5,7 @@ api = 2
 ; ----------------------------------------------------------------
 projects[ucsf_images][download][type] = "git"
 projects[ucsf_images][download][url] = "git@github.com:ucsf-drupal/ucsf_images.git"
-;projects[ucsf_images][download][tag] = "7.x-2.0-beta6"
+;projects[ucsf_images][download][tag] = "7.x-2.3"
 projects[ucsf_images][download][branch] = "7.x-2.x"
 projects[ucsf_images][type] = "module"
 projects[ucsf_images][subdir] = "custom"
