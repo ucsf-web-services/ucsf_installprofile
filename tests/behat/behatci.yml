@@ -11,7 +11,7 @@ default:
         capabilities:
           name: "win7ff"
           platform: "Windows 7"
-          version: 28
+          version: 33
     Drupal\DrupalExtension\Extension:
       blackbox: ~
       region_map:
