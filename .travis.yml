@@ -103,6 +103,9 @@ script:
 - sudo cp -f $TRAVIS_BUILD_DIR/build/travis-ci-apache /etc/apache2/sites-available/default
 - sudo sed -e "s?%DOCROOT%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
 
+# configure behat
+- sudo sed -e "s?%DOCROOT%?$(pwd)?g" --in-place ${TRAVIS_BUILD_DIR}/tests/behat/behatci.yml
+
 # restart apache
 - sudo service apache2 restart
 - until netstat -an 2>/dev/null | grep '80.*LISTEN'; do true; done
