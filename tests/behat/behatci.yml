@@ -14,6 +14,9 @@ default:
           version: 33
     Drupal\DrupalExtension\Extension:
       blackbox: ~
+      api_driver: 'drupal'
+      drupal:
+        drupal_root: '%DOCROOT%'
       region_map:
         Content: ".content"
         Top Header: ".top-region-container"
