@@ -17,7 +17,7 @@ At the very least, you must have PHP 5.3.5+ and the Firefox browser installed in
 
     ```bash
     cd tests/behat
-    composer install
+    composer update
     ```
 
 ## Run Test in a web-browser
