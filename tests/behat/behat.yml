@@ -8,9 +8,12 @@ default:
       browser_name: "firefox"
       goutte: ~
       selenium2:
-        capabilities: { "browser": "firefox", "version": "26" }
+        capabilities: { "browser": "firefox", "version": "33" }
     Drupal\DrupalExtension\Extension:
       blackbox: ~
+      api_driver: 'drupal'
+      drupal:
+       drupal_root: '/path/to/your/ucsf_installprofile/webroot'
       region_map:
        Content: ".content"
        Top Header: ".top-region-container"
