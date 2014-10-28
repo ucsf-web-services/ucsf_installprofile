@@ -18,6 +18,7 @@ default:
       drupal:
         drupal_root: '%DOCROOT%'
       region_map:
+        Admin Menu: "#admin-menu"
         Content: ".content"
         Top Header: ".top-region-container"
         Header: ".header-region"
