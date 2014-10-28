@@ -13,16 +13,17 @@ default:
       blackbox: ~
       api_driver: 'drupal'
       drupal:
-       drupal_root: '/path/to/your/ucsf_installprofile/webroot'
+        drupal_root: '/path/to/your/ucsf_installprofile/webroot'
       region_map:
-       Content: ".content"
-       Top Header: ".top-region-container"
-       Header: ".header-region"
-       Footer Top: ".footer-top"
-       Footer: ".footer"
-       Sidebar First: ".sidebar-first"
-       Sidebar Second: ".sidebar-second"
-       Highlighted: ".drupal-messages"
+        Admin Menu: "#admin-menu"
+        Content: ".content"
+        Top Header: ".top-region-container"
+        Header: ".header-region"
+        Footer Top: ".footer-top"
+        Footer: ".footer"
+        Sidebar First: ".sidebar-first"
+        Sidebar Second: ".sidebar-second"
+        Highlighted: ".drupal-messages"
   filters:
     # don't process scenarios and features tagged as "ignored"
     tags: '~@ignored'
