@@ -750,7 +750,9 @@ function _ucsf_installprofile_fields(){
 }
 
 function _ucsf_installprofile_permissions(){
+  // "use text format comments"
   $comments_format_permission = variable_get('comments_format_permission');
+  // "use text format webedit"
   $webedit_format_permission = variable_get('webedit_format_permission');
 
   // Create a new role for editor`s
