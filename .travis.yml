@@ -93,7 +93,7 @@ script:
 - cd $TRAVIS_BUILD_DIR/../webroot
 
 # copy the profile to the profiles/ directory, then remove tests and build/make subdirs
-- cp $TRAVIS_BUILD_DIR profiles/ucsf_installprofile
+- cp -R $TRAVIS_BUILD_DIR profiles/ucsf_installprofile
 - rm -rf profiles/ucsf_installprofile/build
 - rm -rf profiles/ucsf_installprofile/make
 - rm -rf profiles/ucsf_installprofile/tests
