@@ -1,7 +1,6 @@
 language: php
 
 php:
-- 5.3
 - 5.4
 - 5.5
 
@@ -23,11 +22,8 @@ env:
 matrix:
   fast_finish: true
   exclude:
-  - php: 5.4
   - php: 5.5
   include:
-  - php: 5.4
-    env: BEHAT_PROFILE="phantomjs"
   - php: 5.5
     env: BEHAT_PROFILE="phantomjs"
 
