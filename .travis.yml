@@ -92,8 +92,11 @@ script:
 
 - cd $TRAVIS_BUILD_DIR/../webroot
 
-# symlink to profile from the /profiles directory
-- ln -s $TRAVIS_BUILD_DIR profiles/ucsf_installprofile
+# copy the profile to the profiles/ directory, then remove tests and build/make subdirs
+- cp $TRAVIS_BUILD_DIR profiles/ucsf_installprofile
+- rm profiles/ucsf_installprofile/build
+- rm profiles/ucsf_installprofile/make
+- rm profiles/ucsf_installprofile/tests
 
 # configure apache virtual hosts
 - sudo cp -f $TRAVIS_BUILD_DIR/build/travis-ci-apache /etc/apache2/sites-available/default
