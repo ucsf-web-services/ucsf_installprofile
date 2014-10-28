@@ -33,7 +33,7 @@ At the very least, you must have PHP 5.3.5+ and the Firefox browser installed in
 2. Run Behat tests with the "browser" profile
 
     ```bash
-    cd <project>
+    cd tests/behat
     bin/behat -p browser
     ```
 
