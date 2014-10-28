@@ -1,7 +1,6 @@
 language: php
 
 php:
-- 5.3
 - 5.4
 - 5.5
 
@@ -23,11 +22,8 @@ env:
 matrix:
   fast_finish: true
   exclude:
-  - php: 5.4
   - php: 5.5
   include:
-  - php: 5.4
-    env: BEHAT_PROFILE="phantomjs"
   - php: 5.5
     env: BEHAT_PROFILE="phantomjs"
 
@@ -96,12 +92,18 @@ script:
 
 - cd $TRAVIS_BUILD_DIR/../webroot
 
-# symlink to profile from the /profiles directory
-- ln -s $TRAVIS_BUILD_DIR profiles/ucsf_installprofile
+# copy the profile to the profiles/ directory, then remove tests and build/make subdirs
+- cp -R $TRAVIS_BUILD_DIR profiles/ucsf_installprofile
+- rm -rf profiles/ucsf_installprofile/build
+- rm -rf profiles/ucsf_installprofile/make
+- rm -rf profiles/ucsf_installprofile/tests
 
 # configure apache virtual hosts
 - sudo cp -f $TRAVIS_BUILD_DIR/build/travis-ci-apache /etc/apache2/sites-available/default
 - sudo sed -e "s?%DOCROOT%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
+
+# configure behat
+- sudo sed -e "s?%DOCROOT%?$(pwd)?g" --in-place ${TRAVIS_BUILD_DIR}/tests/behat/behatci.yml
 
 # restart apache
 - sudo service apache2 restart

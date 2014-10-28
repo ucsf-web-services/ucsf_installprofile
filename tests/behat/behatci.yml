@@ -11,10 +11,14 @@ default:
         capabilities:
           name: "win7ff"
           platform: "Windows 7"
-          version: 28
+          version: 33
     Drupal\DrupalExtension\Extension:
       blackbox: ~
+      api_driver: 'drupal'
+      drupal:
+        drupal_root: '%DOCROOT%'
       region_map:
+        Admin Menu: "#admin-menu"
         Content: ".content"
         Top Header: ".top-region-container"
         Header: ".header-region"

@@ -17,8 +17,9 @@ At the very least, you must have PHP 5.3.5+ and the Firefox browser installed in
 
     ```bash
     cd tests/behat
-    composer install
+    composer update
     ```
+4. Copy `behat.yml.dist` to `behat.yml` and the replace `drupal_root` value with whatever path is applicable in your environment.
 
 ## Run Test in a web-browser
 
@@ -32,7 +33,7 @@ At the very least, you must have PHP 5.3.5+ and the Firefox browser installed in
 2. Run Behat tests with the "browser" profile
 
     ```bash
-    cd <project>
+    cd tests/behat
     bin/behat -p browser
     ```
 
