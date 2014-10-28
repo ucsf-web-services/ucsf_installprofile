@@ -812,8 +812,18 @@ function _ucsf_installprofile_permissions(){
                                  'access send by email',
                                  $comments_format_permission);
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, $anonymous_permissions);
-  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content', 'access comments', 'post comments', 'skip comment approval', 'search content', 'access PDF version', 'access print', 'access send by email', $comments_format_permission));
-  //
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array(
+    'access administration menu',
+    'access content',
+    'access comments',
+    'post comments',
+    'skip comment approval',
+    'search content',
+    'access PDF version',
+    'access print',
+    'access send by email',
+    $comments_format_permission
+  ));
 }
 
 function _ucsf_installprofile_misc_config(){
