@@ -53,54 +53,19 @@ Feature: Permissions
   @api
   Scenario Outline: Role Permissions
     Given I am logged in as a user with the "<role>" role
-    Then I should have the "<permission>" permission
+    Then I should have the "<permissions>" permissions
 
     Examples:
-      | role               | permission                      |
-      | authenticated user | access administration menu      |
-      | authenticated user | access comments                 |
-      | authenticated user | access content                  |
-      | authenticated user | access PDF version              |
-      | authenticated user | access print                    |
-      | authenticated user | access send by email            |
-      | authenticated user | post comments                   |
-      | authenticated user | search content                  |
-      | authenticated user | skip comment approval           |
-      | authenticated user | use text format comments        |
-      | editor             | access administration menu      |
-      | editor             | access comments                 |
-      | editor             | access content overview         |
-      | editor             | access content                  |
-      | editor             | access contextual links         |
-      | editor             | access PDF version              |
-      | editor             | access print                    |
-      | editor             | access send by email            |
-      | editor             | access site in maintenance mode |
-      | editor             | administer comments             |
-      | editor             | administer nodes                |
-      | editor             | create events content           |
-      | editor             | create news content             |
-      | editor             | create page content             |
-      | editor             | delete any events content       |
-      | editor             | delete any news content         |
-      | editor             | delete any page content         |
-      | editor             | delete own events content       |
-      | editor             | delete own news content         |
-      | editor             | delete own page content         |
-      | editor             | edit any events content         |
-      | editor             | edit any news content           |
-      | editor             | edit any page content           |
-      | editor             | edit own comments               |
-      | editor             | edit own events content         |
-      | editor             | edit own news content           |
-      | editor             | edit own page content           |
-      | editor             | flush caches                    |
-      | editor             | post comments                   |
-      | editor             | search content                  |
-      | editor             | skip comment approval           |
-      | editor             | use text format comments        |
-      | editor             | use text format webedit         |
-      | editor             | view the administration theme   |
+      | role               | permissions                                                                                                                   |
+      | authenticated user | access administration menu, access comments, access content, access PDF version, access print, access send by email           |
+      | authenticated user | post comments, search content, use text format comments                                                                       |
+      | editor             | access administration menu, access comments, access content overview, access content, access contextual links                 |
+      | editor             | access PDF version, access print, access send by email, access site in maintenance mode, administer comments                  |
+      | editor             | administer nodes, create events content, create news content, create page content, delete any events content                  |
+      | editor             | delete any news content, delete any page content, delete own events content, delete own news content, delete own page content |
+      | editor             | edit any events content, edit any news content,  edit any page content, edit own comments, edit own events content            |
+      | editor             | edit own news content,  edit own page content, flush caches, post comments, search content, skip comment approval             |
+      | editor             | use text format comments, use text format webedit, view the administration theme                                              |
 
   @api
   Scenario: Admin Permissions

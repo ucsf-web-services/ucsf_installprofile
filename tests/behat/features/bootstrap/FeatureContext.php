@@ -47,6 +47,21 @@ class FeatureContext extends DrupalContext
   }
 
   /**
+   * @Then /^I should have the "([^"]*)" permissions$/
+   */
+  public function iShouldHaveThePermissions($permissions) {
+    $user = NULL;
+    if ($this->user) {
+      $user = user_load($this->user->uid);
+    }
+    $permissions = explode(',', $permissions);
+    foreach ($permissions as $permission) {
+      assertTrue(user_access(trim($permission), $user),
+        sprintf("The current user does not have the %s permission.", $permission));
+    }
+  }
+
+  /**
    * @Then /^I should not have the "([^"]*)" permission$/
    */
   public function iShouldNotHaveThePermission($permission) {
