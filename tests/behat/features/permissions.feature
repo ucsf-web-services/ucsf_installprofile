@@ -56,51 +56,51 @@ Feature: Permissions
     Then I should have the "<permission>" permission
 
     Examples:
-      | role | permission |
-      | authenticated user | access administration menu |
-      | authenticated user | access comments |
-      | authenticated user | access content |
-      | authenticated user | access PDF version |
-      | authenticated user | access print |
-      | authenticated user | access send by email |
-      | authenticated user | post comments |
-      | authenticated user | search content |
-      | authenticated user | skip comment approval |
-      | authenticated user | use text format comments |
-      | editor | access administration menu |
-      | editor | access comments |
-      | editor | access content overview |
-      | editor | access content |
-      | editor | access contextual links |
-      | editor | access PDF version |
-      | editor | access print |
-      | editor | access send by email |
-      | editor | access site in maintenance mode |
-      | editor | administer comments |
-      | editor | administer nodes |
-      | editor | create events content |
-      | editor | create news content |
-      | editor | create page content |
-      | editor | delete any events content |
-      | editor | delete any news content |
-      | editor | delete any page content |
-      | editor | delete own events content |
-      | editor | delete own news content |
-      | editor | delete own page content |
-      | editor | edit any events content |
-      | editor | edit any news content |
-      | editor | edit any page content |
-      | editor | edit own comments |
-      | editor | edit own events content |
-      | editor | edit own news content |
-      | editor | edit own page content |
-      | editor | flush caches |
-      | editor | post comments |
-      | editor | search content |
-      | editor | skip comment approval |
-      | editor | use text format comments |
-      | editor | use text format webedit |
-      | editor | view the administration theme |
+      | role               | permission                      |
+      | authenticated user | access administration menu      |
+      | authenticated user | access comments                 |
+      | authenticated user | access content                  |
+      | authenticated user | access PDF version              |
+      | authenticated user | access print                    |
+      | authenticated user | access send by email            |
+      | authenticated user | post comments                   |
+      | authenticated user | search content                  |
+      | authenticated user | skip comment approval           |
+      | authenticated user | use text format comments        |
+      | editor             | access administration menu      |
+      | editor             | access comments                 |
+      | editor             | access content overview         |
+      | editor             | access content                  |
+      | editor             | access contextual links         |
+      | editor             | access PDF version              |
+      | editor             | access print                    |
+      | editor             | access send by email            |
+      | editor             | access site in maintenance mode |
+      | editor             | administer comments             |
+      | editor             | administer nodes                |
+      | editor             | create events content           |
+      | editor             | create news content             |
+      | editor             | create page content             |
+      | editor             | delete any events content       |
+      | editor             | delete any news content         |
+      | editor             | delete any page content         |
+      | editor             | delete own events content       |
+      | editor             | delete own news content         |
+      | editor             | delete own page content         |
+      | editor             | edit any events content         |
+      | editor             | edit any news content           |
+      | editor             | edit any page content           |
+      | editor             | edit own comments               |
+      | editor             | edit own events content         |
+      | editor             | edit own news content           |
+      | editor             | edit own page content           |
+      | editor             | flush caches                    |
+      | editor             | post comments                   |
+      | editor             | search content                  |
+      | editor             | skip comment approval           |
+      | editor             | use text format comments        |
+      | editor             | use text format webedit         |
+      | editor             | view the administration theme   |
 
   @api
   Scenario: Admin Permissions
