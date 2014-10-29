@@ -43,30 +43,62 @@ Feature: Permissions
     Given I am an anonymous user
     Then I should have the "access content" permission
     And I should have the "access comments" permission
-    And I should have the "search content" permission
     And I should have the "access PDF version" permission
     And I should have the "access print" permission
     And I should have the "access send by email" permission
+    And I should have the "search content" permission
     And I should have the "use text format comments" permission
-    But I should not have the "create content" permission
 
   @api
-  Scenario Outline: Role Permissions
-    Given I am logged in as a user with the "<role>" role
-    Then I should have the "<permissions>" permissions
+  Scenario: Authenticated User Permissions
+    Given I am logged in as a user with the "authenticated user" role
+    Then I should have the "access administration menu" permission
+    And I should have the "access comments" permission
+    And I should have the "access content" permission
+    And I should have the "access PDF version" permission
+    And I should have the "access print" permission
+    And I should have the "access send by email" permission
+    And I should have the "post comments" permission
+    And I should have the "search content" permission
+    And I should have the "use text format comments" permission
 
-    Examples:
-      | role               | permissions                                                                                                                   |
-      | authenticated user | access administration menu, access comments, access content, access PDF version, access print, access send by email           |
-      | authenticated user | post comments, search content, use text format comments                                                                       |
-      | editor             | access administration menu, access comments, access content overview, access content, access contextual links                 |
-      | editor             | access PDF version, access print, access send by email, access site in maintenance mode, administer comments                  |
-      | editor             | administer nodes, create events content, create news content, create page content, delete any events content                  |
-      | editor             | delete any news content, delete any page content, delete own events content, delete own news content, delete own page content |
-      | editor             | edit any events content, edit any news content,  edit any page content, edit own comments, edit own events content            |
-      | editor             | edit own news content,  edit own page content, flush caches, post comments, search content, skip comment approval             |
-      | editor             | use text format comments, use text format webedit, view the administration theme                                              |
-
+  @api
+  Scenario: Editor Permissions
+    Given I am logged in as a user with the "editor" role
+    Then I should have the "access administration menu" permission
+    And I should have the "access comments" permission
+    And I should have the "access content overview" permission
+    And I should have the "access content" permission
+    And I should have the "access contextual links" permission
+    And I should have the "access PDF version" permission
+    And I should have the "access print" permission
+    And I should have the "access send by email" permission
+    And I should have the "access site in maintenance mode" permission
+    And I should have the "administer comments" permission
+    And I should have the "administer nodes" permission
+    And I should have the "create events content" permission
+    And I should have the "create news content" permission
+    And I should have the "create page content" permission
+    And I should have the "delete any events content" permission
+    And I should have the "delete any news content" permission
+    And I should have the "delete any page content" permission
+    And I should have the "delete own events content" permission
+    And I should have the "delete own news content" permission
+    And I should have the "delete own page content" permission
+    And I should have the "edit any events content" permission
+    And I should have the "edit any news content" permission
+    And I should have the "edit any page content" permission
+    And I should have the "edit own comments" permission
+    And I should have the "edit own events content" permission
+    And I should have the "edit own news content" permission
+    And I should have the "edit own page content" permission
+    And I should have the "flush caches" permission
+    And I should have the "post comments" permission
+    And I should have the "search content" permission
+    And I should have the "skip comment approval" permission
+    And I should have the "use text format comments" permission
+    And I should have the "use text format webedit" permission
+    And I should have the "view the administration theme" permission
   @api
   Scenario: Admin Permissions
     Given I am logged in as a user with the "administrator" role
