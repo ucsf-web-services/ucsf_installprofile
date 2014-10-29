@@ -10,15 +10,12 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 /**
  * Features context.
  */
-class FeatureContext extends DrupalContext
-{
-
+class FeatureContext extends DrupalContext {
 
   /**
    * @BeforeSuite
    */
-  public static function prepare(SuiteEvent $event)
-  {
+  public static function prepare(SuiteEvent $event) {
     /*
      * Kludge!
      * see https://www.drupal.org/node/2023625#comment-8607207
@@ -30,8 +27,7 @@ class FeatureContext extends DrupalContext
   /**
    * @Given /^I am on the home page$/
    */
-  public function iAmOnTheHomePage()
-  {
+  public function iAmOnTheHomePage() {
     $this->assertHomepage();
   }
 
@@ -39,7 +35,7 @@ class FeatureContext extends DrupalContext
    * @Then /^I should have the "([^"]*)" permission$/
    */
   public function iShouldHaveThePermission($permission) {
-    $user = null;
+    $user = NULL;
     if ($this->user) {
       $user = user_load($this->user->uid);
     }
@@ -65,7 +61,7 @@ class FeatureContext extends DrupalContext
    * @Then /^I should not have the "([^"]*)" permission$/
    */
   public function iShouldNotHaveThePermission($permission) {
-    $user = null;
+    $user = NULL;
     if ($this->user) {
       $user = user_load($this->user->uid);
     }
@@ -111,4 +107,46 @@ class FeatureContext extends DrupalContext
     // there should only be disabled perms left at this point
     assertEquals($disabled_perms, $delta);
   }
+
+  /**
+   * @Given /^I resize the window to "(\d+)" by "(\d+)"$/
+   */
+  public function iResizeWindow($width, $height) {
+    $this->getSession()->resizeWindow((int) $width, (int) $height);
+    $foo =1;
+  }
+
+  /**
+   * @Then /^I should see the "([^"]*)" region$/
+   */
+  public function iShouldSeeTheRegion($region) {
+    $regionObj = $this->getRegion($region);
+    if (!$regionObj->isVisible()) {
+      throw new \Exception(sprintf('Region "%s" on the page %s is not visible.', $region, $this->getSession()
+            ->getCurrentUrl()));
+    }
+  }
+
+  /**
+   * @Given /^I should not see the "([^"]*)" region$/
+   */
+  public function iShouldNotSeeTheRegion($region) {
+    $regionObj = $this->getRegion($region);
+    if ($regionObj->isVisible()) {
+      throw new \Exception(sprintf('Region "%s" on the page %s is visible.', $region, $this->getSession()
+            ->getCurrentUrl()));
+    }
+  }
+
+  /**
+   * @Given /^I should see the mobile navigation hamburger$/
+   */
+  public function iShouldSeeTheMobileNavigationHamburger() {
+    $elem = $this->getSession()->getPage()->find('css', '#mobile-link');
+    if (! $elem->isVisible()) {
+      throw new \Exception(sprintf('Mobile navigation hamburger on the page %s is not visible.',
+        $this->getSession()->getCurrentUrl()));
+    }
+  }
+
 }
