@@ -7,13 +7,13 @@ Windows-users may need to further investigate the internet for their OS-specific
 
 ## Prerequisites
 
-At the very least, you must have PHP 5.3.5+ and the Firefox browser installed in order to run these tests.
+At the very least, you must have PHP 5.4+ and the Firefox browser installed in order to run these tests.
 
 1. Install the Oracle JDK.
 
 2. Install Composer. See http://getcomposer.org/doc/00-intro.md for instructions.
 
-3. Install Behat and Co. (Selenium, PhantomJS) via Composer.
+3. Install Behat and Co. (Selenium) via Composer.
 
     ```bash
     cd tests/behat
@@ -35,29 +35,6 @@ At the very least, you must have PHP 5.3.5+ and the Firefox browser installed in
     ```bash
     cd tests/behat
     bin/behat -p browser
-    ```
-
-## Run Tests in a headless web-browser
-
-1. Run Selenium as hub
-
-    ```bash
-    cd tests/behat
-    java -jar bin/selenium-server.jar -role hub
-    ```
-
-2. Run PhantomJS and register it with Selenium
-
-    ```bash
-    cd tests/behat
-    bin/phantomjs --webdriver=8080 --webdriver-selenium-grid-hub=http://127.0.0.1:4444
-    ```
-
-3. Run Behat tests with the "headless" profile
-
-    ```bash
-    cd tests/behat
-    bin/behat -p headless
     ```
 
 ## Troubleshooting

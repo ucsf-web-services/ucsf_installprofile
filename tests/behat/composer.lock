@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "051762b1ee46481e08cb05798f7c2380",
+    "hash": "78518294da38ea45e204a90b0a8c3bca",
     "packages": [
         {
             "name": "appium/php-client",
@@ -954,47 +954,6 @@
                 "webtest"
             ],
             "time": "2014-05-12 21:03:05"
-        },
-        {
-            "name": "jakoch/phantomjs-installer",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jakoch/phantomjs-installer.git",
-                "reference": "9a73992867072a79fe93d91029c73436ea2f56f9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jakoch/phantomjs-installer/zipball/9a73992867072a79fe93d91029c73436ea2f56f9",
-                "reference": "9a73992867072a79fe93d91029c73436ea2f56f9",
-                "shasum": ""
-            },
-            "require": {
-                "ext-openssl": "*"
-            },
-            "type": "custom-installer",
-            "autoload": {
-                "psr-0": {
-                    "PhantomInstaller\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jens-André Koch",
-                    "email": "jakoch@web.de"
-                }
-            ],
-            "description": "A Composer package which installs the PhantomJS binary (Linux, Windows, Mac) into `/bin` of your project.",
-            "keywords": [
-                "binaries",
-                "headless",
-                "phantomjs"
-            ],
-            "time": "2014-08-28 16:13:44"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -2384,8 +2343,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/drupal-extension": 0,
-        "jakoch/phantomjs-installer": 20
+        "drupal/drupal-extension": 0
     },
     "prefer-stable": false,
     "platform": [],

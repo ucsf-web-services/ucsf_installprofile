@@ -17,7 +17,6 @@ env:
   - BEHAT_PROFILE='win8ie11'
   - BEHAT_PROFILE='osxchrome'
   - BEHAT_PROFILE='osxsafari'
-  - BEHAT_PROFILE='phantomjs'
 
 matrix:
   fast_finish: true
@@ -25,7 +24,7 @@ matrix:
   - php: 5.5
   include:
   - php: 5.5
-    env: BEHAT_PROFILE="phantomjs"
+    env: BEHAT_PROFILE="default"
 
 mysql:
   username: root
@@ -64,16 +63,8 @@ before_script:
 - mysql -e 'CREATE DATABASE starterkit'
 
 # start Sauce Connect
-- if [ "$BEHAT_PROFILE" != "phantomjs" ]; then (${TRAVIS_BUILD_DIR}/tests/behat/bin/sauce_connect --readyfile /tmp/scready.tmp --tunnel-identifier $TRAVIS_JOB_NUMBER $SAUCE_USERNAME $SAUCE_ACCESS_KEY > /dev/null &); fi
-- if [ "$BEHAT_PROFILE" != "phantomjs" ]; then (while [ ! -f /tmp/scready.tmp ]; do(sleep .5) done); fi
-
-# start Selenium as hub server
-- if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (java -jar ${TRAVIS_BUILD_DIR}/tests/behat/bin/selenium-server.jar -role hub > /dev/null &); fi
-- if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (until netstat -an 2>/dev/null | grep '4444.*LISTEN'; do true; done); fi
-
-# start PhantomJS
-- if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (phantomjs --webdriver=8080 --webdriver-selenium-grid-hub=http://127.0.0.1:4444 --ignore-ssl-errors=true > /dev/null &); fi
-- if [ "$BEHAT_PROFILE" = "phantomjs" ]; then (until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do true; done); fi
+- ${TRAVIS_BUILD_DIR}/tests/behat/bin/sauce_connect --readyfile /tmp/scready.tmp --tunnel-identifier $TRAVIS_JOB_NUMBER $SAUCE_USERNAME $SAUCE_ACCESS_KEY > /dev/null &
+- while [ ! -f /tmp/scready.tmp ]; do(sleep .5) done
 
 script:
 

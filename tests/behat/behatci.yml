@@ -116,13 +116,3 @@ osxsafari:
           name: "osxsafari"
           platform: "OS X 10.9"
           version: 7
-
-
-# Use this profile to run phantomjs tests
-phantomjs:
-  extensions:
-    Behat\MinkExtension\Extension:
-      default_session: selenium2
-      javascript_session: selenium2
-      selenium2:
-        wd_host: "http://localhost:8080/wd/hub"
