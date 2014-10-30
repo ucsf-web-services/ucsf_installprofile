@@ -147,7 +147,7 @@ projects[libraries][version] = "2.2"
 projects[libraries][type] = "module"
 
 projects[link][subdir] = "contrib"
-projects[link][version] = "1.2"
+projects[link][version] = "1.3"
 projects[link][type] = "module"
 
 projects[menu_attributes][subdir] = "contrib"
