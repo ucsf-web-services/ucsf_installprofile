@@ -24,6 +24,7 @@ default:
         Sidebar First: ".sidebar-first"
         Sidebar Second: ".sidebar-second"
         Highlighted: ".drupal-messages"
+        Page Container: ".page-container"
       selectors:
         message_selector: '.messages'
         error_message_selector: '.messages.error'
