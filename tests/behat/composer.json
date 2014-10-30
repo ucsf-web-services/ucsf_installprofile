@@ -3,19 +3,10 @@
         "phpunit/phpunit": "3.7.*",
         "drupal/drupal-extension": "1.0.*@stable",
         "sauce/connect": ">=3.0",
-        "emagister/selenium-server": "2.*",
-        "jakoch/phantomjs-installer": "dev-master"
+        "emagister/selenium-server": "2.*"
     },
     "minimum-stability": "dev",
     "config": {
         "bin-dir": "bin/"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "PhantomInstaller\\Installer::installPhantomJS"
-        ],
-        "post-update-cmd": [
-            "PhantomInstaller\\Installer::installPhantomJS"
-        ]
     }
 }
