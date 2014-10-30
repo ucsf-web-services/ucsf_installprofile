@@ -24,6 +24,10 @@ default:
         Sidebar First: ".sidebar-first"
         Sidebar Second: ".sidebar-second"
         Highlighted: ".drupal-messages"
+      selectors:
+        message_selector: '.messages'
+        error_message_selector: '.messages.error'
+        success_message_selector: '.messages.status'
   filters:
     # don't process scenarios and features tagged as "ignored"
     tags: '~@ignored'
