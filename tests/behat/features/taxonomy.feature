@@ -31,18 +31,6 @@ Feature: Taxonomy
     Then I should see the heading "Cole Hall"
 
   @api
-  Scenario: Apply location term to event node
-    Given "Event Location" terms:
-      | name        |
-      | Cole Hall   |
-    And I am viewing an "Event" node:
-      | title | My test Event |
-      | body  | A placeholder |
-      | location | Cole Hall |
-    When I visit "event-location/cole-hall"
-    Then I should see the link "My test Event"
-
-  @api
   Scenario: Create an event node with location term
     Given "Event Location" terms:
       | name        |
