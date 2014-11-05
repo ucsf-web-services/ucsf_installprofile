@@ -149,4 +149,12 @@ class FeatureContext extends DrupalContext {
     }
   }
 
+  /**
+   * @Given /^I should see today\'s date formatted like "([^"]*)" in the "([^"]*)" region$/
+   */
+  public function iShouldSeeTodaySDateInTheRegion($date_format, $region) {
+    $text = date($date_format);
+    $this->assertRegionText($text, $region);
+  }
+
 }
