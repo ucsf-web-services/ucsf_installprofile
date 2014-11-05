@@ -5,7 +5,7 @@ Feature:
 
   @api
   Scenario: Create an News node
-    And  I am logged in as a user with the "administrator" role
+    Given I am logged in as a user with the "administrator" role
     And I am on "node/add"
     And I follow "News"
     And I enter "My test News" for "title"
@@ -18,10 +18,14 @@ Feature:
 
   @api
   Scenario: News View
-    Given "News" nodes:
-      | title                 | body                    |
-      | Yet another news Item | this is some dummy text |
+    Given I am logged in as a user with the "administrator" role
+    And I am on "node/add"
+    And I follow "News"
+    And I enter "Yet another news Item" for "title"
+    And I select "Plain text" from "body[und][0][format]"
+    And I enter "Lorem Ipsum" for "body[und][0][value]"
+    And I press "Save"
     When I visit "news"
     Then I should see the link "Yet another news Item" in the "Page Container" region
-    When I follow "Yet another news Item"
+    And I follow "Yet another news Item"
     Then I should be on "news/yet-another-news-item"
