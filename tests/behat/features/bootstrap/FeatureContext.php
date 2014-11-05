@@ -157,4 +157,17 @@ class FeatureContext extends DrupalContext {
     $this->assertRegionText($text, $region);
   }
 
+  /**
+   * @Then /^I should see a slideshow in the "([^"]*)" region$/
+   */
+  public function iShouldSeeASlideshowInTheRegion($region) {
+    $regionObj = $this->getRegion($region);
+    $elem = $regionObj->find('css', '.flexslider');
+    if (! $elem) {
+      throw new \Exception(sprintf('No slideshow found in "%s" region',
+        $region));
+    }
+  }
+
+
 }
