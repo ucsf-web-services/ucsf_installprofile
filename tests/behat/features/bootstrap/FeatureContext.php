@@ -149,4 +149,25 @@ class FeatureContext extends DrupalContext {
     }
   }
 
+  /**
+   * @Given /^I should see today\'s date formatted like "([^"]*)" in the "([^"]*)" region$/
+   */
+  public function iShouldSeeTodaySDateInTheRegion($date_format, $region) {
+    $text = date($date_format);
+    $this->assertRegionText($text, $region);
+  }
+
+  /**
+   * @Then /^I should see a slideshow in the "([^"]*)" region$/
+   */
+  public function iShouldSeeASlideshowInTheRegion($region) {
+    $regionObj = $this->getRegion($region);
+    $elem = $regionObj->find('css', '.flexslider');
+    if (! $elem) {
+      throw new \Exception(sprintf('No slideshow found in "%s" region',
+        $region));
+    }
+  }
+
+
 }

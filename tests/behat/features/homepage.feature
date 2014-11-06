@@ -11,3 +11,10 @@ Feature: Homepage
 
   Scenario: Main Content
     Then I should see "Cras justo odio, dapibus ac facilisis in, egestas eget quam." in the "Content" region
+
+  Scenario: Blocks In sidebars
+    Then I should see the heading "Callout Box" in the "Sidebar Second" region
+    And I should see the heading "News" in the "Sidebar Second" region
+
+  Scenario: Slideshow present
+    Then I should see a slideshow in the "Page Container" region
