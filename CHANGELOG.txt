@@ -6,7 +6,7 @@
 - Test coverage for News content type #23
 - Test coverage for Events content type #24
 - Updated Image URL Formatter module to version 7.x-1.4 #48
-- Updated UCSF Images module to version 7.x-2.3 #50
+- Updated UCSF Images module to version 7.x-2.4 #52
 - Updated Drupal core to version 7.32 #53
 - Enabled admin toolbar for Authenticated User role during installation #57
 - Test coverage for navigation/menus #60
