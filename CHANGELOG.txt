@@ -1,3 +1,19 @@
+7.x-1.3
+-------
+- Test coverage for user roles/permissions #20
+- Test coverage for taxonomy #21
+- Test coverage for contact form #22
+- Test coverage for News content type #23
+- Test coverage for Events content type #24
+- Updated Image URL Formatter module to version 7.x-1.4 #48
+- Updated UCSF Images module to version 7.x-2.3 #50
+- Updated Drupal core to version 7.32 #53
+- Enabled admin toolbar for Authenticated User role during installation #57
+- Test coverage for navigation/menus #60
+- Updated Webform module to version 7.x-3.21 #63
+- Updated Link module to version 7.x-1.3 #64
+- Updated UCSF Webedit module to version 7.x-1.0-beta15 #69
+
 7.x-1.2
 -------
 - Added contribution guidelines. #25
