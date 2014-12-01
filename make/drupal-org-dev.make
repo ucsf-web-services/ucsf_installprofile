@@ -90,6 +90,12 @@ projects[ucsf_base][download][branch] = "7.x-1.x"
 projects[ucsf_base][type] = "theme"
 projects[ucsf_base][options][working-copy] = TRUE
 
+projects[ucsf_base][download][type] = "git"
+projects[ucsf_base][download][url] = "https://github.com/ucsf-drupal/ucsf_chi.git"
+;projects[ucsf_base][download][tag] = "7.x-1.0"
+projects[ucsf_base][download][branch] = "7.x-1.x"
+projects[ucsf_base][type] = "theme"
+
 ; Contributed modules
 ; ----------------------------------------------------------------
 
