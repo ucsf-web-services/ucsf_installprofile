@@ -94,7 +94,7 @@ projects[ucsf_base][options][working-copy] = TRUE
 ; ----------------------------------------------------------------
 
 projects[ctools][subdir] = "contrib"
-projects[ctools][version] = "1.4"
+projects[ctools][version] = "1.5"
 projects[ctools][type] = "module"
 
 projects[pasteformat][subdir] = "contrib"
