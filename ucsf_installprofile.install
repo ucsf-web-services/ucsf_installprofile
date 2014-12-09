@@ -163,12 +163,13 @@ function _ucsf_installprofile_enable_theme(){
   variable_set('admin_theme', $admin_theme);
   variable_set('node_admin_theme', '1');
 
-  // Enable base theme
-  $theme = 'ucsf_base';
-  theme_enable(array($theme));
-  variable_set('theme_default', $theme);
-  theme_enable(array('teal'));
-  theme_enable(array('orange'));
+  // Enable ucsf_base and its sub-themes
+  theme_enable(array('ucsf_base', 'teal', 'orange', 'ucsf_chi'));
+
+  // set ucsf_base as default theme
+  variable_set('theme_default', 'ucsf_base');
+
+  // disable old default theme
   theme_disable(array('bartik'));
 }
 
@@ -900,21 +901,16 @@ function _ucsf_installprofile_misc_config(){
   // [ST 2014/06/19]
   variable_set('jquery_update_jquery_version', '1.5');
 
-  // Theme
-  $ucsf_base_settings = variable_get('theme_ucsf_base_settings');
-  $ucsf_base_settings['mothership_classes_field_label'] = 0;
-  variable_set('theme_ucsf_base_settings', $ucsf_base_settings);
-
-  $orange_settings = variable_get('theme_orange_settings');
-  $orange_settings['mothership_classes_field_label'] = 0;
-  variable_set('theme_orange_settings', $orange_settings);
-
-  $teal_settings = variable_get('theme_teal_settings');
-  $teal_settings['mothership_classes_field_label'] = 0;
-  variable_set('theme_teal_settings', $teal_settings);
+  // Theme configuration
+  $themes =  array('ucsf_base', 'teal', 'orange', 'ucsf_chi');
+  foreach ($themes as $theme) {
+    $key = "theme_${theme}_settings";
+    $theme_settings = variable_get($key);
+    $theme_settings['mothership_classes_field_label'] = 0;
+    variable_set($key, $theme_settings);
+  }
 
   registry_rebuild();
-
 }
 
 function _ucsf_installprofile_importviews(){
@@ -1785,7 +1781,7 @@ function _ucsf_installprofile_menus(){
 }
 
 function _ucsf_installprofile_blocks(){
-  $default_themes = array('ucsf_base', 'orange', 'teal');
+  $default_themes = array('ucsf_base', 'teal', 'orange', 'ucsf_chi');
   $blocks = array(
     array(
       'module' => 'menu',
