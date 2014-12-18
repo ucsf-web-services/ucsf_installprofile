@@ -183,6 +183,10 @@ projects[field_collection][subdir] = "contrib"
 projects[field_collection][version] = "1.0-beta5"
 projects[field_collection][type] = "module"
 
+projects[node_edit_protection][subdir] = "contrib"
+projects[node_edit_protection][version] = "1.1"
+projects[node_edit_protection][type] = "module"
+
 projects[flexslider][subdir] = "contrib"
 projects[flexslider][version] = "1.0-rc3"
 projects[flexslider][type] = "module"
@@ -310,11 +314,6 @@ projects[ckeditor_link][subdir] = "patched"
 projects[ckeditor_link][version] = "2.3"
 projects[ckeditor_link][type] = "module"
 projects[ckeditor_link][patch][] = "https://drupal.org/files/issues/ckeditor_link-autocomplete_on_return_validate-2178379.patch"
-
-projects[node_edit_protection][subdir] = "patched"
-projects[node_edit_protection][version] = "1.0"
-projects[node_edit_protection][type] = "module"
-projects[node_edit_protection][patch][] = "https://drupal.org/files/issues/wysiwyg_protection-1276370-1.patch"
 
 ; Contributed themes
 ; ----------------------------------------------------------------
