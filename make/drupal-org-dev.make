@@ -259,7 +259,7 @@ projects[token][type] = "module"
 
 ;required by picture and ucsf_starterkit_inmages module
 projects[breakpoints][subdir] = "contrib"
-projects[breakpoints][version] = "1.1"
+projects[breakpoints][version] = "1.3"
 projects[breakpoints][type] = "module"
 
 ; development snapshot 7.x-1.4+70-dev
