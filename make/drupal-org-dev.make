@@ -131,10 +131,6 @@ projects[date][subdir] = "contrib"
 projects[date][version] = "2.8"
 projects[date][type] = "module"
 
-projects[admin_menu][subdir] = "contrib"
-projects[admin_menu][version] = "3.0-rc4"
-projects[admin_menu][type] = "module"
-
 projects[admin_views][subdir] = "contrib"
 projects[admin_views][version] = "1.3"
 projects[admin_views][type] = "module"
@@ -314,6 +310,11 @@ projects[ckeditor_link][subdir] = "patched"
 projects[ckeditor_link][version] = "2.3"
 projects[ckeditor_link][type] = "module"
 projects[ckeditor_link][patch][] = "https://drupal.org/files/issues/ckeditor_link-autocomplete_on_return_validate-2178379.patch"
+
+projects[admin_menu][subdir] = "patched"
+projects[admin_menu][version] = "3.0-rc4"
+projects[admin_menu][type] = "module"
+projects[admin_menu][patch][] = "https://www.drupal.org/files/issues/admin_menu-correctly_display-2360249-74.patch"
 
 ; Contributed themes
 ; ----------------------------------------------------------------
