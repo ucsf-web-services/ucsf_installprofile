@@ -103,5 +103,8 @@ script:
 # create new site, stubbing sendmail path with true to prevent delivery errors and manually
 - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes site-install ucsf_installprofile --db-url=mysql://root:@127.0.0.1/starterkit
 
+# disable dblog
+- drush pm-disable dblog --yes
+
 # run behat tests
 - ${TRAVIS_BUILD_DIR}/tests/behat/bin/behat -c ${TRAVIS_BUILD_DIR}/tests/behat/behatci.yml -p ${BEHAT_PROFILE}
