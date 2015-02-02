@@ -100,7 +100,7 @@ projects[ucsf_chi][type] = "theme"
 ; ----------------------------------------------------------------
 
 projects[ctools][subdir] = "contrib"
-projects[ctools][version] = "1.5"
+projects[ctools][version] = "1.6"
 projects[ctools][type] = "module"
 
 projects[pasteformat][subdir] = "contrib"
