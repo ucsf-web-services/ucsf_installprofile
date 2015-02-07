@@ -168,7 +168,7 @@ projects[link][version] = "1.3"
 projects[link][type] = "module"
 
 projects[menu_attributes][subdir] = "contrib"
-projects[menu_attributes][version] = "1.0-rc2"
+projects[menu_attributes][version] = "1.0-rc3"
 projects[menu_attributes][type] = "module"
 
 projects[module_filter][subdir] = "contrib"
