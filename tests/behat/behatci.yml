@@ -93,7 +93,7 @@ win7ie10:
           sauce_labs:
             browser: "internet explorer"
             capabilities:
-              name:win7ie10"
+              name: "win7ie10"
               platform: "Windows 7"
               version: 10
 
