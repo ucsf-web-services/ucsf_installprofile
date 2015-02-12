@@ -1,6 +1,10 @@
 <?php
-use Behat\Behat\Exception\PendingException;
-use Drupal\DrupalExtension\Context\DrupalContext;
+
+use Behat\Behat\Tester\Exception\PendingException;
+use Drupal\DrupalExtension\Context\RawDrupalContext;
+use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Event\SuiteEvent;
 
 
@@ -10,7 +14,17 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 /**
  * Features context.
  */
-class FeatureContext extends DrupalContext {
+class FeatureContext implements Context, SnippetAcceptingContext {
+
+  /**
+   * Initializes context.
+   *
+   * Every scenario gets its own context instance.
+   * You can also pass arbitrary arguments to the
+   * context constructor through behat.yml.
+   */
+  public function __construct() {
+  }
 
   /**
    * @BeforeSuite
@@ -168,6 +182,4 @@ class FeatureContext extends DrupalContext {
         $region));
     }
   }
-
-
 }
