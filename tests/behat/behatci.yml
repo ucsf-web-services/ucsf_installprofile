@@ -1,7 +1,15 @@
 # Use this profile to run tests on Sauce against the Travis-CI instance
 default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       base_url: http://localhost
       default_session: saucelabs
       javascript_session: saucelabs
@@ -12,7 +20,7 @@ default:
           name: "win7ff"
           platform: "Windows 7"
           version: 33
-    Drupal\DrupalExtension\Extension:
+    Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drupal'
       drupal:
@@ -38,7 +46,7 @@ default:
 # Run tests with winxp ie7
 winxpie7:
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       saucelabs:
         browser: "internet explorer"
         capabilities:
@@ -49,7 +57,7 @@ winxpie7:
 # Run tests with win7 ie8
 win7ie8:
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       saucelabs:
         browser: "internet explorer"
         capabilities:
@@ -60,7 +68,7 @@ win7ie8:
 # Run tests with win7 ie9
 win7ie9:
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       saucelabs:
         browser: "internet explorer"
         capabilities:
@@ -71,7 +79,7 @@ win7ie9:
 # Run tests with win7 ie10
 win7ie10:
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       saucelabs:
         browser: "internet explorer"
         capabilities:
@@ -82,7 +90,7 @@ win7ie10:
 # Run tests with win8 ie11
 win8ie11:
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       saucelabs:
         browser: "internet explorer"
         capabilities:
@@ -93,7 +101,7 @@ win8ie11:
 # Run tests with osx firefox
 osxfirefox:
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       saucelabs:
         capabilities:
           name: "osxfirefox"
@@ -103,7 +111,7 @@ osxfirefox:
 # Run tests with osx chrome
 osxchrome:
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       saucelabs:
         browser: "chrome"
         capabilities:
@@ -114,7 +122,7 @@ osxchrome:
 # Run tests with osx safari
 osxsafari:
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       saucelabs:
         browser: "safari"
         capabilities:
