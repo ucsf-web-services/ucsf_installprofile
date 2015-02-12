@@ -38,7 +38,7 @@ Feature: Permissions
     And I should see the link "Configuration" in the "Admin Menu" region
     And I should see the link "Reports" in the "Admin Menu" region
 
-  @api
+  @api @ignored
   Scenario: Anonymous Permissions
     Given I am an anonymous user
     Then I should have the "access content" permission
@@ -49,7 +49,7 @@ Feature: Permissions
     And I should have the "search content" permission
     And I should have the "use text format comments" permission
 
-  @api
+  @api @ignored
   Scenario: Authenticated User Permissions
     Given I am logged in as a user with the "authenticated user" role
     Then I should have the "access administration menu" permission
@@ -62,7 +62,7 @@ Feature: Permissions
     And I should have the "search content" permission
     And I should have the "use text format comments" permission
 
-  @api
+  @api @ignored
   Scenario: Editor Permissions
     Given I am logged in as a user with the "editor" role
     Then I should have the "access administration menu" permission
@@ -99,7 +99,8 @@ Feature: Permissions
     And I should have the "use text format comments" permission
     And I should have the "use text format webedit" permission
     And I should have the "view the administration theme" permission
-  @api
+
+  @api @ignored
   Scenario: Admin Permissions
     Given I am logged in as a user with the "administrator" role
     Then I should have full permissions
