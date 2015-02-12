@@ -1,11 +1,13 @@
 <?php
 
+use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
+use Drupal\DrupalExtension\Context\MinkContext;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Behat\Event\SuiteEvent;
 
 
 require_once 'PHPUnit/Autoload.php';
@@ -14,7 +16,7 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 /**
  * Features context.
  */
-class FeatureContext implements Context, SnippetAcceptingContext {
+class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext {
 
   /**
    * Initializes context.
@@ -29,7 +31,7 @@ class FeatureContext implements Context, SnippetAcceptingContext {
   /**
    * @BeforeSuite
    */
-  public static function prepare(SuiteEvent $event) {
+  public static function prepare(BeforeSuiteScope $scope) {
     /*
      * Kludge!
      * see https://www.drupal.org/node/2023625#comment-8607207
@@ -168,7 +170,13 @@ class FeatureContext implements Context, SnippetAcceptingContext {
    */
   public function iShouldSeeTodaySDateInTheRegion($date_format, $region) {
     $text = date($date_format);
-    $this->assertRegionText($text, $region);
+    $regionObj = $this->getRegion($region);
+
+    // Find the text within the region
+    $regionText = $regionObj->getText();
+    if (strpos($regionText, $text) === FALSE) {
+      throw new \Exception(sprintf("The text '%s' was not found in the region '%s' on the page %s", $text, $region, $this->getSession()->getCurrentUrl()));
+    }
   }
 
   /**
@@ -181,5 +189,26 @@ class FeatureContext implements Context, SnippetAcceptingContext {
       throw new \Exception(sprintf('No slideshow found in "%s" region',
         $region));
     }
+  }
+
+  /**
+   * Return a region from the current page.
+   *
+   * @throws \Exception
+   *   If region cannot be found.
+   *
+   * @param string $region
+   *   The machine name of the region to return.
+   *
+   * @return \Behat\Mink\Element\NodeElement
+   */
+  public function getRegion($region) {
+    $session = $this->getSession();
+    $regionObj = $session->getPage()->find('region', $region);
+    if (!$regionObj) {
+      throw new \Exception(sprintf('No region "%s" found on the page %s.', $region, $session->getCurrentUrl()));
+    }
+
+    return $regionObj;
   }
 }
