@@ -132,6 +132,11 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
    *   The machine name of the region to return.
    *
    * @return \Behat\Mink\Element\NodeElement
+   *
+   * @see \Drupal\DrupalExtension\Context\MinkContext::getRegion()
+   *
+   * Copied verbatim from the MinkContext's method b/c there's no way to call it anymore.
+   * @link https://www.drupal.org/node/2370729#comment-9320477
    */
   public function getRegion($region) {
     $session = $this->getSession();
