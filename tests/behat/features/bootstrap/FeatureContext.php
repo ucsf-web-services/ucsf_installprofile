@@ -49,6 +49,9 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
 
   /**
    * @Then /^I should have the "([^"]*)" permission$/
+   *
+   * @depecated
+   * @todo Broken in BH3 b/c we can't access current user anymore. Find a suitable replacement [ST 2015/02/12].
    */
   public function iShouldHaveThePermission($permission) {
     $user = NULL;
@@ -60,6 +63,9 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
 
   /**
    * @Then /^I should have the "([^"]*)" permissions$/
+   *
+   * @depecated
+   * @todo Broken in BH3 b/c we can't access current user anymore. Find a suitable replacement [ST 2015/02/12].
    */
   public function iShouldHaveThePermissions($permissions) {
     $user = NULL;
@@ -75,6 +81,9 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
 
   /**
    * @Then /^I should not have the "([^"]*)" permission$/
+   *
+   * @depecated
+   * @todo Broken in BH3 b/c we can't access current user anymore. Find a suitable replacement [ST 2015/02/12].
    */
   public function iShouldNotHaveThePermission($permission) {
     $user = NULL;
@@ -95,6 +104,9 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
 
   /**
    * @Then /^I should have full permissions$/
+   *
+   * @depecated
+   * @todo Broken in BH3 b/c we can't access current user anymore. Find a suitable replacement [ST 2015/02/12].
    */
   public function iShouldHaveFullPermissions() {
 
