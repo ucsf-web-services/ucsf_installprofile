@@ -8,6 +8,8 @@ default:
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\DrushContext
+      filters:
+        tags: "~@ignore"
   extensions:
     Behat\MinkExtension:
       base_url: http://localhost
@@ -42,8 +44,6 @@ default:
         message_selector: '.messages'
         error_message_selector: '.messages.error'
         success_message_selector: '.messages.status'
-  filters:
-    tags: "~@ignore"
 
 # Run tests with winxp ie7
 winxpie7:
