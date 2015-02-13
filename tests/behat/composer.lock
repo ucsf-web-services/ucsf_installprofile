@@ -1561,12 +1561,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jlipps/sausage.git",
-                "reference": "33562f487a8a38813a354d6de4b12093abb7e08b"
+                "reference": "3af661e719195b93df4ad0f2660ffea7caee9956"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jlipps/sausage/zipball/33562f487a8a38813a354d6de4b12093abb7e08b",
-                "reference": "33562f487a8a38813a354d6de4b12093abb7e08b",
+                "url": "https://api.github.com/repos/jlipps/sausage/zipball/3af661e719195b93df4ad0f2660ffea7caee9956",
+                "reference": "3af661e719195b93df4ad0f2660ffea7caee9956",
                 "shasum": ""
             },
             "require": {
@@ -1575,6 +1575,9 @@
                 "php": ">=5.4.0",
                 "phpunit/phpunit-selenium": ">=1.4.1",
                 "sauce/sausage-installer": ">=0.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.3.*"
             },
             "suggest": {
                 "sauce/connect": ">=3.1"
@@ -1611,7 +1614,7 @@
                 "selenium",
                 "testing"
             ],
-            "time": "2015-02-11 16:12:44"
+            "time": "2015-02-13 00:48:36"
         },
         {
             "name": "sauce/sausage-installer",
