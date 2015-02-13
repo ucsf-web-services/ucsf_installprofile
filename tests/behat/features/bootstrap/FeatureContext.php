@@ -1,7 +1,13 @@
 <?php
-use Behat\Behat\Exception\PendingException;
-use Drupal\DrupalExtension\Context\DrupalContext;
-use Behat\Behat\Event\SuiteEvent;
+
+use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
+use Drupal\DrupalExtension\Context\RawDrupalContext;
+use Drupal\DrupalExtension\Context\MinkContext;
+use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
 
 
 require_once 'PHPUnit/Autoload.php';
@@ -10,12 +16,22 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 /**
  * Features context.
  */
-class FeatureContext extends DrupalContext {
+class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext {
+
+  /**
+   * Initializes context.
+   *
+   * Every scenario gets its own context instance.
+   * You can also pass arbitrary arguments to the
+   * context constructor through behat.yml.
+   */
+  public function __construct() {
+  }
 
   /**
    * @BeforeSuite
    */
-  public static function prepare(SuiteEvent $event) {
+  public static function prepare(BeforeSuiteScope $scope) {
     /*
      * Kludge!
      * see https://www.drupal.org/node/2023625#comment-8607207
@@ -32,80 +48,11 @@ class FeatureContext extends DrupalContext {
   }
 
   /**
-   * @Then /^I should have the "([^"]*)" permission$/
-   */
-  public function iShouldHaveThePermission($permission) {
-    $user = NULL;
-    if ($this->user) {
-      $user = user_load($this->user->uid);
-    }
-    assertTrue(user_access($permission, $user));
-  }
-
-  /**
-   * @Then /^I should have the "([^"]*)" permissions$/
-   */
-  public function iShouldHaveThePermissions($permissions) {
-    $user = NULL;
-    if ($this->user) {
-      $user = user_load($this->user->uid);
-    }
-    $permissions = explode(',', $permissions);
-    foreach ($permissions as $permission) {
-      assertTrue(user_access(trim($permission), $user),
-        sprintf("The current user does not have the %s permission.", $permission));
-    }
-  }
-
-  /**
-   * @Then /^I should not have the "([^"]*)" permission$/
-   */
-  public function iShouldNotHaveThePermission($permission) {
-    $user = NULL;
-    if ($this->user) {
-      $user = user_load($this->user->uid);
-    }
-    assertFalse(user_access($permission, $user));
-  }
-
-
-  /**
    * @Then /^I should see the admin menu$/
    */
   public function iShouldSeeTheAdminMenu() {
     $regionObj = $this->getRegion("Admin Menu");
     assertTrue($regionObj->isVisible());
-  }
-
-  /**
-   * @Then /^I should have full permissions$/
-   */
-  public function iShouldHaveFullPermissions() {
-
-    // get all permissions
-    $all_permissions = module_invoke_all('permission');
-    $all_permission_names = array_keys($all_permissions);
-    sort($all_permission_names);
-
-    // get all permissions for the current user's role
-    $role_name = $this->user->role;
-    $role = user_role_load_by_name($role_name);
-    $user_permissions = user_role_permissions(array($role->rid => $role->name));
-    $user_permission_names = array_keys($user_permissions[$role->rid]);
-    sort($user_permission_names);
-
-    // compare all perms with admin perms
-    $delta = array_diff($all_permission_names, $user_permission_names);
-    sort($delta);
-
-    // perms that are assumed to always be disabled
-    $disabled_perms = array();
-
-    // Webedit module yanks this permission on flush caches
-    $disabled_perms[] = 'use text format webedit_paste';
-
-    // there should only be disabled perms left at this point
-    assertEquals($disabled_perms, $delta);
   }
 
   /**
@@ -154,7 +101,13 @@ class FeatureContext extends DrupalContext {
    */
   public function iShouldSeeTodaySDateInTheRegion($date_format, $region) {
     $text = date($date_format);
-    $this->assertRegionText($text, $region);
+    $regionObj = $this->getRegion($region);
+
+    // Find the text within the region
+    $regionText = $regionObj->getText();
+    if (strpos($regionText, $text) === FALSE) {
+      throw new \Exception(sprintf("The text '%s' was not found in the region '%s' on the page %s", $text, $region, $this->getSession()->getCurrentUrl()));
+    }
   }
 
   /**
@@ -169,5 +122,29 @@ class FeatureContext extends DrupalContext {
     }
   }
 
+  /**
+   * Return a region from the current page.
+   *
+   * @throws \Exception
+   *   If region cannot be found.
+   *
+   * @param string $region
+   *   The machine name of the region to return.
+   *
+   * @return \Behat\Mink\Element\NodeElement
+   *
+   * @see \Drupal\DrupalExtension\Context\MinkContext::getRegion()
+   *
+   * Copied verbatim from the MinkContext's method b/c there's no way to call it anymore.
+   * @link https://www.drupal.org/node/2370729#comment-9320477
+   */
+  public function getRegion($region) {
+    $session = $this->getSession();
+    $regionObj = $session->getPage()->find('region', $region);
+    if (!$regionObj) {
+      throw new \Exception(sprintf('No region "%s" found on the page %s.', $region, $session->getCurrentUrl()));
+    }
 
+    return $regionObj;
+  }
 }

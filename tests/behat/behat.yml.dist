@@ -1,15 +1,29 @@
 # default profile
 default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+      filters:
+         # don't process scenarios and features tagged as "ignored"
+         tags: '~@ignored'
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       base_url: http://localhost
       default_session: goutte
-      javascript_session: selenium2
+      javascript_session: browser
       browser_name: "firefox"
-      goutte: ~
-      selenium2:
-        capabilities: { "browser": "firefox", "version": "33" }
-    Drupal\DrupalExtension\Extension:
+      sessions:
+        default:
+          goutte: ~
+        browser:
+          selenium2:
+            capabilities: { "browser": "firefox", "version": "33" }
+    Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drupal'
       drupal:
@@ -29,13 +43,8 @@ default:
         message_selector: '.messages'
         error_message_selector: '.messages.error'
         success_message_selector: '.messages.status'
-  filters:
-    # don't process scenarios and features tagged as "ignored"
-    tags: '~@ignored'
-
-
 # Use this profile to run all tests in Firefox
 browser:
   extensions:
-    Behat\MinkExtension\Extension:
-      default_session: selenium2
+    Behat\MinkExtension:
+      default_session: browser

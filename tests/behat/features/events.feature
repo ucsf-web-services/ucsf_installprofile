@@ -25,7 +25,7 @@ Feature:
 
   @api
   Scenario: Path generation
-    Given "Events" nodes:
+    Given "Events" content:
       | title     | body    |
       | Some Name | Foo bar |
     When I visit "events/some-name"
