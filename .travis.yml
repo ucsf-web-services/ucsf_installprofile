@@ -1,7 +1,6 @@
 language: php
 
 php:
-- 5.4
 - 5.5
 
 env:
@@ -20,11 +19,6 @@ env:
 
 matrix:
   fast_finish: true
-  exclude:
-  - php: 5.5
-  include:
-  - php: 5.5
-    env: BEHAT_PROFILE="default"
 
 mysql:
   username: root
