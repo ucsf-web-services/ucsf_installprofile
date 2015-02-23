@@ -44,7 +44,7 @@ install:
 - composer global require drush/drush:6.*
 
 # install behat and co
-- composer update -d tests/behat
+- composer install -d tests/behat
 
 before_script:
 # enable php-fpm
