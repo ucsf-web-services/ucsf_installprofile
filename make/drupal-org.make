@@ -132,10 +132,6 @@ projects[block_class][subdir] = "contrib"
 projects[block_class][version] = "1.3"
 projects[block_class][type] = "module"
 
-projects[menu_block][subdir] = "contrib"
-projects[menu_block][version] = "2.5"
-projects[menu_block][type] = "module"
-
 projects[chosen][subdir] = "contrib"
 projects[chosen][version] = "2.0-beta4"
 projects[chosen][type] = "module"
@@ -304,6 +300,10 @@ projects[ckeditor_link][version] = "2.3"
 projects[ckeditor_link][type] = "module"
 projects[ckeditor_link][patch][] = "https://drupal.org/files/issues/ckeditor_link-autocomplete_on_return_validate-2178379.patch"
 
+projects[menu_block][subdir] = "patched"
+projects[menu_block][version] = "2.5"
+projects[menu_block][type] = "module"
+projects[menu_block][patch][] = "https://www.drupal.org/files/issues/2421645-menu-tree-prune-tree-parent-item-false_0.patch"
 
 ; Contributed themes
 ; ----------------------------------------------------------------
