@@ -228,10 +228,6 @@ projects[media_vimeo][subdir] = "contrib"
 projects[media_vimeo][version] = "1.0-beta5"
 projects[media_vimeo][type] = "module"
 
-projects[media_youtube][subdir] = "contrib"
-projects[media_youtube][version] = "2.0-rc1"
-projects[media_youtube][type] = "module"
-
 projects[print][subdir] = "contrib"
 projects[print][version] = "1.3"
 projects[print][type] = "module"
@@ -304,6 +300,11 @@ projects[menu_block][subdir] = "patched"
 projects[menu_block][version] = "2.5"
 projects[menu_block][type] = "module"
 projects[menu_block][patch][] = "https://www.drupal.org/files/issues/2421645-menu-tree-prune-tree-parent-item-false_0.patch"
+
+projects[media_youtube][subdir] = "patched"
+projects[media_youtube][version] = "2.0-rc4"
+projects[media_youtube][type] = "module"
+projects[media_youtube][patch][] = "https://www.drupal.org/files/issues/provide-access-wrapper-1823376-6.patch"
 
 ; Contributed themes
 ; ----------------------------------------------------------------
