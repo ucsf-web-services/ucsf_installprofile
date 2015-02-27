@@ -224,6 +224,10 @@ projects[file_entity][subdir] = "contrib"
 projects[file_entity][version] = "2.0-alpha2"
 projects[file_entity][type] = "module"
 
+projects[media][subdir] = "contrib"
+projects[media][version] = "2.0-alpha4"
+projects[media][type] = "module"
+
 projects[media_vimeo][subdir] = "contrib"
 projects[media_vimeo][version] = "1.0-beta5"
 projects[media_vimeo][type] = "module"
@@ -280,15 +284,6 @@ projects[wysiwyg][download][revision] = "cc248294da6c6b8a29064e503f43aabedb14370
 projects[wysiwyg][subdir] = "patched"
 projects[wysiwyg][type] = "module"
 projects[wysiwyg][patch][] = "http://bit.ly/1m7TQK3"
-
-; development snapshot 7.x-2.0-alpha3+29-dev, patched.
-projects[media][download][type] = "git"
-projects[media][download][url] = "http://git.drupal.org/project/media.git"
-projects[media][download][branch] = "7.x-2.x"
-projects[media][download][revision] = "1faada200ab8584bdd6d692ec0d0b568b649081f"
-projects[media][subdir] = "patched"
-projects[media][type] = "module"
-projects[media][patch][] = "https://www.drupal.org/files/issues/media-browser-incompatibilities-2164823-8.patch"
 
 projects[pathauto][subdir] = "patched"
 projects[pathauto][version] = "1.2"
