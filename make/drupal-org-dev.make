@@ -35,30 +35,6 @@ projects[feature_print_module][type] = "module"
 projects[feature_print_module][subdir] = "custom"
 projects[feature_print_module][options][working-copy] = TRUE
 
-projects[manualcrop_media_wysiwyg][download][type] = "git"
-projects[manualcrop_media_wysiwyg][download][url] = "git@github.com:ucsf-drupal/manualcrop_media_wysiwyg.git"
-;projects[manualcrop_media_wysiwyg][download][tag] = "7.x-1.0-beta1"
-projects[manualcrop_media_wysiwyg][download][branch] = "7.x-1.x"
-projects[manualcrop_media_wysiwyg][type] = "module"
-projects[manualcrop_media_wysiwyg][subdir] = "custom"
-projects[manualcrop_media_wysiwyg][options][working-copy] = TRUE
-
-projects[media_browser_edit][download][type] = "git"
-projects[media_browser_edit][download][url] = "git@github.com:ucsf-drupal/media_browser_edit.git"
-;projects[media_browser_edit][download][tag] = "7.x-1.1"
-projects[media_browser_edit][download][branch] = "7.x-1.x"
-projects[media_browser_edit][type] = "module"
-projects[media_browser_edit][subdir] = "custom"
-projects[media_browser_edit][options][working-copy] = TRUE
-
-projects[square_crop][download][type] = "git"
-projects[square_crop][download][url] = "git@github.com:ucsf-drupal/square_crop.git"
-;projects[square_crop][download][tag] = "7.x-1.0"
-projects[square_crop][download][branch] = "7.x-1.x"
-projects[square_crop][type] = "module"
-projects[square_crop][subdir] = "custom"
-projects[square_crop][options][working-copy] = TRUE
-
 projects[ucsftemplate_tweaks][download][type] = "git"
 projects[ucsftemplate_tweaks][download][url] = "git@github.com:ucsf-drupal/ucsftemplate_tweaks.git"
 ;projects[ucsftemplate_tweaks][download][tag] = "7.x-1.0"
@@ -246,6 +222,20 @@ projects[media_youtube][type] = "module"
 projects[print][subdir] = "contrib"
 projects[print][version] = "1.3"
 projects[print][type] = "module"
+
+projects[square_crop][subdir] = "contrib"
+projects[square_crop][version] = "1.0"
+projects[square_crop][type] = "module"
+
+projects[media_browser_edit][subdir] = "contrib"
+projects[media_browser_edit][version] = "1.1"
+projects[media_browser_edit][type] = "module"
+
+projects[manualcrop_media_wysiwyg][download][type] = "git"
+projects[manualcrop_media_wysiwyg][download][url] = "http://git.drupal.org/sandbox/erykmynn/2443015.git"
+projects[manualcrop_media_wysiwyg][download][tag] = "7.x-1.0-beta1"
+projects[manualcrop_media_wysiwyg][type] = "module"
+projects[manualcrop_media_wysiwyg][subdir] = "contrib"
 
 ; required by picture module
 projects[colorbox][subdir] = "contrib"
