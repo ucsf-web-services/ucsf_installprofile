@@ -244,7 +244,7 @@ projects[colorbox][type] = "module"
 
 ; required by pathauto module
 projects[token][subdir] = "contrib"
-projects[token][version] = "1.5"
+projects[token][version] = "1.6"
 projects[token][type] = "module"
 
 ;required by picture and ucsf_starterkit_inmages module
