@@ -231,6 +231,10 @@ projects[media_browser_edit][subdir] = "contrib"
 projects[media_browser_edit][version] = "1.1"
 projects[media_browser_edit][type] = "module"
 
+projects[picture][subdir] = "contrib"
+projects[picture][version] = "2.9"
+projects[picture][type] = "module"
+
 projects[manualcrop_media_wysiwyg][download][type] = "git"
 projects[manualcrop_media_wysiwyg][download][url] = "http://git.drupal.org/sandbox/erykmynn/2443015.git"
 projects[manualcrop_media_wysiwyg][download][tag] = "7.x-1.0-beta1"
@@ -259,14 +263,6 @@ projects[manualcrop][download][branch] = "7.x-1.x"
 projects[manualcrop][download][revision] = "6cad8c8748ae6e82e3b7317f7a9379685cfb61f9"
 projects[manualcrop][subdir] = "contrib"
 projects[manualcrop][type] = "module"
-
-;development snapshot 7.x-1.1+49-dev
-projects[picture][download][type] = "git"
-projects[picture][download][url] = "http://git.drupal.org/project/picture.git"
-projects[picture][download][branch] = "7.x-1.x"
-projects[picture][download][revision] = "979f10358d558fd71feac2aaab2934fc6c004678"
-projects[picture][subdir] = "contrib"
-projects[picture][type] = "module"
 
 ; This is a patched version of development snapshot 7.x-2.2+8-dev
 ; The raw patch can be found at:
