@@ -84,7 +84,7 @@ projects[strongarm][version] = "2.0"
 projects[strongarm][type] = "module"
 
 projects[entity][subdir] = "contrib"
-projects[entity][version] = "1.4"
+projects[entity][version] = "1.6"
 projects[entity][type] = "module"
 
 projects[views][subdir] = "contrib"
