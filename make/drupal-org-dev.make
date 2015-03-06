@@ -208,7 +208,7 @@ projects[entity_view_mode][version] = "1.0-rc1"
 projects[entity_view_mode][type] = "module"
 
 projects[file_entity][subdir] = "contrib"
-projects[file_entity][version] = "2.0-alpha2"
+projects[file_entity][version] = "2.0-beta1"
 projects[file_entity][type] = "module"
 
 projects[media_vimeo][subdir] = "contrib"
