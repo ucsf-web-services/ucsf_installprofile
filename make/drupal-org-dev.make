@@ -20,9 +20,8 @@ projects[ucsf_starterkit_images][subdir] = "custom"
 projects[ucsf_starterkit_images][options][working-copy] = TRUE
 
 projects[ucsf_webedit][download][type] = "git"
-projects[ucsf_webedit][download][url] = "git@github.com:stopfstedt/ucsf_webedit.git"
 ;projects[ucsf_webedit][download][tag] = "7.x-1.0-beta16"
-projects[ucsf_webedit][download][branch] = "update_ckeditor"
+projects[ucsf_webedit][download][branch] = "7.x-1.x"
 projects[ucsf_webedit][type] = "module"
 projects[ucsf_webedit][subdir] = "custom"
 projects[ucsf_webedit][options][working-copy] = TRUE
