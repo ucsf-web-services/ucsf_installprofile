@@ -5,7 +5,7 @@ api = 2
 ; ----------------------------------------------------------------
 projects[ucsf_images][download][type] = "git"
 projects[ucsf_images][download][url] = "git@github.com:ucsf-drupal/ucsf_images.git"
-;projects[ucsf_images][download][tag] = "7.x-2.6"
+;projects[ucsf_images][download][tag] = "7.x-2.7"
 projects[ucsf_images][download][branch] = "7.x-2.x"
 projects[ucsf_images][type] = "module"
 projects[ucsf_images][subdir] = "custom"
@@ -13,7 +13,7 @@ projects[ucsf_images][options][working-copy] = TRUE
 
 projects[ucsf_starterkit_images][download][type] = "git"
 projects[ucsf_starterkit_images][download][url] = "git@github.com:ucsf-drupal/ucsf_starterkit_images.git"
-;projects[ucsf_starterkit_images][download][tag] = "7.x-1.1-beta6"
+;projects[ucsf_starterkit_images][download][tag] = "7.x-1.2-beta1"
 projects[ucsf_starterkit_images][download][branch] = "7.x-1.x"
 projects[ucsf_starterkit_images][type] = "module"
 projects[ucsf_starterkit_images][subdir] = "custom"
@@ -21,7 +21,7 @@ projects[ucsf_starterkit_images][options][working-copy] = TRUE
 
 projects[ucsf_webedit][download][type] = "git"
 projects[ucsf_webedit][download][url] = "git@github.com:stopfstedt/ucsf_webedit.git"
-;projects[ucsf_webedit][download][tag] = "7.x-1.0-beta15"
+;projects[ucsf_webedit][download][tag] = "7.x-1.0-beta16"
 projects[ucsf_webedit][download][branch] = "update_ckeditor"
 projects[ucsf_webedit][type] = "module"
 projects[ucsf_webedit][subdir] = "custom"
@@ -237,7 +237,7 @@ projects[picture][type] = "module"
 
 projects[manualcrop_media_wysiwyg][download][type] = "git"
 projects[manualcrop_media_wysiwyg][download][url] = "http://git.drupal.org/sandbox/erykmynn/2443015.git"
-projects[manualcrop_media_wysiwyg][download][tag] = "7.x-1.0-beta1"
+projects[manualcrop_media_wysiwyg][download][revision] = "372d1a8251a7fd2829f2652a176604b3731e781f"
 projects[manualcrop_media_wysiwyg][type] = "module"
 projects[manualcrop_media_wysiwyg][subdir] = "contrib"
 
