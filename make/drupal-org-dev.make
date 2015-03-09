@@ -107,6 +107,10 @@ projects[date][subdir] = "contrib"
 projects[date][version] = "2.8"
 projects[date][type] = "module"
 
+projects[diff][subdir] = "contrib"
+projects[diff][version] = "3.2"
+projects[diff][type] = "module"
+
 projects[admin_menu][subdir] = "contrib"
 projects[admin_menu][version] = "3.0-rc5"
 projects[admin_menu][type] = "module"
