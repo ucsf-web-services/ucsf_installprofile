@@ -233,7 +233,7 @@ projects[picture][type] = "module"
 
 projects[manualcrop_media_wysiwyg][download][type] = "git"
 projects[manualcrop_media_wysiwyg][download][url] = "http://git.drupal.org/sandbox/erykmynn/2443015.git"
-projects[manualcrop_media_wysiwyg][download][revision] = "df8b9b0d303714dc0b9adcb85c962c04f383f277"
+projects[manualcrop_media_wysiwyg][download][revision] = "88d690f0a4e050e9749bd3cb8cff855483e5bfe1"
 projects[manualcrop_media_wysiwyg][type] = "module"
 projects[manualcrop_media_wysiwyg][subdir] = "contrib"
 
