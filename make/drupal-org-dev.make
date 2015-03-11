@@ -71,6 +71,7 @@ projects[ucsf_chi][download][url] = "https://github.com/ucsf-drupal/ucsf_chi.git
 ;projects[ucsf_chi][download][tag] = "7.x-1.0"
 projects[ucsf_chi][download][branch] = "7.x-1.x"
 projects[ucsf_chi][type] = "theme"
+projects[ucsf_chi][options][working-copy] = TRUE
 
 ; Contributed modules
 ; ----------------------------------------------------------------
