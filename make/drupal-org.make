@@ -5,21 +5,21 @@ api = 2
 ; ----------------------------------------------------------------
 projects[ucsf_images][download][type] = "git"
 projects[ucsf_images][download][url] = "https://github.com/ucsf-drupal/ucsf_images.git"
-projects[ucsf_images][download][tag] = "7.x-2.6"
+projects[ucsf_images][download][tag] = "7.x-2.7"
 ;projects[ucsf_images][download][branch] = "7.x-2.x"
 projects[ucsf_images][type] = "module"
 projects[ucsf_images][subdir] = "custom"
 
 projects[ucsf_starterkit_images][download][type] = "git"
 projects[ucsf_starterkit_images][download][url] = "https://github.com/ucsf-drupal/ucsf_starterkit_images.git"
-projects[ucsf_starterkit_images][download][tag] = "7.x-1.1-beta6"
+projects[ucsf_starterkit_images][download][tag] = "7.x-1.2-beta1"
 ;projects[ucsf_starterkit_images][download][branch] = "7.x-1.x"
 projects[ucsf_starterkit_images][type] = "module"
 projects[ucsf_starterkit_images][subdir] = "custom"
 
 projects[ucsf_webedit][download][type] = "git"
 projects[ucsf_webedit][download][url] = "https://github.com/ucsf-drupal/ucsf_webedit.git"
-projects[ucsf_webedit][download][tag] = "7.x-1.0-beta15"
+projects[ucsf_webedit][download][tag] = "7.x-1.0-beta16"
 ;projects[ucsf_webedit][download][branch] = "7.x-1.x"
 projects[ucsf_webedit][type] = "module"
 projects[ucsf_webedit][subdir] = "custom"
@@ -207,13 +207,13 @@ projects[file_entity][subdir] = "contrib"
 projects[file_entity][version] = "2.0-beta1"
 projects[file_entity][type] = "module"
 
+projects[media][subdir] = "contrib"
+projects[media][version] = "2.0-alpha4"
+projects[media][type] = "module"
+
 projects[media_vimeo][subdir] = "contrib"
 projects[media_vimeo][version] = "1.0-beta5"
 projects[media_vimeo][type] = "module"
-
-projects[media_youtube][subdir] = "contrib"
-projects[media_youtube][version] = "2.0-rc1"
-projects[media_youtube][type] = "module"
 
 projects[print][subdir] = "contrib"
 projects[print][version] = "1.3"
@@ -227,9 +227,13 @@ projects[media_browser_edit][subdir] = "contrib"
 projects[media_browser_edit][version] = "1.1"
 projects[media_browser_edit][type] = "module"
 
+projects[picture][subdir] = "contrib"
+projects[picture][version] = "2.9"
+projects[picture][type] = "module"
+
 projects[manualcrop_media_wysiwyg][download][type] = "git"
 projects[manualcrop_media_wysiwyg][download][url] = "http://git.drupal.org/sandbox/erykmynn/2443015.git"
-projects[manualcrop_media_wysiwyg][download][tag] = "7.x-1.0-beta1"
+projects[manualcrop_media_wysiwyg][download][revision] = "88d690f0a4e050e9749bd3cb8cff855483e5bfe1"
 projects[manualcrop_media_wysiwyg][type] = "module"
 projects[manualcrop_media_wysiwyg][subdir] = "contrib"
 
@@ -256,14 +260,6 @@ projects[manualcrop][download][revision] = "6cad8c8748ae6e82e3b7317f7a9379685cfb
 projects[manualcrop][subdir] = "contrib"
 projects[manualcrop][type] = "module"
 
-;development snapshot 7.x-1.1+49-dev
-projects[picture][download][type] = "git"
-projects[picture][download][url] = "http://git.drupal.org/project/picture.git"
-projects[picture][download][branch] = "7.x-1.x"
-projects[picture][download][revision] = "979f10358d558fd71feac2aaab2934fc6c004678"
-projects[picture][subdir] = "contrib"
-projects[picture][type] = "module"
-
 ; This is a patched version of development snapshot 7.x-2.2+8-dev
 ; The raw patch can be found at:
 ; https://gist.githubusercontent.com/stopfstedt/90d6cf47fb5f115ae498/raw/be4c6f58e02bd6b4ad0440dce714430f98f29f8e/wysiwyg-7.x-2.2+8-dev-ckeditor.patch
@@ -277,15 +273,6 @@ projects[wysiwyg][download][revision] = "cc248294da6c6b8a29064e503f43aabedb14370
 projects[wysiwyg][subdir] = "patched"
 projects[wysiwyg][type] = "module"
 projects[wysiwyg][patch][] = "http://bit.ly/1m7TQK3"
-
-; development snapshot 7.x-2.0-alpha3+29-dev, patched.
-projects[media][download][type] = "git"
-projects[media][download][url] = "http://git.drupal.org/project/media.git"
-projects[media][download][branch] = "7.x-2.x"
-projects[media][download][revision] = "1faada200ab8584bdd6d692ec0d0b568b649081f"
-projects[media][subdir] = "patched"
-projects[media][type] = "module"
-projects[media][patch][] = "https://www.drupal.org/files/issues/media-browser-incompatibilities-2164823-8.patch"
 
 projects[pathauto][subdir] = "patched"
 projects[pathauto][version] = "1.2"
@@ -301,6 +288,11 @@ projects[menu_block][subdir] = "patched"
 projects[menu_block][version] = "2.5"
 projects[menu_block][type] = "module"
 projects[menu_block][patch][] = "https://www.drupal.org/files/issues/2421645-menu-tree-prune-tree-parent-item-false_0.patch"
+
+projects[media_youtube][subdir] = "patched"
+projects[media_youtube][version] = "2.0-rc4"
+projects[media_youtube][type] = "module"
+projects[media_youtube][patch][] = "https://www.drupal.org/files/issues/provide-access-wrapper-1823376-6.patch"
 
 ; Contributed themes
 ; ----------------------------------------------------------------
