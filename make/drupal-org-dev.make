@@ -20,6 +20,7 @@ projects[ucsf_starterkit_images][subdir] = "custom"
 projects[ucsf_starterkit_images][options][working-copy] = TRUE
 
 projects[ucsf_webedit][download][type] = "git"
+projects[ucsf_webedit][download][url] = "https://github.com/ucsf-drupal/ucsf_webedit.git"
 ;projects[ucsf_webedit][download][tag] = "7.x-1.0-beta16"
 projects[ucsf_webedit][download][branch] = "7.x-1.x"
 projects[ucsf_webedit][type] = "module"
@@ -154,13 +155,13 @@ projects[mpac][subdir] = "contrib"
 projects[mpac][version] = "1.2"
 projects[mpac][type] = "module"
 
-projects[field_collection][subdir] = "contrib"
-projects[field_collection][version] = "1.0-beta5"
-projects[field_collection][type] = "module"
-
 projects[node_edit_protection][subdir] = "contrib"
 projects[node_edit_protection][version] = "1.1"
 projects[node_edit_protection][type] = "module"
+
+projects[field_collection][subdir] = "contrib"
+projects[field_collection][version] = "1.0-beta5"
+projects[field_collection][type] = "module"
 
 projects[flexslider][subdir] = "contrib"
 projects[flexslider][version] = "1.0-rc3"
