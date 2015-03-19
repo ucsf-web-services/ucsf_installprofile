@@ -77,7 +77,7 @@ projects[ucsf_chi][options][working-copy] = TRUE
 ; ----------------------------------------------------------------
 
 projects[ctools][subdir] = "contrib"
-projects[ctools][version] = "1.6"
+projects[ctools][version] = "1.7"
 projects[ctools][type] = "module"
 
 projects[pasteformat][subdir] = "contrib"
