@@ -261,13 +261,14 @@ projects[breakpoints][subdir] = "contrib"
 projects[breakpoints][version] = "1.3"
 projects[breakpoints][type] = "module"
 
-; development snapshot 7.x-1.4+70-dev
+; patched development snapshot 7.x-1.4+123-dev
 projects[manualcrop][download][type] = "git"
 projects[manualcrop][download][url] = "http://git.drupal.org/project/manualcrop.git"
 projects[manualcrop][download][branch] = "7.x-1.x"
-projects[manualcrop][download][revision] = "6cad8c8748ae6e82e3b7317f7a9379685cfb61f9"
-projects[manualcrop][subdir] = "contrib"
+projects[manualcrop][download][revision] = "c68f0d82b620620be3783aee65e49c262dc5f9a6"
+projects[manualcrop][subdir] = "patched"
 projects[manualcrop][type] = "module"
+projects[manualcrop][patch][] = "https://www.drupal.org/files/issues/manualcrop-media-js-data-id-2454087.patch"
 
 ; This is a patched version of development snapshot 7.x-2.2+8-dev
 ; The raw patch can be found at:
