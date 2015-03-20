@@ -173,7 +173,7 @@ projects[switchtheme][version] = "1.0"
 projects[switchtheme][type] = "module"
 
 projects[webform][subdir] = "contrib"
-projects[webform][version] = "3.22"
+projects[webform][version] = "3.23"
 projects[webform][type] = "module"
 
 projects[imce][subdir] = "contrib"
