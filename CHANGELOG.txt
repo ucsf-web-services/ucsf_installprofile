@@ -1,3 +1,24 @@
+7.x-1.5
+-------
+- Updated Webform module to version 7.x-3.23 #141
+- Updated CTools module to version 7.x-1.7 #140
+- Updated Drupal to version 7.x35 #139
+- Updated and patched Manualcrop module #138
+- Added Diff module #133
+- Updated Picture module to version 7.x-2.9 #132
+- Updated Token module to version 7.x-1.6 #125
+- Updated Media Module to version 7.x-2.0-alpha #120
+- Dropped PHP 5.4 from test matrix #116
+- Updated Administration Views module to version 7.x-1.4 #115
+- Updated Module Filter to version 7.x-2.0 #114
+- Updated and patched Menu Block module #109 #98
+- Updated Views module to version 7.x-3.10 #108
+- Updated Menu Attributes to version 7.x-1.0-rc3 #104
+- Updated Media:Youtube module t oversion 7.x-2.0-rc4 #102
+- Updated Entity API module to version 7.x-1.6 #96
+- Updated UCSF WebEdit module to version 7.x-1.0-beta16
+- Updated UCSF Image Handling module to version 7.x-2.8
+- Updated UCSF StarterKit Images module to version 7.x-1.2-beta1
 7.x-1.4
 -------
 - Bundled in CHI theme #75
