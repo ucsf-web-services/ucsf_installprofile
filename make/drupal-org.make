@@ -88,7 +88,7 @@ projects[entity][version] = "1.6"
 projects[entity][type] = "module"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.10"
+projects[views][version] = "3.11"
 projects[views][type] = "module"
 
 projects[views_bulk_operations][subdir] = "contrib"
