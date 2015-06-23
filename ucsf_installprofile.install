@@ -915,6 +915,7 @@ function _ucsf_installprofile_misc_config(){
 
 function _ucsf_installprofile_importviews(){
 
+  /* Slider View */
   $view = new view();
   $view->name = 'slider';
   $view->description = '';
