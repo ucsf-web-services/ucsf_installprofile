@@ -197,7 +197,7 @@ projects[special_menu_items][version] = "2.0"
 projects[special_menu_items][type] = "module"
 
 projects[views_slideshow][subdir] = "contrib"
-projects[views_slideshow][version] = "3.0"
+projects[views_slideshow][version] = "3.1"
 projects[views_slideshow][type] = "module"
 
 projects[facetapi][subdir] = "contrib"
@@ -340,21 +340,6 @@ libraries[jquery.imagesloaded][download][type] = "file"
 libraries[jquery.imagesloaded][download][url] = "https://github.com/desandro/imagesloaded/archive/v2.1.2.tar.gz"
 libraries[jquery.imagesloaded][directory_name] = "jquery.imagesloaded"
 libraries[jquery.imagesloaded][type] = "library"
-
-; views_slideshow module dependency
-libraries[json2][download][type] = "git"
-libraries[json2][download][url] = "https://github.com/douglascrockford/JSON-js.git"
-libraries[json2][download][revision] = "40f3377a631eaedeec877379f9cb338046cac0e0"
-libraries[json2][directory_name] = "json2"
-libraries[json2][type] = "library"
-
-; views_slideshow module dependency
-; jQuery Cycle Plugin, version 2.9999.5 (10-APR-2012)
-libraries[jquery.cycle][download][type] = "git"
-libraries[jquery.cycle][download][url] = "https://github.com/malsup/cycle"
-libraries[jquery.cycle][download][revision] = "b1dc72bc44405523317e2a016972075a07437b16"
-libraries[jquery.cycle][directory_name] = "jquery.cycle"
-libraries[jquery.cycle][type] = "library"
 
 ; print module dependency
 ; dompdf libs, patched version 0.6.0-beta3.
