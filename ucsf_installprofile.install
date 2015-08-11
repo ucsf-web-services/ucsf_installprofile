@@ -164,10 +164,10 @@ function _ucsf_installprofile_enable_theme(){
   variable_set('node_admin_theme', '1');
 
   // Enable ucsf_base and its sub-themes
-  theme_enable(array('ucsf_base', 'teal', 'orange', 'ucsf_chi'));
+  theme_enable(array('ucsf_starterkit_base', 'teal', 'orange', 'ucsf_chi'));
 
   // set ucsf_base as default theme
-  variable_set('theme_default', 'ucsf_base');
+  variable_set('theme_default', 'ucsf_starterkit_base');
 
   // disable old default theme
   theme_disable(array('bartik'));
@@ -902,7 +902,7 @@ function _ucsf_installprofile_misc_config(){
   variable_set('jquery_update_jquery_version', '1.5');
 
   // Theme configuration
-  $themes =  array('ucsf_base', 'teal', 'orange', 'ucsf_chi');
+  $themes =  array('ucsf_starterkit_base');
   foreach ($themes as $theme) {
     $key = "theme_${theme}_settings";
     $theme_settings = variable_get($key);
@@ -939,7 +939,6 @@ function _ucsf_installprofile_importviews(){
   $handler->display->display_options['style_plugin'] = 'slideshow';
   $handler->display->display_options['style_options']['default_row_class'] = FALSE;
   $handler->display->display_options['style_options']['row_class_special'] = FALSE;
-  $handler->display->display_options['style_options']['flexslider_views_slideshow']['caption_field'] = 'none';
   $handler->display->display_options['style_options']['slideshow_type'] = 'flexslider_views_slideshow';
   $handler->display->display_options['style_options']['slideshow_skin'] = 'default';
   $handler->display->display_options['style_options']['skin_info'] = array(
@@ -964,6 +963,7 @@ function _ucsf_installprofile_importviews(){
     'field_image' => 0,
     'field_link' => 0,
   );
+  $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_controls']['enable'] = 1;
   $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_controls']['weight'] = '1';
   $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_controls']['hide_on_single_slide'] = 1;
   $handler->display->display_options['style_options']['widgets']['bottom']['views_slideshow_controls']['type'] = 'views_slideshow_controls_text';
@@ -988,7 +988,7 @@ function _ucsf_installprofile_importviews(){
     'image_style' => 'flexslider_full',
     'image_link' => '',
   );
-  /* Field: Field: Link */
+  /* Field: Field: Location Map */
   $handler->display->display_options['fields']['field_link']['id'] = 'field_link';
   $handler->display->display_options['fields']['field_link']['table'] = 'field_data_field_link';
   $handler->display->display_options['fields']['field_link']['field'] = 'field_link';
@@ -1781,7 +1781,7 @@ function _ucsf_installprofile_menus(){
 }
 
 function _ucsf_installprofile_blocks(){
-  $default_themes = array('ucsf_base', 'teal', 'orange', 'ucsf_chi');
+  $default_themes = array('ucsf_starterkit_base');
   $blocks = array(
     array(
       'module' => 'menu',
