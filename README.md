@@ -19,7 +19,7 @@ cd ucsf_installprofile
 # build drupal and the profile into the webroot dir
 drush make --prepare-install make/build-ucsf_installprofile.make webroot
 # build modules/themes/libs into a temp dir
-drush make --no-cache --contrib-destination="." --no-core make/drupal-org.make tmp
+drush make --no-cache --no-core make/drupal-org.make tmp
 # move the temp directory's content into sites/all
 cp -r tmp/sites/all/* webroot/sites/all/
 # delete temp dir
