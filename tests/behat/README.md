@@ -21,6 +21,12 @@ At the very least, you must have PHP 5.4+ and the Firefox browser installed in o
     ```
 4. Copy `behat.yml.dist` to `behat.yml` and the replace `drupal_root` value with whatever path is applicable in your environment.
 
+5. Download the latest [Selenium Standalone Server](http://docs.seleniumhq.org/download/) JAR file.
+ 
+    ```bash
+    wget -O selenium-server.jar http://goo.gl/PJUZfa
+    ```
+
 ## Run Test in a web-browser
 
 1. Run Selenium as standalone
