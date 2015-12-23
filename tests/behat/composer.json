@@ -1,9 +1,8 @@
 {
     "require": {
         "phpunit/phpunit": "3.7.*",
-        "drupal/drupal-extension": "3.0.*@stable",
-        "sauce/connect": ">=3.0",
-        "emagister/selenium-server": "2.*"
+        "drupal/drupal-extension": "~3.0",
+        "sauce/connect": ">=3.0"
     },
     "minimum-stability": "dev",
     "config": {
