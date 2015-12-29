@@ -99,6 +99,7 @@ script:
 
 # disable dblog
 - drush pm-disable dblog --yes
+- drush cc all
 
 # run behat tests
 - ${TRAVIS_BUILD_DIR}/tests/behat/bin/behat -c ${TRAVIS_BUILD_DIR}/tests/behat/behatci.yml -p ${BEHAT_PROFILE}
