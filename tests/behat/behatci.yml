@@ -46,69 +46,69 @@ default:
         success_message_selector: '.messages.status'
 
 # Run tests with winxp ie7
-winxpie7:
-  extensions:
-    Behat\MinkExtension:
-      sessions:
-        saucelabs:
-          sauce_labs:
-            browser: "internet explorer"
-            capabilities:
-              name: "winxpie7"
-              platform: "Windows XP"
-              version: 7
-
-# Run tests with win7 ie8
-win7ie8:
-  extensions:
-    Behat\MinkExtension:
-      sessions:
-        saucelabs:
-          sauce_labs:
-            browser: "internet explorer"
-            capabilities:
-              name: "win7ie8"
-              platform: "Windows 7"
-              version: 8
-
-# Run tests with win7 ie9
-win7ie9:
-  extensions:
-    Behat\MinkExtension:
-      sessions:
-        saucelabs:
-          sauce_labs:
-            browser: "internet explorer"
-            capabilities:
-              name: "win7ie9"
-              platform: "Windows 7"
-              version: 9
-
-# Run tests with win7 ie10
-win7ie10:
-  extensions:
-    Behat\MinkExtension:
-      sessions:
-        saucelabs:
-          sauce_labs:
-            browser: "internet explorer"
-            capabilities:
-              name: "win7ie10"
-              platform: "Windows 7"
-              version: 10
-
-# Run tests with win8 ie11
-win8ie11:
-  extensions:
-    Behat\MinkExtension:
-      sessions:
-        saucelabs:
-          sauce_labs:
-            browser: "internet explorer"
-            capabilities:
-              name: "win8ie11"
-              platform: "Windows 8.1"
-              version: 11
+#winxpie7:
+#  extensions:
+#    Behat\MinkExtension:
+#      sessions:
+#        saucelabs:
+#          sauce_labs:
+#            browser: "internet explorer"
+#            capabilities:
+#              name: "winxpie7"
+#              platform: "Windows XP"
+#              version: 7
+#
+## Run tests with win7 ie8
+#win7ie8:
+#  extensions:
+#    Behat\MinkExtension:
+#      sessions:
+#        saucelabs:
+#          sauce_labs:
+#            browser: "internet explorer"
+#            capabilities:
+#              name: "win7ie8"
+#              platform: "Windows 7"
+#              version: 8
+#
+## Run tests with win7 ie9
+#win7ie9:
+#  extensions:
+#    Behat\MinkExtension:
+#      sessions:
+#        saucelabs:
+#          sauce_labs:
+#            browser: "internet explorer"
+#            capabilities:
+#              name: "win7ie9"
+#              platform: "Windows 7"
+#              version: 9
+#
+## Run tests with win7 ie10
+#win7ie10:
+#  extensions:
+#    Behat\MinkExtension:
+#      sessions:
+#        saucelabs:
+#          sauce_labs:
+#            browser: "internet explorer"
+#            capabilities:
+#              name: "win7ie10"
+#              platform: "Windows 7"
+#              version: 10
+#
+## Run tests with win8 ie11
+#win8ie11:
+#  extensions:
+#    Behat\MinkExtension:
+#      sessions:
+#        saucelabs:
+#          sauce_labs:
+#            browser: "internet explorer"
+#            capabilities:
+#              name: "win8ie11"
+#              platform: "Windows 8.1"
+#              version: 11
 
 # Run tests with osx firefox
 osxfirefox:
@@ -121,9 +121,7 @@ osxfirefox:
               name: "osxfirefox"
               platform: "OS X 10.9"
               version: 28
-sessions:
-        saucelabs:
-          sauce_labs:
+
 # Run tests with osx chrome
 osxchrome:
   extensions:
