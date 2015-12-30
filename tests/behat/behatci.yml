@@ -119,8 +119,8 @@ osxfirefox:
           sauce_labs:
             capabilities:
               name: "osxfirefox"
-              platform: "OS X 10.9"
-              version: 28
+              platform: "OS X 10.10"
+              version: 38
 
 # Run tests with osx chrome
 osxchrome:
