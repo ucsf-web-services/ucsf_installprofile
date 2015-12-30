@@ -60,7 +60,6 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
    */
   public function iResizeWindow($width, $height) {
     $this->getSession()->resizeWindow((int) $width, (int) $height);
-    $foo =1;
   }
 
   /**
@@ -146,5 +145,27 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     }
 
     return $regionObj;
+  }
+
+  /**
+   * @AfterScenario @mobile
+   * KLUDGE!
+   * After running scenarios tagged as 'mobile', resize the browser to 'full screen'.
+   * [ST 2015/12/30]
+   */
+  public function resizeWindowToFullScreen(\Behat\Behat\Hook\Scope\AfterScenarioScope $scope)
+  {
+    $this->iResizeWindow(1366, 768);
+  }
+
+  /**
+   * @BeforeScenario @mobile
+   * KLUDGE!
+   * Before running scenarios tagged as 'mobile', resize the browser to 'mobile screen'.
+   * [ST 2015/12/30]
+   */
+  public function resizeWindowToMobile(\Behat\Behat\Hook\Scope\BeforeScenarioScope $scope)
+  {
+    $this->iResizeWindow(200, 600);
   }
 }

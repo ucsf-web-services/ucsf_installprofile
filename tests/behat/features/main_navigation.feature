@@ -27,9 +27,7 @@ Feature: Main Navigation
       | Services   | /services   |
       | Styleguide | /styleguide |
 
-
-  # TODO: Figure out a way to resize the window to its original dimensions after running this scenario. [ST 2014/11/05]
+  @mobile
   Scenario: See hamburger instead of main nav on mobile
-    When I resize the window to "200" by "600"
     Then I should not see the "Header" region
     But I should see the mobile navigation hamburger
