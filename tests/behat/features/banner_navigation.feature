@@ -18,7 +18,7 @@ Feature: Banner Navigation
 
   Scenario: Follow "About UCSF" link in the UCSF banner navigation
     And I follow "About UCSF" in the "Top Header" region
-    Then I should be on "http://www.ucsf.edu/about"
+    Then I should be on "http://www.ucsf.edu/about/ucsf-overview"
 
   Scenario: Follow "Search UCSF" link in the UCSF banner navigation
     And I follow "Search UCSF" in the "Top Header" region
