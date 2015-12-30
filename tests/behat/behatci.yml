@@ -23,7 +23,7 @@ default:
             capabilities:
               name: "win7ff"
               platform: "Windows 7"
-              version: 38
+              version: 43
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drupal'
@@ -145,5 +145,5 @@ osxsafari:
             browser: "safari"
             capabilities:
               name: "osxsafari"
-              platform: "OS X 10.9"
-              version: 7
+              platform: "OS X 10.10"
+              version: 8
