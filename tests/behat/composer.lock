@@ -8,6 +8,54 @@
     "content-hash": "b3545ec42ceaa1a6c6941d2cd0767b60",
     "packages": [
         {
+            "name": "appium/php-client",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/appium/php-client.git",
+                "reference": "68be3cc2ea19d3a3cf8be4abcebdd9d5e7539a99"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/appium/php-client/zipball/68be3cc2ea19d3a3cf8be4abcebdd9d5e7539a99",
+                "reference": "68be3cc2ea19d3a3cf8be4abcebdd9d5e7539a99",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "phpunit/phpunit-selenium": ">=1.3.3"
+            },
+            "type": "appium-php",
+            "autoload": {
+                "classmap": [
+                    "PHPUnit/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                ""
+            ],
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Isaac Murchie",
+                    "email": "isaac@saucelabs.com",
+                    "homepage": "http://www.saucelabs.com",
+                    "role": "Lead"
+                }
+            ],
+            "description": "PHP client for Selenium 3.0/Appium 1.0",
+            "homepage": "http://github.com/appium/appium-php",
+            "keywords": [
+                "appium",
+                "phpunit",
+                "selenium"
+            ],
+            "time": "2014-10-09 19:02:49"
+        },
+        {
             "name": "behat/behat",
             "version": "dev-master",
             "source": {
@@ -475,44 +523,34 @@
             "time": "2015-09-28 16:26:35"
         },
         {
-            "name": "brianium/paratest",
-            "version": "v0.4.3",
+            "name": "brianium/habitat",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/brianium/paratest.git",
-                "reference": "0fa10fb9f31f00d18a4c7eb09271dd6812990dae"
+                "url": "https://github.com/brianium/habitat.git",
+                "reference": "d0979e3bb379cbc78ecb42b3ac171bc2b7e06d96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brianium/paratest/zipball/0fa10fb9f31f00d18a4c7eb09271dd6812990dae",
-                "reference": "0fa10fb9f31f00d18a4c7eb09271dd6812990dae",
+                "url": "https://api.github.com/repos/brianium/habitat/zipball/d0979e3bb379cbc78ecb42b3ac171bc2b7e06d96",
+                "reference": "d0979e3bb379cbc78ecb42b3ac171bc2b7e06d96",
                 "shasum": ""
             },
-            "require": {
-                "ext-pcre": "*",
-                "ext-reflection": "*",
-                "ext-simplexml": "*",
-                "php": ">=5.3.0",
-                "phpunit/php-timer": ">=1.0.4",
-                "phpunit/phpunit": ">=3.7.8",
-                "symfony/console": ">=2.0.0"
+            "require-dev": {
+                "monolog/monolog": ">=1.5.0",
+                "phpunit/phpunit": ">=3.7.21"
             },
-            "bin": [
-                "bin/paratest"
-            ],
             "type": "library",
             "autoload": {
                 "psr-0": {
-                    "ParaTest": [
-                        "src/",
-                        "test/",
-                        "it/"
+                    "Habitat": [
+                        "src/"
                     ]
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "APACHE-2"
+                "MIT"
             ],
             "authors": [
                 {
@@ -522,13 +560,66 @@
                     "role": "Lead"
                 }
             ],
+            "description": "A dependable php environment",
+            "time": "2013-06-08 04:42:29"
+        },
+        {
+            "name": "brianium/paratest",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/brianium/paratest.git",
+                "reference": "15caf61a1ada8f1fd7676e80afbbb30cf15055f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/brianium/paratest/zipball/15caf61a1ada8f1fd7676e80afbbb30cf15055f2",
+                "reference": "15caf61a1ada8f1fd7676e80afbbb30cf15055f2",
+                "shasum": ""
+            },
+            "require": {
+                "brianium/habitat": "1.0.0",
+                "ext-pcre": "*",
+                "ext-reflection": "*",
+                "ext-simplexml": "*",
+                "php": ">=5.4.0",
+                "phpunit/php-timer": ">=1.0.4",
+                "phpunit/phpunit": ">=3.7.8",
+                "symfony/console": "~2.3",
+                "symfony/process": "~2.3"
+            },
+            "bin": [
+                "bin/paratest"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ParaTest": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brian Scaturro",
+                    "email": "scaturrob@gmail.com",
+                    "homepage": "http://brianscaturro.com",
+                    "role": "Lead"
+                }
+            ],
             "description": "Parallel testing for PHP",
             "homepage": "https://github.com/brianium/paratest",
             "keywords": [
+                "concurrent",
+                "parallel",
                 "phpunit",
                 "testing"
             ],
-            "time": "2013-03-09 23:37:56"
+            "time": "2015-12-02 20:10:20"
         },
         {
             "name": "drupal/drupal-driver",
@@ -1460,26 +1551,30 @@
         },
         {
             "name": "sauce/sausage",
-            "version": "v0.9.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jlipps/sausage.git",
-                "reference": "5b9e002c752e83a9b85b4b2271feebc47b752d1c"
+                "reference": "ce7fea6a8de0090459cf23719aec907452600aa6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jlipps/sausage/zipball/5b9e002c752e83a9b85b4b2271feebc47b752d1c",
-                "reference": "5b9e002c752e83a9b85b4b2271feebc47b752d1c",
+                "url": "https://api.github.com/repos/jlipps/sausage/zipball/ce7fea6a8de0090459cf23719aec907452600aa6",
+                "reference": "ce7fea6a8de0090459cf23719aec907452600aa6",
                 "shasum": ""
             },
             "require": {
-                "brianium/paratest": ">=0.3.0",
-                "php": ">=5.3.0",
-                "phpunit/phpunit-selenium": ">=1.2.10",
+                "appium/php-client": ">=0.1.0",
+                "brianium/paratest": ">=0.12.1",
+                "php": ">=5.4.0",
+                "phpunit/phpunit-selenium": ">=1.4.1",
                 "sauce/sausage-installer": ">=0.1.0"
             },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.5.1"
+            },
             "suggest": {
-                "sauce/connect": ">=3.0"
+                "sauce/connect": ">=3.1"
             },
             "bin": [
                 "bin/sauce_config"
@@ -1508,11 +1603,12 @@
                 "Sauce",
                 "SauceLabs",
                 "api",
+                "appium",
                 "phpunit",
                 "selenium",
                 "testing"
             ],
-            "time": "2013-07-23 21:59:31"
+            "time": "2015-04-28 03:02:03"
         },
         {
             "name": "sauce/sausage-installer",
@@ -1899,26 +1995,26 @@
         },
         {
             "name": "symfony/config",
-            "version": "2.8.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "9052633e11a0682621b4c5cd56b2d4297271acf0"
+                "reference": "7703f5290c2b167a5ae5b730099cfd6b56084831"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/9052633e11a0682621b4c5cd56b2d4297271acf0",
-                "reference": "9052633e11a0682621b4c5cd56b2d4297271acf0",
+                "url": "https://api.github.com/repos/symfony/config/zipball/7703f5290c2b167a5ae5b730099cfd6b56084831",
+                "reference": "7703f5290c2b167a5ae5b730099cfd6b56084831",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9",
-                "symfony/filesystem": "~2.3|~3.0.0"
+                "php": ">=5.5.9",
+                "symfony/filesystem": "~2.8|~3.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -1945,30 +2041,30 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2015-12-28 13:12:56"
+            "time": "2015-12-28 13:15:29"
         },
         {
             "name": "symfony/console",
-            "version": "dev-master",
+            "version": "2.8.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "1b1ac9b937aad3fbb1c53914ef253b2f9cb47e96"
+                "reference": "4e83844dead78e6e90b8b7dff862fa232fa228ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/1b1ac9b937aad3fbb1c53914ef253b2f9cb47e96",
-                "reference": "1b1ac9b937aad3fbb1c53914ef253b2f9cb47e96",
+                "url": "https://api.github.com/repos/symfony/console/zipball/4e83844dead78e6e90b8b7dff862fa232fa228ad",
+                "reference": "4e83844dead78e6e90b8b7dff862fa232fa228ad",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.9",
+                "php": ">=5.3.9",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/event-dispatcher": "~2.8|~3.0",
-                "symfony/process": "~2.8|~3.0"
+                "symfony/event-dispatcher": "~2.1|~3.0.0",
+                "symfony/process": "~2.1|~3.0.0"
             },
             "suggest": {
                 "psr/log": "For using the console logger",
@@ -1978,7 +2074,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -2005,7 +2101,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2015-12-28 13:15:29"
+            "time": "2015-12-28 13:12:56"
         },
         {
             "name": "symfony/css-selector",
@@ -2062,28 +2158,25 @@
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "2.8.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "845726fa9603a9b62a08d596345e4113b94dc99e"
+                "reference": "d6f39446b5b55db95ddcfc6801b08b48d2495e61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/845726fa9603a9b62a08d596345e4113b94dc99e",
-                "reference": "845726fa9603a9b62a08d596345e4113b94dc99e",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/d6f39446b5b55db95ddcfc6801b08b48d2495e61",
+                "reference": "d6f39446b5b55db95ddcfc6801b08b48d2495e61",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9"
-            },
-            "conflict": {
-                "symfony/expression-language": "<2.6"
+                "php": ">=5.5.9"
             },
             "require-dev": {
-                "symfony/config": "~2.2|~3.0.0",
-                "symfony/expression-language": "~2.6|~3.0.0",
-                "symfony/yaml": "~2.1|~3.0.0"
+                "symfony/config": "~2.8|~3.0",
+                "symfony/expression-language": "~2.8|~3.0",
+                "symfony/yaml": "~2.8|~3.0"
             },
             "suggest": {
                 "symfony/config": "",
@@ -2093,7 +2186,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -2120,7 +2213,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2015-12-30 10:33:57"
+            "time": "2015-12-28 13:15:29"
         },
         {
             "name": "symfony/dom-crawler",
