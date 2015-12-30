@@ -21,9 +21,9 @@ default:
             browser: "firefox"
             connect: ~
             capabilities:
-              name: "win7ff"
-              platform: "Windows 7"
-              version: 33
+              name: "win8ff"
+              platform: "Windows 8"
+              version: 43
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drupal'
@@ -119,8 +119,8 @@ osxfirefox:
           sauce_labs:
             capabilities:
               name: "osxfirefox"
-              platform: "OS X 10.9"
-              version: 28
+              platform: "OS X 10.10"
+              version: 38
 
 # Run tests with osx chrome
 osxchrome:
@@ -145,5 +145,5 @@ osxsafari:
             browser: "safari"
             capabilities:
               name: "osxsafari"
-              platform: "OS X 10.9"
-              version: 7
+              platform: "OS X 10.10"
+              version: 8
