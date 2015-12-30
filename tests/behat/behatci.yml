@@ -21,8 +21,8 @@ default:
             browser: "firefox"
             connect: ~
             capabilities:
-              name: "win7ff"
-              platform: "Windows 7"
+              name: "win8ff"
+              platform: "Windows 8"
               version: 43
     Drupal\DrupalExtension:
       blackbox: ~
