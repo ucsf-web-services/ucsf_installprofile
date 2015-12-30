@@ -23,7 +23,7 @@ default:
             capabilities:
               name: "win7ff"
               platform: "Windows 7"
-              version: 33
+              version: 38
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drupal'
