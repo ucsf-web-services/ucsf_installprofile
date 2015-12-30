@@ -58,6 +58,12 @@ projects[ucsf_base][download][tag] = "7.x-1.1"
 ;projects[ucsf_base][download][branch] = "7.x-1.x"
 projects[ucsf_base][type] = "theme"
 
+projects[ucsf_starterkit_base][download][type] = "git"
+projects[ucsf_starterkit_base][download][url] = "https://github.com/ucsf-drupal/ucsf_starterkit_base.git"
+projects[ucsf_starterkit_base][download][tag] = "7.x-1.0"
+;projects[ucsf_starterkit_base][download][branch] = "7.x-1.x"
+projects[ucsf_starterkit_base][type] = "theme"
+
 projects[ucsf_chi][download][type] = "git"
 projects[ucsf_chi][download][url] = "https://github.com/ucsf-drupal/ucsf_chi.git"
 projects[ucsf_chi][download][tag] = "7.x-1.0"
