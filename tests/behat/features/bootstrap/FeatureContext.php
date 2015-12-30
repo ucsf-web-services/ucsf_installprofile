@@ -1,6 +1,8 @@
 <?php
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Hook\Scope\AfterScenarioScope;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
@@ -150,10 +152,10 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
   /**
    * @AfterScenario @mobile
    * KLUDGE!
-   * After running scenarios tagged as 'mobile', resize the browser to 'full screen'.
+   * After running scenarios tagged as 'mobile', resize the browser to 'full screen' width/height.
    * [ST 2015/12/30]
    */
-  public function resizeWindowToFullScreen(\Behat\Behat\Hook\Scope\AfterScenarioScope $scope)
+  public function resizeWindowToFullScreen(AfterScenarioScope $scope)
   {
     $this->iResizeWindow(1366, 768);
   }
@@ -161,10 +163,10 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
   /**
    * @BeforeScenario @mobile
    * KLUDGE!
-   * Before running scenarios tagged as 'mobile', resize the browser to 'mobile screen'.
+   * Before running scenarios tagged as 'mobile', resize the browser to 'mobile' width/height.
    * [ST 2015/12/30]
    */
-  public function resizeWindowToMobile(\Behat\Behat\Hook\Scope\BeforeScenarioScope $scope)
+  public function resizeWindowToMobile(BeforeScenarioScope $scope)
   {
     $this->iResizeWindow(200, 600);
   }
