@@ -97,6 +97,9 @@ script:
 # create new site, stubbing sendmail path with true to prevent delivery errors and manually
 - php -d sendmail_path=`which true` ~/.composer/vendor/bin/drush.php --yes site-install ucsf_installprofile --db-url=mysql://root:@127.0.0.1/starterkit
 
+# DEBUGGING: show all enabled modules and themes
+- drush pml --status=enabled
+
 # disable dblog
 - drush pm-disable dblog --yes
 - drush cc all
