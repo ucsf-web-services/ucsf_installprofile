@@ -12,10 +12,10 @@ env:
 #  - BEHAT_PROFILE='winxpie7'
 #  - BEHAT_PROFILE='win7ie8'
 #  - BEHAT_PROFILE='win7ie9'
-#  - BEHAT_PROFILE='win7ie10'
-#  - BEHAT_PROFILE='win8ie11'
+  - BEHAT_PROFILE='win7ie10'
+  - BEHAT_PROFILE='win8ie11'
   - BEHAT_PROFILE='osxchrome'
-#  - BEHAT_PROFILE='osxsafari'
+  - BEHAT_PROFILE='osxsafari'
 
 matrix:
   fast_finish: true
