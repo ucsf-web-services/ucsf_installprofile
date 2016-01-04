@@ -2,8 +2,6 @@ Feature: Taxonomy
   In order to structure content
   As a content provider
   I want to be able to classify content using taxonomy terms
-
-
 #  When I visit "event-location/ucsf-medical-building-room-202"
 
   @api
@@ -35,13 +33,15 @@ Feature: Taxonomy
     Given "Event Location" terms:
       | name        |
       | Cole Hall   |
-    And  I am logged in as a user with the "administrator" role
+    And I am logged in as a user with the "administrator" role
     And I am on "node/add"
     And I follow "Events"
     And I enter "My test Event" for "title"
     And I select "Plain text" from "body[und][0][format]"
+    Then I wait for the browser to complete
     And I enter "Lorem Ipsum" for "body[und][0][value]"
     And I enter "Cole Hall" for "Location"
     And I press "Save"
-    When I visit "event-location/cole-hall"
+    Then I wait for the browser to complete
+    When I visit "/event-location/cole-hall"
     Then I should see the link "My test Event"

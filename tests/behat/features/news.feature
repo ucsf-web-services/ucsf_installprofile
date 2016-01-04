@@ -6,6 +6,7 @@ Feature:
   @api
   Scenario: Create an News node
     Given I am logged in as a user with the "administrator" role
+    Then I wait for the browser to complete
     And I am on "node/add"
     And I follow "News"
     And I enter "My test News" for "title"

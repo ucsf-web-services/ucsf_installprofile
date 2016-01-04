@@ -6,6 +6,7 @@ Feature:
   @api
   Scenario: Create an Event
     And  I am logged in as a user with the "administrator" role
+    Then I wait for the browser to complete
     And I am on "node/add"
     And I follow "Events"
     And I enter "My test Event" for "title"
@@ -14,6 +15,7 @@ Feature:
     And I enter "Cole Hall" for "Location"
     And I enter "http://drupal.org/news" for "URL"
     And I press "Save"
+    Then I wait for the browser to complete
     Then I should see the success message "Events My test Event has been created."
     And I should see the heading "My test Event"
     And I should see "Cole Hall" in the "Content" region

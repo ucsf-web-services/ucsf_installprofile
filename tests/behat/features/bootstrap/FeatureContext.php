@@ -170,4 +170,18 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
   {
     $this->iResizeWindow(200, 600);
   }
+
+
+  /**
+   * @Then /^I wait for the browser to complete$/
+   *
+   * KLUDGE! - trying to delay the script to get things to complete all the time.
+   * [EG 2015/01/04]
+   */
+  public function iWaitForBrowserComplete()
+  {
+    $this->getSession()->wait(1000, '');
+  }
+
+
 }
