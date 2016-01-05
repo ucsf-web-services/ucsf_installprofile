@@ -44,4 +44,4 @@ Feature: Taxonomy
     And I press "Save"
     Then I wait for the browser to complete
     When I visit "event-location/cole-hall"
-    Then I should see the link "My test Event"
+    Then I should see the heading "My test Event"
