@@ -180,7 +180,7 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
    */
   public function iWaitForBrowserComplete()
   {
-    $this->getSession()->wait(2000, '');
+    $this->getSession()->wait(1000,'');
   }
 
 

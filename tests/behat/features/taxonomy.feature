@@ -24,24 +24,22 @@ Feature: Taxonomy
   Scenario: Create an Event Location taxonomy term
     Given "Event Location" terms:
       | name        |
-      | Cole Hall   |
+      | Cole-Hall   |
     When I visit "event-location/cole-hall"
-    Then I should see the heading "Cole Hall"
+    Then I should see the heading "Cole-Hall"
 
   @api
   Scenario: Create an event node with location term
     Given "Event Location" terms:
       | name        |
-      | Cole Hall   |
+      | Cole-Hall   |
     And I am logged in as a user with the "administrator" role
     And I am on "node/add"
     And I follow "Events"
-    And I enter "My test Event" for "title"
+    And I enter "My Test Event 2016" for "title"
     And I select "Plain text" from "body[und][0][format]"
-    Then I wait for the browser to complete
-    And I enter "Lorem Ipsum" for "body[und][0][value]"
-    And I enter "Cole Hall" for "Location"
+    And I enter "This event is in 2016, it will be great." for "body[und][0][value]"
+    And I enter "Cole-Hall" for "field_event_location[und]"
     And I press "Save"
-    Then I wait for the browser to complete
-    When I visit "event-location/cole-hall"
-    Then I should see the heading "My test Event"
+    When I visit "events/my-test-event-2016"
+    And I should see the text "This event is in 2016, it will be great."

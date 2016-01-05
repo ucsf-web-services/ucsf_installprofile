@@ -11,13 +11,14 @@ Feature:
     And I follow "Events"
     And I enter "My test Event" for "title"
     And I select "Plain text" from "body[und][0][format]"
+    Then I wait for the browser to complete
     And I enter "Lorem Ipsum" for "body[und][0][value]"
-    And I enter "Cole Hall" for "Location"
+    And I enter "Cole-Hall" for "Location"
     And I enter "http://drupal.org/news" for "URL"
     And I press "Save"
     Then I should see the success message "Events My test Event has been created."
     And I should see the heading "My test Event"
-    And I should see "Cole Hall" in the "Content" region
+    And I should see "Cole-Hall" in the "Content" region
     And I should see "Lorem Ipsum" in the "Content" region
     And I should see today's date formatted like "F j, Y" in the "Content" region
     And I should see the link "Map" in the "Content" region
