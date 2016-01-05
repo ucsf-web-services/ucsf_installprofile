@@ -39,7 +39,10 @@ Feature: Taxonomy
     And I enter "My Test Event 2016" for "title"
     And I select "Plain text" from "body[und][0][format]"
     And I enter "This event is in 2016, it will be great." for "body[und][0][value]"
+    # it doesn't appear this next step works, no matter what you do, adding Cole-Hall to location
+    # does not add the Event to the taxonomy Cole-Hall.  There is a lot of tricky JS not working here.
     And I enter "Cole-Hall" for "field_event_location[und]"
     And I press "Save"
+    # instead of going back to Cole-Hall, just review the event saved.
     When I visit "events/my-test-event-2016"
     And I should see the text "This event is in 2016, it will be great."
