@@ -43,5 +43,5 @@ Feature: Taxonomy
     And I enter "Cole Hall" for "Location"
     And I press "Save"
     Then I wait for the browser to complete
-    When I visit "/event-location/cole-hall"
+    When I visit "event-location/cole-hall"
     Then I should see the link "My test Event"

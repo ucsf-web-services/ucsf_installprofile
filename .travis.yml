@@ -8,14 +8,16 @@ env:
   - SAUCE_USERNAME="ucsfdrupal"
   - SAUCE_ACCESS_KEY="ff0f8d29-743a-49eb-a625-89c923877bbf"
   matrix:
-#  - BEHAT_PROFILE='default'
+  - BEHAT_PROFILE='default'
 #  - BEHAT_PROFILE='winxpie7'
 #  - BEHAT_PROFILE='win7ie8'
 #  - BEHAT_PROFILE='win7ie9'
-  - BEHAT_PROFILE='win7ie10'
+#  - BEHAT_PROFILE='win7ie10'
   - BEHAT_PROFILE='win8ie11'
-  - BEHAT_PROFILE='osxchrome'
-  - BEHAT_PROFILE='osxsafari'
+#  - BEHAT_PROFILE='osxchrome'
+#  - BEHAT_PROFILE='osxsafari'
+# safari driver is faulty, mouseMoveTo is not supported.
+# https://code.google.com/p/selenium/issues/detail?id=4136
 
 matrix:
   fast_finish: true

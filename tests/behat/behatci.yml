@@ -145,5 +145,5 @@ osxsafari:
             browser: "safari"
             capabilities:
               name: "osxsafari"
-              platform: "OS X 10.10"
-              version: 8
+              platform: "OS X 10.9"
+              version: 9
