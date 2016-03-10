@@ -43,6 +43,7 @@ Feature: Taxonomy
     # does not add the Event to the taxonomy Cole-Hall.  There is a lot of tricky JS not working here.
     And I enter "Cole-Hall" for "field_event_location[und]"
     And I press "Save"
+    Then I wait for the browser to complete
     # instead of going back to Cole-Hall, just review the event saved.
     When I visit "events/my-test-event-2016"
     And I should see the text "This event is in 2016, it will be great."
