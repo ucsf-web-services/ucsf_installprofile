@@ -26,7 +26,6 @@ mysql:
   encoding: utf8
 
 before_install:
-- composer self-update
 - sudo apt-get update -qq
 
 install:
@@ -41,11 +40,15 @@ install:
 - sed -i '1i export PATH="$HOME/.composer/vendor/bin:$PATH"' $HOME/.bashrc
 - source $HOME/.bashrc
 
+
 # install drush globally
+- composer self-update
+- composer --version
+- composer update
 - composer global require drush/drush:6.*
 
 # install behat and co
-- composer install -d --no-interaction tests/behat
+- composer install -d tests/behat
 
 before_script:
 # enable php-fpm
